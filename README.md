@@ -30,6 +30,10 @@ A tool to make it easier to manage bash modules.
 
 # Usage
 
+## Installing modules
+
+Clone the module inside ~/.basher/modules
+
 ## Runtime functions
 
 ### require
