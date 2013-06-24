@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "export BASHER_ROOT=$BASHER_ROOT"
+echo "source $BASHER_ROOT/lib/basher.bash"

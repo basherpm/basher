@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+eval "echo \$$1"
