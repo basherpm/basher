@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+command="$1"
+command_file="${BASHER_ROOT}/libexec/${command}"
+test_file="${BASHER_ROOT}/tests/${command}.bats"
+
+test_template="#!/usr/bin/env bats
+
+load test_helper"
+
+if [ -e "$command_file" ]; then
+  exit 1
+fi
+
+echo "#!/usr/bin/env bash" > "$command_file"
+chmod +x "$command_file"
+
+echo "$test_template" > "$test_file"
