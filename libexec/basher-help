@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Summary: Displays help for a command
+# Summary: Display help for a command
 #
 # Usage: basher help [--usage] COMMAND
 #
@@ -140,7 +140,7 @@ if [ -z "$1" ] || [ "$1" == "basher" ]; then
   [ -z "$usage" ] || exit
   echo
   echo "Some useful basher commands are:"
-  print_summaries help commands init
+  print_summaries help commands init new-command
   echo
   echo "See 'basher help <command>' for information on a specific command."
 else

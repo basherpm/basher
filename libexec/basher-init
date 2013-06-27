@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Summary: Configure the shell environment for basher
+# Usage: eval "$(basher init -)"
 
 echo "export BASHER_ROOT=$BASHER_ROOT"
 echo "source $BASHER_ROOT/lib/basher.bash"

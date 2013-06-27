@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+# Summary: Create a new empty command
+# Usage: basher new-command command-name
+#
+# Creates an empty command and an empty test.
 
 command="$1"
 command_file="${BASHER_ROOT}/libexec/${command}"

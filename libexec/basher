@@ -28,6 +28,9 @@ export PATH="${bin_path}:${PATH}"
 
 command="$1"
 case "$command" in
+"")
+  basher-help
+  ;;
 * )
   command_path="$(command -v "basher-$command" || true)"
   if [ -z "$command_path" ]; then
