@@ -5,8 +5,8 @@
 # Creates an empty command and an empty test.
 
 command="$1"
-command_file="${BASHER_ROOT}/libexec/${command}"
-test_file="${BASHER_ROOT}/tests/${command}.bats"
+command_file="libexec/${command}"
+test_file="tests/${command}.bats"
 
 test_template="#!/usr/bin/env bats
 
