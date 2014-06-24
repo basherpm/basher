@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Summary: Uninstalls a module
+# Usage: basher uninstall <module>
+
+module="$1"
+
+if [ -z "$module" ]; then
+  basher-help uninstall
+  exit 1
+fi
+
+rm -rf "$BASHER_ROOT/cellar/modules/$module"

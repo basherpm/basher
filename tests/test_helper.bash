@@ -20,3 +20,7 @@ teardown() {
 mock_git() {
   export PATH="${BATS_TEST_DIRNAME}/path/git:$PATH"
 }
+
+mock_rm() {
+  export PATH="${BATS_TEST_DIRNAME}/path/rm:$PATH"
+}
