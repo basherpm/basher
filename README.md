@@ -1,6 +1,6 @@
-# What is it?
+# basher
 
-A tool to make it easier to manage bash modules.
+A package manager for shell scripts and functions.
 
 # Installation
 
@@ -32,10 +32,18 @@ A tool to make it easier to manage bash modules.
 
 ## Installing modules
 
-Clone the module inside ~/.basher/modules
+~~~ sh
+$ basher install sstephenson bats
+~~~
 
-## Runtime functions
+This will install bats from https://github.com/sstephenson/bats and add it to the PATH.
 
-### require
+# Modules
+
+Modules are simply github repos which may contain a bin directory with an executable file.
+
+# Runtime functions
+
+## require
 
 `require module_name`
