@@ -16,3 +16,9 @@ if [ -z "$module" ]; then
 fi
 
 git clone "git://github.com/$username/$module.git" "$BASHER_ROOT/cellar/modules/$module"
+
+shopt -s nullglob
+for bin in $BASHER_ROOT/cellar/modules/$module/bin/*
+do
+  ln -s $bin "$BASHER_ROOT/cellar/bin/${bin##*/}"
+done

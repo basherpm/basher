@@ -4,6 +4,8 @@ BASHER_TEST_DIR="${BATS_TMPDIR}/basher"
 
 export BASHER_ROOT="${BASHER_TEST_DIR}/root"
 
+export FIXTURES_DIR="${BATS_TEST_DIRNAME}/fixtures"
+
 export PATH="${BATS_TEST_DIRNAME}/libexec:$PATH"
 export PATH="${BATS_TEST_DIRNAME}/../libexec:$PATH"
 export PATH="${BASHER_TEST_DIR}/bin:$PATH"
@@ -31,4 +33,10 @@ echo "$command \$@"
 SH
   chmod +x "${BASHER_TEST_DIR}/path/$command/$command"
   export PATH="${BASHER_TEST_DIR}/path/$command:$PATH"
+}
+
+install_module() {
+  local username="$1"
+  local module="$2"
+  cp -r "${FIXTURES_DIR}/repos/$username/$module" "${BASHER_ROOT}/cellar/modules"
 }

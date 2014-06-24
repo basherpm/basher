@@ -21,3 +21,14 @@ load test_helper
   assert_success
   assert_line "git clone git://github.com/username/module.git $BASHER_ROOT/cellar/modules/module"
 }
+
+@test "links each binary to the cellar bin" {
+  install_module username module
+  mock_command git
+
+  run basher-install username module
+echo $output
+  assert_success
+  assert [ "$(readlink $BASHER_ROOT/cellar/bin/exec1)" = "$BASHER_ROOT/cellar/modules/module/bin/exec1" ]
+  assert [ "$(readlink $BASHER_ROOT/cellar/bin/exec2)" = "$BASHER_ROOT/cellar/modules/module/bin/exec2" ]
+}
