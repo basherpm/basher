@@ -15,7 +15,7 @@ load test_helper
 }
 
 @test "clones the repo on the modules folder" {
-  mock_git
+  mock_command git
 
   run basher-install username module
   assert_success

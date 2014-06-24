@@ -9,7 +9,7 @@ load test_helper
 }
 
 @test "removes module directory" {
-  mock_rm
+  mock_command rm
 
   run basher-uninstall module
   assert_success
