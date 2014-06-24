@@ -10,7 +10,10 @@ export PATH="${BASHER_TEST_DIR}/bin:$PATH"
 
 mkdir -p "${BASHER_ROOT}/libexec"
 mkdir -p "${BASHER_ROOT}/tests"
-mkdir -p "${BASHER_ROOT}/modules"
+mkdir -p "${BASHER_ROOT}/cellar"
+mkdir -p "${BASHER_ROOT}/cellar/bin"
+mkdir -p "${BASHER_ROOT}/cellar/modules"
+
 mkdir -p "${BASHER_TEST_DIR}/bin"
 
 teardown() {
