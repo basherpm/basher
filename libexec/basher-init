@@ -3,4 +3,4 @@
 # Usage: eval "$(basher init -)"
 
 echo "export BASHER_ROOT=$BASHER_ROOT"
-echo "source $BASHER_ROOT/lib/basher.bash"
+echo "source $BASHER_ROOT/runtime/require.bash"
