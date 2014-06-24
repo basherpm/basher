@@ -4,6 +4,7 @@ load test_helper
 
 @test "sources main basher lib" {
   run basher-init -
+  assert_line "source $BASHER_ROOT/runtime/path.bash"
   assert_line "source $BASHER_ROOT/runtime/require.bash"
 }
 
