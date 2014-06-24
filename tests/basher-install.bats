@@ -14,7 +14,7 @@ load test_helper
   assert_line "Usage: basher install <user> <module>"
 }
 
-@test "clones the repo on the modules folder" {
+@test "clones the module repo in the cellar" {
   mock_command git
 
   run basher-install username module
