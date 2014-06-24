@@ -19,5 +19,5 @@ load test_helper
 
   run basher-install username module
   assert_success
-  assert_line "git clone git://github.com/username/module.git $BASHER_ROOT/modules/module"
+  assert_line "git clone git://github.com/username/module.git $BASHER_ROOT/cellar/modules/module"
 }

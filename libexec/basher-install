@@ -15,4 +15,4 @@ if [ -z "$module" ]; then
   exit 1
 fi
 
-git clone "git://github.com/$username/$module.git" "$BASHER_ROOT/modules/$module"
+git clone "git://github.com/$username/$module.git" "$BASHER_ROOT/cellar/modules/$module"

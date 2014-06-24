@@ -2,5 +2,5 @@
 
 require() {
   local module_name="$1"
-  source "$BASHER_ROOT/modules/$module_name/lib/$module_name.bash"
+  source "$BASHER_ROOT/cellar/modules/$module_name/lib/$module_name.bash"
 }
