@@ -46,4 +46,20 @@ Modules are simply github repos which may contain a bin directory with an execut
 
 ## require
 
-`require module_name`
+~~~ sh
+require module_name
+~~~
+
+# Development
+
+To run the tests, install bats:
+
+~~~ sh
+$ basher install sstephenson bats
+~~~
+
+and then run:
+
+~~~ sh
+$ bats tests
+~~~
