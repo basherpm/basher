@@ -2,7 +2,7 @@
 
 A package manager for shell scripts and functions.
 
-# Installation
+## Installation
 
 1. Checkout basher on `~/.basher`
 
@@ -28,9 +28,9 @@ A package manager for shell scripts and functions.
 
     _Same as in previous step, use `~/.profile` on Ubuntu, `~/.zshrc` for Zsh._
 
-# Usage
+## Usage
 
-## Installing modules
+### Installing modules
 
 ~~~ sh
 $ basher install sstephenson bats
@@ -38,19 +38,19 @@ $ basher install sstephenson bats
 
 This will install bats from https://github.com/sstephenson/bats and add it to the PATH.
 
-# Modules
+## Modules
 
 Modules are simply github repos which may contain a bin directory with an executable file.
 
-# Runtime functions
+## Runtime functions
 
-## require
+### require
 
 ~~~ sh
 require module_name
 ~~~
 
-# Development
+## Development
 
 To run the tests, install bats:
 
