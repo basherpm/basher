@@ -1,24 +1,24 @@
 #!/usr/bin/env bash
-# Summary: Installs a module from github
-# Usage: basher install <user> <module>
+# Summary: Installs a package from github
+# Usage: basher install <user> <package>
 
 username="$1"
-module="$2"
+package="$2"
 
 if [ -z "$username" ]; then
   basher-help install
   exit 1
 fi
 
-if [ -z "$module" ]; then
+if [ -z "$package" ]; then
   basher-help install
   exit 1
 fi
 
-git clone "git://github.com/$username/$module.git" "$BASHER_ROOT/cellar/modules/$module"
+git clone "git://github.com/$username/$package.git" "$BASHER_ROOT/cellar/packages/$package"
 
 shopt -s nullglob
-for bin in $BASHER_ROOT/cellar/modules/$module/bin/*
+for bin in $BASHER_ROOT/cellar/packages/$package/bin/*
 do
   ln -s $bin "$BASHER_ROOT/cellar/bin/${bin##*/}"
 done

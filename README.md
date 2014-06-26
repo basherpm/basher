@@ -30,7 +30,7 @@ A package manager for shell scripts and functions.
 
 ## Usage
 
-### Installing modules
+### Installing packages
 
 ~~~ sh
 $ basher install sstephenson bats
@@ -38,16 +38,16 @@ $ basher install sstephenson bats
 
 This will install bats from https://github.com/sstephenson/bats and add it to the PATH.
 
-## Modules
+## Packages
 
-Modules are simply github repos which may contain a bin directory with an executable file.
+Packages are simply github repos which may contain a bin directory with an executable file.
 
 ## Runtime functions
 
 ### require
 
 ~~~ sh
-require module_name
+require package_name
 ~~~
 
 ## Development

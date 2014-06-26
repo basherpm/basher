@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# Summary: Uninstalls a module
-# Usage: basher uninstall <module>
+# Summary: Uninstalls a package
+# Usage: basher uninstall <package>
 
-module="$1"
+package="$1"
 
-if [ -z "$module" ]; then
+if [ -z "$package" ]; then
   basher-help uninstall
   exit 1
 fi
 
-rm -rf "$BASHER_ROOT/cellar/modules/$module"
+rm -rf "$BASHER_ROOT/cellar/packages/$package"

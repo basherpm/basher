@@ -14,7 +14,7 @@ mkdir -p "${BASHER_ROOT}/libexec"
 mkdir -p "${BASHER_ROOT}/tests"
 mkdir -p "${BASHER_ROOT}/cellar"
 mkdir -p "${BASHER_ROOT}/cellar/bin"
-mkdir -p "${BASHER_ROOT}/cellar/modules"
+mkdir -p "${BASHER_ROOT}/cellar/packages"
 
 mkdir -p "${BASHER_TEST_DIR}/bin"
 mkdir -p "${BASHER_TEST_DIR}/path"
@@ -35,8 +35,8 @@ SH
   export PATH="${BASHER_TEST_DIR}/path/$command:$PATH"
 }
 
-install_module() {
+install_package() {
   local username="$1"
-  local module="$2"
-  cp -r "${FIXTURES_DIR}/repos/$username/$module" "${BASHER_ROOT}/cellar/modules"
+  local package="$2"
+  cp -r "${FIXTURES_DIR}/repos/$username/$package" "${BASHER_ROOT}/cellar/packages"
 }
