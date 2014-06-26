@@ -3,6 +3,7 @@ load assertions
 BASHER_TEST_DIR="${BATS_TMPDIR}/basher"
 
 export BASHER_ROOT="${BASHER_TEST_DIR}/root"
+export BASHER_PACKAGES_PATH="$BASHER_ROOT/cellar/packages"
 
 export FIXTURES_DIR="${BATS_TEST_DIRNAME}/fixtures"
 

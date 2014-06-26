@@ -23,6 +23,11 @@ if [ -z "$BASHER_ROOT" ]; then
 fi
 export BASHER_ROOT
 
+if [ -z "$BASHER_PACKAGES_PATH" ]; then
+  BASHER_PACKAGES_PATH="$BASHER_ROOT/cellar/packages"
+fi
+export BASHER_PACKAGES_PATH
+
 bin_path="$(abs_dirname "$0")"
 export PATH="${bin_path}:${PATH}"
 

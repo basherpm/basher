@@ -19,7 +19,7 @@ load test_helper
 
   run basher-install username package
   assert_success
-  assert_line "git clone git://github.com/username/package.git $BASHER_ROOT/cellar/packages/package"
+  assert_line "git clone git://github.com/username/package.git ${BASHER_PACKAGES_PATH}/package"
 }
 
 @test "links each binary to the cellar bin" {
@@ -29,6 +29,6 @@ load test_helper
   run basher-install username package
 echo $output
   assert_success
-  assert [ "$(readlink $BASHER_ROOT/cellar/bin/exec1)" = "$BASHER_ROOT/cellar/packages/package/bin/exec1" ]
-  assert [ "$(readlink $BASHER_ROOT/cellar/bin/exec2)" = "$BASHER_ROOT/cellar/packages/package/bin/exec2" ]
+  assert [ "$(readlink $BASHER_ROOT/cellar/bin/exec1)" = "${BASHER_PACKAGES_PATH}/package/bin/exec1" ]
+  assert [ "$(readlink $BASHER_ROOT/cellar/bin/exec2)" = "${BASHER_PACKAGES_PATH}/package/bin/exec2" ]
 }

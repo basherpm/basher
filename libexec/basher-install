@@ -15,10 +15,11 @@ if [ -z "$package" ]; then
   exit 1
 fi
 
-git clone "git://github.com/$username/$package.git" "$BASHER_ROOT/cellar/packages/$package"
+git clone "git://github.com/$username/$package.git" "${BASHER_PACKAGES_PATH}/$package"
 
 shopt -s nullglob
-for bin in $BASHER_ROOT/cellar/packages/$package/bin/*
+
+for bin in ${BASHER_PACKAGES_PATH}/$package/bin/*
 do
   ln -s $bin "$BASHER_ROOT/cellar/bin/${bin##*/}"
 done

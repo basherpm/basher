@@ -9,4 +9,4 @@ if [ -z "$package" ]; then
   exit 1
 fi
 
-rm -rf "$BASHER_ROOT/cellar/packages/$package"
+rm -rf "${BASHER_PACKAGES_PATH}/$package"

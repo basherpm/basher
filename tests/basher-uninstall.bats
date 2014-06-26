@@ -13,5 +13,5 @@ load test_helper
 
   run basher-uninstall package
   assert_success
-  assert_line "rm -rf $BASHER_ROOT/cellar/packages/package"
+  assert_line "rm -rf ${BASHER_PACKAGES_PATH}/package"
 }
