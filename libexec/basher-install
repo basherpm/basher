@@ -15,7 +15,7 @@ if [ -z "$package" ]; then
   exit 1
 fi
 
-git clone "git://github.com/$username/$package.git" "${BASHER_PACKAGES_PATH}/$package"
+basher-clone "$username" "$package"
 
 shopt -s nullglob
 

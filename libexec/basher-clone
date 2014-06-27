@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+#
+# Summary: Clones a package from github, but doesn't install it
+# Usage: basher clone <user> <package>
+
+username="$1"
+package="$2"
+
+if [ -z "$username" ]; then
+  basher-help clone
+  exit 1
+fi
+
+if [ -z "$package" ]; then
+  basher-help clone
+  exit 1
+fi
+
+git clone "git://github.com/$username/$package.git" "${BASHER_PACKAGES_PATH}/$package"
