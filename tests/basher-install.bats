@@ -27,7 +27,6 @@ load test_helper
   mock_command git
 
   run basher-install username package
-echo $output
   assert_success
   assert [ "$(readlink $BASHER_ROOT/cellar/bin/exec1)" = "${BASHER_PACKAGES_PATH}/package/bin/exec1" ]
   assert [ "$(readlink $BASHER_ROOT/cellar/bin/exec2)" = "${BASHER_PACKAGES_PATH}/package/bin/exec2" ]
