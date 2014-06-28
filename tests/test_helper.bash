@@ -54,7 +54,7 @@ create_package() {
   git commit -m "first"
 }
 
-add_exec() {
+create_exec() {
   local username="$1"
   local package="$2"
   local exec="$3"

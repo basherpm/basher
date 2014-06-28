@@ -24,8 +24,8 @@ load test_helper
 
 @test "links each binary to the cellar bin" {
   create_package username package
-  add_exec username package exec1
-  add_exec username package exec2
+  create_exec username package exec1
+  create_exec username package exec2
   mock_clone
 
   run basher-install username package
