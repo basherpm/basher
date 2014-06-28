@@ -14,17 +14,19 @@ load test_helper
   assert_line "Usage: basher install <user> <package>"
 }
 
-@test "clones the package repo in the cellar" {
-  mock_command git
+@test "calls basher-clone" {
+  mock_command basher-clone
 
   run basher-install username package
   assert_success
-  assert_line "git clone git://github.com/username/package.git ${BASHER_PACKAGES_PATH}/package"
+  assert_line "basher-clone username package"
 }
 
 @test "links each binary to the cellar bin" {
-  install_package username package
-  mock_command git
+  create_package username package
+  add_exec username package exec1
+  add_exec username package exec2
+  mock_clone
 
   run basher-install username package
   assert_success
