@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#
+# Summary: Displays a list of outdated packages
+# Usage: basher outdated
+
+shopt -s nullglob
+
+for package_path in ${BASHER_PACKAGES_PATH}/*
+do
+  cd $package_path
+  git remote update > /dev/null 2>&1
+  if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/HEAD)" ]; then
+    echo ${package_path##*/}
+  fi
+done
