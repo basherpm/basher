@@ -2,5 +2,10 @@
 # Summary: Updates basher to the latest version
 # Usage: basher update
 
+if [ "$#" -gt 0 ]; then
+  basher-help update
+  exit 1
+fi
+
 cd $BASHER_ROOT
 git pull
