@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+#
+# Summary: List installed packages
+# Usage: basher list
+
+if [ "$#" -gt 0 ]; then
+  basher-help list
+  exit 1
+fi
+
+shopt -s nullglob
+
+for package_path in ${BASHER_PACKAGES_PATH}/*
+do
+  echo "${package_path##*/}"
+done
