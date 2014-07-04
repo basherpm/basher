@@ -14,12 +14,22 @@ load test_helper
   assert_line "Usage: basher install <user> <package>"
 }
 
-@test "calls basher-clone" {
-  mock_command basher-clone
+@test "fails if there is no package.sh" {
+  create_invalid_package username package
+  mock_clone
 
   run basher-install username package
-  assert_success
-  assert_line "basher-clone username package"
+  assert_failure
+  assert_line "package.sh not found"
+}
+
+@test "does not create package directory if there is no package.sh" {
+  create_invalid_package username package
+  mock_clone
+
+  run basher-install username package
+  assert_failure
+  [ ! -d "$BASHER_PACKAGES_PATH/package" ]
 }
 
 @test "links each binary to the cellar bin" {

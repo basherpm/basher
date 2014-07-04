@@ -17,9 +17,17 @@ fi
 
 basher-clone "$username" "$package"
 
-shopt -s nullglob
+if [ ! -e "$BASHER_PACKAGES_PATH/$package/package.sh" ]; then
+  echo "package.sh not found"
+  rm -rf "$BASHER_PACKAGES_PATH/$package"
+  exit 1
+fi
 
-for bin in ${BASHER_PACKAGES_PATH}/$package/bin/*
+source "$BASHER_PACKAGES_PATH/$package/package.sh" # TODO: make this secure?
+
+IFS=: read -a bins <<< "$BIN"
+
+for bin in "${bins[@]}"
 do
-  ln -s $bin "$BASHER_ROOT/cellar/bin/${bin##*/}"
+  ln -s "$BASHER_PACKAGES_PATH/$package/$bin" "$BASHER_ROOT/cellar/bin/${bin##*/}"
 done

@@ -49,9 +49,20 @@ create_package() {
   mkdir -p "${BASHER_ORIGIN_DIR}/$username/$package"
   cd "${BASHER_ORIGIN_DIR}/$username/$package"
   git init .
+  touch package.sh
+  git add .
+  git commit -m "package.sh"
+}
+
+create_invalid_package() {
+  local username="$1"
+  local package="$2"
+  mkdir -p "${BASHER_ORIGIN_DIR}/$username/$package"
+  cd "${BASHER_ORIGIN_DIR}/$username/$package"
+  git init .
   touch dummy
   git add .
-  git commit -m "first"
+  git commit -m "dummy"
 }
 
 create_exec() {
@@ -62,6 +73,13 @@ create_exec() {
   mkdir -p bin
   touch bin/$exec
   chmod +x bin/$exec
+
+  if grep -sq "BIN=" "package.sh"; then
+    sed -e "/^BIN=/ s/$/:bin\/$exec/" -i '' package.sh
+  else
+    echo "BIN=bin/$exec" >> package.sh
+  fi
+
   git add .
   git commit -m "Add $exec"
 }
