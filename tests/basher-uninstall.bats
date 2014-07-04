@@ -9,9 +9,37 @@ load test_helper
 }
 
 @test "removes package directory" {
-  mock_command rm
+  mock_clone
+  create_package username package
+  basher-install username package
 
   run basher-uninstall package
   assert_success
-  assert_line "rm -rf ${BASHER_PACKAGES_PATH}/package"
+  [ ! -d "$BASHER_PACKAGES_PATH/package" ]
+}
+
+@test "removes binaries" {
+  mock_clone
+  create_package username package
+  create_exec username package exec1
+  basher-install username package
+
+  run basher-uninstall package
+  assert_success
+  [ ! -e "$BASHER_ROOT/cellar/bin/exec1" ]
+}
+
+@test "does not remove other package directories and binaries" {
+  mock_clone
+  create_package username package1
+  create_exec username package1 exec1
+  create_package username package2
+  create_exec username package2 exec2
+  basher-install username package1
+  basher-install username package2
+
+  run basher-uninstall package1
+  assert_success
+  [ -d "$BASHER_PACKAGES_PATH/package2" ]
+  [ -e "$BASHER_ROOT/cellar/bin/exec2" ]
 }

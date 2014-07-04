@@ -9,4 +9,12 @@ if [ -z "$package" ]; then
   exit 1
 fi
 
+source "$BASHER_PACKAGES_PATH/$package/package.sh"
+
+IFS=: read -a bins <<< "$BIN"
+
+for bin in "${bins[@]}"; do
+  rm "$BASHER_ROOT/cellar/bin/${bin##*/}"
+done
+
 rm -rf "${BASHER_PACKAGES_PATH}/$package"
