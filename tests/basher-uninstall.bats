@@ -8,6 +8,12 @@ load test_helper
   assert_line "Usage: basher uninstall <package>"
 }
 
+@test "fails if package is not installed" {
+  run basher-uninstall lol
+  assert_failure
+  assert_output "Package 'lol' is not installed"
+}
+
 @test "removes package directory" {
   mock_clone
   create_package username package

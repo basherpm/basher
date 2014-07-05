@@ -11,6 +11,11 @@ fi
 
 shopt -s nullglob
 
+if [ ! -d "$BASHER_PACKAGES_PATH/$package" ]; then
+  echo "Package '$package' is not installed"
+  exit 1
+fi
+
 if [ -e "$BASHER_PACKAGES_PATH/$package/package.sh" ]; then
   source "$BASHER_PACKAGES_PATH/$package/package.sh"
   IFS=: read -a bins <<< "$BIN"
