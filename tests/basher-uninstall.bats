@@ -18,7 +18,7 @@ load test_helper
   [ ! -d "$BASHER_PACKAGES_PATH/package" ]
 }
 
-@test "removes binaries" {
+@test "with package.sh, removes binaries" {
   mock_clone
   create_package username package
   create_exec username package exec1
@@ -26,6 +26,18 @@ load test_helper
 
   run basher-uninstall package
   assert_success
+  [ ! -e "$BASHER_ROOT/cellar/bin/exec1" ]
+}
+
+@test "without package.sh, removes binaries" {
+  mock_clone
+  create_invalid_package username package
+  create_exec username package exec1
+  basher-install username package
+
+  run basher-uninstall package
+  assert_success
+  assert_line "WARNING: package.sh not found, unlinking any binaries in bin directory"
   [ ! -e "$BASHER_ROOT/cellar/bin/exec1" ]
 }
 
