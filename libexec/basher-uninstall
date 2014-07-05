@@ -2,6 +2,8 @@
 # Summary: Uninstalls a package
 # Usage: basher uninstall <package>
 
+set -e
+
 package="$1"
 
 if [ -z "$package" ]; then

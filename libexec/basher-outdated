@@ -3,6 +3,8 @@
 # Summary: Displays a list of outdated packages
 # Usage: basher outdated
 
+set -e
+
 shopt -s nullglob
 
 for package_path in ${BASHER_PACKAGES_PATH}/*

@@ -3,6 +3,8 @@
 # Summary: Clones a package from github, but doesn't install it
 # Usage: basher clone <user> <package>
 
+set -e
+
 username="$1"
 package="$2"
 

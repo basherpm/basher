@@ -3,6 +3,8 @@
 # Summary: List all available basher commands
 # Usage: basher commands
 
+set -e
+
 IFS=: paths=($PATH)
 
 shopt -s nullglob

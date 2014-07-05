@@ -2,6 +2,8 @@
 # Summary: Installs a package from github
 # Usage: basher install <user> <package>
 
+set -e
+
 username="$1"
 package="$2"
 

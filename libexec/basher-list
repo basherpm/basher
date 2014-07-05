@@ -3,6 +3,8 @@
 # Summary: List installed packages
 # Usage: basher list
 
+set -e
+
 if [ "$#" -gt 0 ]; then
   basher-help list
   exit 1
