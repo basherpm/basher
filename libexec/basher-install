@@ -17,15 +17,17 @@ fi
 
 basher-clone "$username" "$package"
 
-if [ ! -e "$BASHER_PACKAGES_PATH/$package/package.sh" ]; then
-  echo "package.sh not found"
-  rm -rf "$BASHER_PACKAGES_PATH/$package"
-  exit 1
+shopt -s nullglob
+
+if [ -e "$BASHER_PACKAGES_PATH/$package/package.sh" ]; then
+  source "$BASHER_PACKAGES_PATH/$package/package.sh" # TODO: make this secure?
+  IFS=: read -a bins <<< "$BIN"
+else
+  echo "WARNING: package.sh not found, linking any binaries in bin directory"
+  bins=($BASHER_PACKAGES_PATH/$package/bin/*)
+  bins=("${bins[@]##*/}")
+  bins=("${bins[@]/#/bin/}")
 fi
-
-source "$BASHER_PACKAGES_PATH/$package/package.sh" # TODO: make this secure?
-
-IFS=: read -a bins <<< "$BIN"
 
 for bin in "${bins[@]}"
 do

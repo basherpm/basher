@@ -74,10 +74,12 @@ create_exec() {
   touch bin/$exec
   chmod +x bin/$exec
 
-  if grep -sq "BIN=" "package.sh"; then
-    sed -e "/^BIN=/ s/$/:bin\/$exec/" -i '' package.sh
-  else
-    echo "BIN=bin/$exec" >> package.sh
+  if [ -e "package.sh" ]; then
+    if grep -sq "BIN=" "package.sh"; then
+      sed -e "/^BIN=/ s/$/:bin\/$exec/" -i '' package.sh
+    else
+      echo "BIN=bin/$exec" >> package.sh
+    fi
   fi
 
   git add .
