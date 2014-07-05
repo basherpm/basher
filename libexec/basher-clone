@@ -18,4 +18,9 @@ if [ -z "$package" ]; then
   exit 1
 fi
 
+if [ -e "$BASHER_PACKAGES_PATH/$package" ]; then
+  echo "Package '$package' is already present"
+  exit 1
+fi
+
 git clone "git://github.com/$username/$package.git" "${BASHER_PACKAGES_PATH}/$package"

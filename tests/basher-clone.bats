@@ -14,6 +14,15 @@ load test_helper
   assert_line "Usage: basher clone <user> <package>"
 }
 
+@test "fails if package is already present" {
+  mkdir -p "$BASHER_PACKAGES_PATH/package"
+
+  run basher-clone username package
+  echo $output
+  assert_failure
+  assert_output "Package 'package' is already present"
+}
+
 @test "clones a package from github" {
   mock_command git
 
