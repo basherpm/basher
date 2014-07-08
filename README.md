@@ -36,19 +36,27 @@ A package manager for shell scripts and functions.
 $ basher install sstephenson bats
 ~~~
 
-This will install bats from https://github.com/sstephenson/bats and add it to the PATH.
+This will install bats from https://github.com/sstephenson/bats and add `bin/bats` it to the PATH.
+
+### Command summary
+
+- `basher commands` - List commands
+- `basher help <command>` - Displays help for a command
+- `basher uninstall <package>` - Uninstall a package
+- `basher update` - Update basher to latest version from master
+- `basher list` - List installed packages
+- `basher outdated` - List packages which are not in the latest version
+- `basher upgrade <package>` - Upgrades a package to the latest version
 
 ## Packages
 
-Packages are simply github repos which may contain a bin directory with an executable file.
-
-## Runtime functions
-
-### require
+Packages are github repos which contain a `package.sh` file with the following format:
 
 ~~~ sh
-require package_name
+BIN=bin/exec1:bin/exec2
 ~~~
+
+If a `package.sh` file is not found, basher will try to link any binaries inside the `bin` folder of the project.
 
 ## Development
 
