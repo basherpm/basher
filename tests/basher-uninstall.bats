@@ -8,29 +8,41 @@ load test_helper
   assert_line "Usage: basher uninstall <package>"
 }
 
-@test "fails if package is not installed" {
+@test "with invalid arguments, prints usage" {
   run basher-uninstall lol
   assert_failure
-  assert_output "Package 'lol' is not installed"
+  assert_line "Usage: basher uninstall <package>"
+}
+
+@test "with too many arguments, prints usage" {
+  run basher-uninstall a/b lol
+  assert_failure
+  assert_line "Usage: basher uninstall <package>"
+}
+
+@test "fails if package is not installed" {
+  run basher-uninstall user/lol
+  assert_failure
+  assert_output "Package 'user/lol' is not installed"
 }
 
 @test "removes package directory" {
   mock_clone
   create_package username package
-  basher-install username package
+  basher-install username/package
 
-  run basher-uninstall package
+  run basher-uninstall username/package
   assert_success
-  [ ! -d "$BASHER_PACKAGES_PATH/package" ]
+  [ ! -d "$BASHER_PACKAGES_PATH/username/package" ]
 }
 
 @test "with package.sh, removes binaries" {
   mock_clone
   create_package username package
   create_exec username package exec1
-  basher-install username package
+  basher-install username/package
 
-  run basher-uninstall package
+  run basher-uninstall username/package
   assert_success
   [ ! -e "$BASHER_ROOT/cellar/bin/exec1" ]
 }
@@ -39,9 +51,9 @@ load test_helper
   mock_clone
   create_invalid_package username package
   create_exec username package exec1
-  basher-install username package
+  basher-install username/package
 
-  run basher-uninstall package
+  run basher-uninstall username/package
   assert_success
   assert_line "WARNING: package.sh not found, unlinking any binaries in bin directory"
   [ ! -e "$BASHER_ROOT/cellar/bin/exec1" ]
@@ -53,11 +65,11 @@ load test_helper
   create_exec username package1 exec1
   create_package username package2
   create_exec username package2 exec2
-  basher-install username package1
-  basher-install username package2
+  basher-install username/package1
+  basher-install username/package2
 
-  run basher-uninstall package1
+  run basher-uninstall username/package1
   assert_success
-  [ -d "$BASHER_PACKAGES_PATH/package2" ]
+  [ -d "$BASHER_PACKAGES_PATH/username/package2" ]
   [ -e "$BASHER_ROOT/cellar/bin/exec2" ]
 }

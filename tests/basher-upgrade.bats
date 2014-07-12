@@ -8,13 +8,25 @@ load test_helper
   assert_line "Usage: basher upgrade <package>"
 }
 
+@test "with invalid argument, shows usage" {
+  run basher-upgrade lol
+  assert_failure
+  assert_line "Usage: basher upgrade <package>"
+}
+
+@test "with too many arguments, shows usage" {
+  run basher-upgrade a/b wrong
+  assert_failure
+  assert_line "Usage: basher upgrade <package>"
+}
+
 @test "upgrades a package to the latest version" {
   mock_clone
   create_package username package
-  basher-install username package
+  basher-install username/package
   create_exec username package "second"
 
-  basher-upgrade package
+  basher-upgrade username/package
 
   run basher-outdated
   assert_output ""

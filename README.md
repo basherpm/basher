@@ -33,7 +33,7 @@ A package manager for shell scripts and functions.
 ### Installing packages
 
 ~~~ sh
-$ basher install sstephenson bats
+$ basher install sstephenson/bats
 ~~~
 
 This will install bats from https://github.com/sstephenson/bats and add `bin/bats` it to the PATH.
@@ -50,7 +50,7 @@ This will install bats from https://github.com/sstephenson/bats and add `bin/bat
 
 ## Packages
 
-Packages are github repos which contain a `package.sh` file with the following format:
+Packages are github repos (username/repo) which contain a `package.sh` file with the following format:
 
 ~~~ sh
 BIN=bin/exec1:bin/exec2
@@ -63,7 +63,7 @@ If a `package.sh` file is not found, basher will try to link any binaries inside
 To run the tests, install bats:
 
 ~~~ sh
-$ basher install sstephenson bats
+$ basher install sstephenson/bats
 ~~~
 
 and then run:

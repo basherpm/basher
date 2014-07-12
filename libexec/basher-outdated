@@ -7,11 +7,14 @@ set -e
 
 shopt -s nullglob
 
-for package_path in ${BASHER_PACKAGES_PATH}/*
+IFS=$'\r\n' packages=($(basher list))
+
+for package in "${packages[@]}"
 do
+  package_path="$BASHER_PACKAGES_PATH/$package"
   cd $package_path
   git remote update > /dev/null 2>&1
   if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/HEAD)" ]; then
-    echo ${package_path##*/}
+    echo "$package"
   fi
 done

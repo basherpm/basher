@@ -1,23 +1,34 @@
 #!/usr/bin/env bash
 # Summary: Installs a package from github
-# Usage: basher install <user> <package>
+# Usage: basher install <package>
 
 set -e
 
-username="$1"
-package="$2"
-
-if [ -z "$username" ]; then
+if [ "$#" -ne 1 ]; then
   basher-help install
   exit 1
 fi
+
+package="$1"
 
 if [ -z "$package" ]; then
   basher-help install
   exit 1
 fi
 
-basher-clone "$username" "$package"
+IFS=/ read -r user name <<< "$package"
+
+if [ -z "$user" ]; then
+  basher-help install
+  exit 1
+fi
+
+if [ -z "$name" ]; then
+  basher-help install
+  exit 1
+fi
+
+basher-clone "$package"
 
 shopt -s nullglob
 
@@ -33,5 +44,5 @@ fi
 
 for bin in "${bins[@]}"
 do
-  ln -s "$BASHER_PACKAGES_PATH/$package/$bin" "$BASHER_ROOT/cellar/bin/${bin##*/}"
+  ln -sf "$BASHER_PACKAGES_PATH/$package/$bin" "$BASHER_ROOT/cellar/bin/${bin##*/}"
 done

@@ -3,4 +3,4 @@
 username="$1"
 package="$2"
 
-git clone "${BASHER_ORIGIN_DIR}/$username/$package" "${BASHER_PACKAGES_PATH}/$package"
+git clone "${BASHER_ORIGIN_DIR}/$username/$package" "${BASHER_PACKAGES_PATH}/$username/$package"
