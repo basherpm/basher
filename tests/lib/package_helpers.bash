@@ -37,3 +37,15 @@ create_exec() {
   git add .
   git commit -m "Add $exec"
 }
+
+create_runtime() {
+  local package="$1"
+  local runtime="$2"
+  cd "${BASHER_ORIGIN_DIR}/$package"
+  touch "$runtime"
+
+  echo "RUNTIME=$runtime" >> package.sh
+
+  git add .
+  git commit -m "Add runtime $runtime"
+}

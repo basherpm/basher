@@ -23,6 +23,10 @@ mkdir -p "${BASHER_TEST_DIR}/path"
 
 mkdir -p "${BASHER_ORIGIN_DIR}"
 
+setup() {
+  source "${BATS_TEST_DIRNAME}/../runtime/require.bash"
+}
+
 teardown() {
   rm -rf "$BASHER_TEST_DIR"
 }
