@@ -38,6 +38,14 @@ $ basher install sstephenson/bats
 
 This will install bats from https://github.com/sstephenson/bats and add `bin/bats` it to the PATH.
 
+### Using package runtimes
+
+If a package exports a runtime, you can include it in the current shell by running, for instance:
+
+~~~ sh
+require juanibiapina/gg
+~~~
+
 ### Command summary
 
 - `basher commands` - List commands
@@ -54,7 +62,12 @@ Packages are github repos (username/repo) which contain a `package.sh` file with
 
 ~~~ sh
 BIN=bin/exec1:bin/exec2
+RUNTIME=lib/functions.sh
 ~~~
+
+BIN is a ":" separated list of binaries that will be added to the path.
+
+RUNTIME is a file that will be sourced when using the `require` function.
 
 If a `package.sh` file is not found, basher will try to link any binaries inside the `bin` folder of the project.
 
