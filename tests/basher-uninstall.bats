@@ -28,7 +28,7 @@ load test_helper
 
 @test "removes package directory" {
   mock_clone
-  create_package username package
+  create_package username/package
   basher-install username/package
 
   run basher-uninstall username/package
@@ -38,8 +38,8 @@ load test_helper
 
 @test "with package.sh, removes binaries" {
   mock_clone
-  create_package username package
-  create_exec username package exec1
+  create_package username/package
+  create_exec username/package exec1
   basher-install username/package
 
   run basher-uninstall username/package
@@ -49,8 +49,8 @@ load test_helper
 
 @test "without package.sh, removes binaries" {
   mock_clone
-  create_invalid_package username package
-  create_exec username package exec1
+  create_invalid_package username/package
+  create_exec username/package exec1
   basher-install username/package
 
   run basher-uninstall username/package
@@ -61,10 +61,10 @@ load test_helper
 
 @test "does not remove other package directories and binaries" {
   mock_clone
-  create_package username package1
-  create_exec username package1 exec1
-  create_package username package2
-  create_exec username package2 exec2
+  create_package username/package1
+  create_exec username/package1 exec1
+  create_package username/package2
+  create_exec username/package2 exec2
   basher-install username/package1
   basher-install username/package2
 

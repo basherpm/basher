@@ -10,9 +10,9 @@ load test_helper
 
 @test "list installed packages" {
   mock_clone
-  create_package username p1
-  create_package username2 p2
-  create_package username2 p3
+  create_package username/p1
+  create_package username2/p2
+  create_package username2/p3
   basher-install username/p1
   basher-install username2/p2
 

@@ -21,7 +21,7 @@ load test_helper
 }
 
 @test "gives a warning if there is no package.sh" {
-  create_invalid_package username package
+  create_invalid_package username/package
   mock_clone
 
   run basher-install username/package
@@ -30,9 +30,9 @@ load test_helper
 }
 
 @test "with a valid package, links each binary to the cellar bin" {
-  create_package username package
-  create_exec username package exec1
-  create_exec username package exec2
+  create_package username/package
+  create_exec username/package exec1
+  create_exec username/package exec2
   mock_clone
 
   run basher-install username/package
@@ -42,9 +42,9 @@ load test_helper
 }
 
 @test "with an invalid package, links each binary to the cellar bin" {
-  create_invalid_package username package
-  create_exec username package exec1
-  create_exec username package exec2
+  create_invalid_package username/package
+  create_exec username/package exec1
+  create_exec username/package exec2
   mock_clone
 
   run basher-install username/package

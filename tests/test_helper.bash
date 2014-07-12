@@ -1,4 +1,4 @@
-load assertions
+load lib/assertions
 
 export BASHER_TEST_DIR="${BATS_TMPDIR}/basher"
 export BASHER_ORIGIN_DIR="${BASHER_TEST_DIR}/origin"
@@ -27,61 +27,5 @@ teardown() {
   rm -rf "$BASHER_TEST_DIR"
 }
 
-mock_command() {
-  local command="$1"
-  mkdir -p "${BASHER_TEST_DIR}/path/$command"
-  cat > "${BASHER_TEST_DIR}/path/$command/$command" <<SH
-#!/usr/bin/env bash
-
-echo "$command \$@"
-SH
-  chmod +x "${BASHER_TEST_DIR}/path/$command/$command"
-  export PATH="${BASHER_TEST_DIR}/path/$command:$PATH"
-}
-
-mock_clone() {
-  export PATH="${BATS_TEST_DIRNAME}/fixtures/commands/basher-clone:$PATH"
-}
-
-create_package() {
-  local username="$1"
-  local package="$2"
-  mkdir -p "${BASHER_ORIGIN_DIR}/$username/$package"
-  cd "${BASHER_ORIGIN_DIR}/$username/$package"
-  git init .
-  touch package.sh
-  git add .
-  git commit -m "package.sh"
-}
-
-create_invalid_package() {
-  local username="$1"
-  local package="$2"
-  mkdir -p "${BASHER_ORIGIN_DIR}/$username/$package"
-  cd "${BASHER_ORIGIN_DIR}/$username/$package"
-  git init .
-  touch dummy
-  git add .
-  git commit -m "dummy"
-}
-
-create_exec() {
-  local username="$1"
-  local package="$2"
-  local exec="$3"
-  cd "${BASHER_ORIGIN_DIR}/$username/$package"
-  mkdir -p bin
-  touch bin/$exec
-  chmod +x bin/$exec
-
-  if [ -e "package.sh" ]; then
-    if grep -sq "BIN=" "package.sh"; then
-      sed -e "/^BIN=/ s/$/:bin\/$exec/" -i '' package.sh
-    else
-      echo "BIN=bin/$exec" >> package.sh
-    fi
-  fi
-
-  git add .
-  git commit -m "Add $exec"
-}
+load lib/mocks
+load lib/package_helpers

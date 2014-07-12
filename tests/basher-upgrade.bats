@@ -22,9 +22,9 @@ load test_helper
 
 @test "upgrades a package to the latest version" {
   mock_clone
-  create_package username package
+  create_package username/package
   basher-install username/package
-  create_exec username package "second"
+  create_exec username/package "second"
 
   basher-upgrade username/package
 
