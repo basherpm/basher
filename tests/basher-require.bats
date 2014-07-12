@@ -20,8 +20,16 @@ load test_helper
   assert_line "Usage: require <package>"
 }
 
+@test "when package is not installed, show error" {
+  run require a/b
+  assert_failure
+  assert_line "Package 'a/b' is not installed."
+}
+
 @test "when package doesn't have a package.sh, show error" {
+  mock_clone
   create_package username/package
+  basher-install username/package
   run require username/package
 
   assert_failure
@@ -29,8 +37,10 @@ load test_helper
 }
 
 @test "when package doesn't export a runtime, show error" {
+  mock_clone
   create_package username/package
   create_exec username/package exec1
+  basher-install username/package
   run require username/package
 
   assert_failure

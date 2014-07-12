@@ -25,6 +25,11 @@ require() {
     return 1
   fi
 
+  if [ ! -e "$BASHER_ROOT/cellar/packages/$package" ]; then
+    echo "Package '$package' is not installed."
+    return 1
+  fi
+
   if [ -e "$BASHER_ROOT/cellar/packages/$package/package.sh" ]; then
     local line="$(cat ${BASHER_ROOT}/cellar/packages/$package/package.sh | grep RUNTIME=)"
     if [ "$line" = "" ]; then
