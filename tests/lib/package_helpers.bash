@@ -28,7 +28,7 @@ create_exec() {
 
   if [ -e "package.sh" ]; then
     if grep -sq "BIN=" "package.sh"; then
-      sed -e "/^BIN=/ s/$/:bin\/$exec/" -i '' package.sh
+      sed -e "/^BIN=/ s/$/:bin\/$exec/" -i'' package.sh
     else
       echo "BIN=bin/$exec" >> package.sh
     fi
