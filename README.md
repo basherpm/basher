@@ -1,6 +1,6 @@
 # basher
 
-A package manager for shell scripts and functions.
+A package manager for bash scripts and functions.
 
 ## Installation
 
