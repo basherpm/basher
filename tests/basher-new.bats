@@ -27,3 +27,9 @@ load test_helper
   assert_success
   assert [ -e "$(pwd)/package/package.sh" ]
 }
+
+@test "create a README.md file" {
+  run basher-new package
+  assert_success
+  assert [ -e "$(pwd)/package/README.md" ]
+}

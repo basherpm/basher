@@ -18,3 +18,4 @@ fi
 
 mkdir "$package"
 touch "$package/package.sh"
+touch "$package/README.md"
