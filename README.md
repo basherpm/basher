@@ -2,6 +2,8 @@
 
 A package manager for bash scripts and functions.
 
+[![Build Status](https://travis-ci.org/basherpm/basher.svg?branch=master)](https://travis-ci.org/basherpm/basher)
+
 ## Installation
 
 1. Checkout basher on `~/.basher`
