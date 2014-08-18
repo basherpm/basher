@@ -1,4 +1,7 @@
 install: git clone https://github.com/sstephenson/bats.git
+before_script:
+  - git config --global user.email "user@example.com"
+  - git config --global user.name "User Name"
 script: bats/bin/bats --tap tests
 # skips unnecessary Ruby-specific setup
 language: c
