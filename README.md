@@ -7,7 +7,7 @@ A package manager for bash scripts and functions.
 1. Checkout basher on `~/.basher`
 
     ~~~ sh
-    $ git clone git://github.com/juanibiapina/basher.git ~/.basher
+    $ git clone git://github.com/basherpm/basher.git ~/.basher
     ~~~
 
 2. Add `~/.basher/bin` to `$PATH` for easy access to the basher command-line utility.
@@ -16,7 +16,7 @@ A package manager for bash scripts and functions.
     $ echo 'export PATH="$HOME/.basher/bin:$PATH"' >> ~/.bash_profile
     ~~~
 
-    **Ubuntu note**: Modify your `~/.profile` instead of `~/.bash_profile`.
+    **Ubuntu Desktop note**: Modify your `~/.bashrc` instead of `~/.bash_profile`.
 
     **Zsh note**: Modify your `~/.zshrc` file instead of `~/.bash_profile`.
 
@@ -26,7 +26,7 @@ A package manager for bash scripts and functions.
     $ echo 'eval "$(basher init -)"' >> ~/.bash_profile
     ~~~
 
-    _Same as in previous step, use `~/.profile` on Ubuntu, `~/.zshrc` for Zsh._
+    _Same as in previous step, use `~/.bashrc` on Ubuntu, `~/.zshrc` for Zsh._
 
 ## Usage
 
