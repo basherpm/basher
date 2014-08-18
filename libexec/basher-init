@@ -2,6 +2,9 @@
 # Summary: Configure the shell environment for basher
 # Usage: eval "$(basher init -)"
 
+set -e
+
 echo "export BASHER_ROOT=$BASHER_ROOT"
-echo "source $BASHER_ROOT/runtime/path.bash"
-echo "source $BASHER_ROOT/runtime/require.bash"
+echo 'export PATH="$BASHER_ROOT/cellar/bin:$PATH"'
+
+echo 'source "$BASHER_ROOT/runtime/require.bash"'

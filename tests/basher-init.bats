@@ -2,13 +2,21 @@
 
 load test_helper
 
-@test "sources main basher lib" {
-  run basher-init -
-  assert_line "source $BASHER_ROOT/runtime/path.bash"
-  assert_line "source $BASHER_ROOT/runtime/require.bash"
-}
-
 @test "exports BASHER_ROOT" {
   BASHER_ROOT=/lol run basher-init -
-  assert_line 0 "export BASHER_ROOT=/lol"
+  assert_success
+  assert_line 0 'export BASHER_ROOT=/lol'
 }
+
+@test "adds cellar/bin to path" {
+  run basher-init -
+  assert_success
+  assert_line 1 'export PATH="$BASHER_ROOT/cellar/bin:$PATH"'
+}
+
+@test "sources require runtime" {
+  run basher-init -
+  assert_success
+  assert_line 2 'source "$BASHER_ROOT/runtime/require.bash"'
+}
+
