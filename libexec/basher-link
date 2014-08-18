@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Summary: Installs a local directory as a basher package
+# Usage: basher link <directory>
+
+set -e
+
+if [ "$#" -ne 1 ]; then
+  basher-help link
+  exit 1
+fi
+
+directory="$1"
+
+if [ ! -d "$directory" ]; then
+  echo "Directory '$directory' not found."
+  exit 1
+fi
+
+mkdir -p "${BASHER_PACKAGES_PATH}/link"
+ln -s "$(pwd)/$directory" "${BASHER_PACKAGES_PATH}/link/$directory"
+
+basher-link-bins "link/$directory"

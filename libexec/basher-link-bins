@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+package="$1"
+
+shopt -s nullglob
+
+if [ -e "$BASHER_PACKAGES_PATH/$package/package.sh" ]; then
+  source "$BASHER_PACKAGES_PATH/$package/package.sh" # TODO: make this secure?
+  IFS=: read -a bins <<< "$BIN"
+else
+  echo "WARNING: package.sh not found, linking any binaries in bin directory"
+  bins=($BASHER_PACKAGES_PATH/$package/bin/*)
+  bins=("${bins[@]##*/}")
+  bins=("${bins[@]/#/bin/}")
+fi
+
+for bin in "${bins[@]}"
+do
+  ln -sf "$BASHER_PACKAGES_PATH/$package/$bin" "$BASHER_ROOT/cellar/bin/${bin##*/}"
+done
