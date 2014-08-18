@@ -2,6 +2,7 @@ load lib/assertions
 
 export BASHER_TEST_DIR="${BATS_TMPDIR}/basher"
 export BASHER_ORIGIN_DIR="${BASHER_TEST_DIR}/origin"
+export BASHER_CWD="${BASHER_TEST_DIR}/cwd"
 
 export BASHER_ROOT="${BASHER_TEST_DIR}/root"
 export BASHER_PACKAGES_PATH="$BASHER_ROOT/cellar/packages"
@@ -23,8 +24,11 @@ mkdir -p "${BASHER_TEST_DIR}/path"
 
 mkdir -p "${BASHER_ORIGIN_DIR}"
 
+mkdir -p "${BASHER_CWD}"
+
 setup() {
   source "${BATS_TEST_DIRNAME}/../runtime/require.bash"
+  cd ${BASHER_CWD}
 }
 
 teardown() {
