@@ -4,6 +4,14 @@
 
 set -e
 
+if [ -z "$shell" ]; then
+  shell="$(ps c -p "$PPID" -o 'ucomm=' 2>/dev/null || true)"
+  shell="${shell##-}"
+  shell="${shell%% *}"
+  shell="$(basename "${shell:-$SHELL}")"
+fi
+
+echo "export BASHER_SHELL=$shell"
 echo "export BASHER_ROOT=$BASHER_ROOT"
 echo 'export PATH="$BASHER_ROOT/cellar/bin:$PATH"'
 
