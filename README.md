@@ -22,6 +22,15 @@ A package manager for bash scripts and functions.
 
     **Zsh note**: Modify your `~/.zshrc` file instead of `~/.bash_profile`.
 
+    **For Fish**: Add the following to you `~/.config/fish/config.fish`
+
+    ~~~ sh
+    if test -d ~/.basher
+      set basher ~/.basher/bin
+    end
+    set -gx PATH $basher $PATH
+    ~~~
+
 3. Add `basher init` to your shell to enable basher runtime functions
 
     ~~~ sh
@@ -29,6 +38,12 @@ A package manager for bash scripts and functions.
     ~~~
 
     _Same as in previous step, use `~/.bashrc` on Ubuntu, `~/.zshrc` for Zsh._
+
+    _For **Fish**, use the following line on your `~/.config/fish/config.fish`._
+
+    ~~~ sh
+    status --is-interactive; and . (basher init -|psub)
+    ~~~
 
 ## Usage
 
