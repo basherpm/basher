@@ -12,14 +12,34 @@ if [ -z "$shell" ]; then
   shell="$(basename "${shell:-$SHELL}")"
 fi
 
-echo "export BASHER_SHELL=$shell"
-echo "export BASHER_ROOT=$BASHER_ROOT"
+print_fish_commands() {
+  echo "setenv BASHER_SHELL $shell"
+  echo "setenv BASHER_ROOT $BASHER_ROOT"
 
-echo 'export PATH="$BASHER_ROOT/cellar/bin:$PATH"'
+  echo 'if not contains $BASHER_ROOT/cellar/bin $PATH'
+  echo 'setenv PATH $BASHER_ROOT/cellar/bin $PATH'
+  echo 'end'
+}
+
+print_sh_commands(){
+  echo "export BASHER_SHELL=$shell"
+  echo "export BASHER_ROOT=$BASHER_ROOT"
+
+  echo 'export PATH="$BASHER_ROOT/cellar/bin:$PATH"'
+
+  # TODO: is only read by sh type shells (not Fish)
+  echo 'source "$BASHER_ROOT/runtime/require.bash"'
+}
+
+case "$shell" in
+  fish )
+    print_fish_commands
+    ;;
+  * )
+    print_sh_commands
+    ;;
+esac
 
 if [ -e "$BASHER_ROOT/completions/basher.$shell" ]; then
   echo "source \"\$BASHER_ROOT/completions/basher.$shell\""
 fi
-
-
-echo 'source "$BASHER_ROOT/runtime/require.bash"'
