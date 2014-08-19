@@ -5,14 +5,4 @@
 
 set -e
 
-IFS=: paths=($PATH)
-
-shopt -s nullglob
-
-{ for path in "${paths[@]}"; do
-    for command in "${path}/basher-"*; do
-      command="${command##*basher-}"
-      echo ${command}
-    done
-  done
-} | sort | uniq
+basher-_commands basher
