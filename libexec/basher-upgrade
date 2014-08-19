@@ -9,6 +9,11 @@ if [ "$#" -ne 1 ]; then
   exit 1
 fi
 
+# TAG completions
+if [ "$1" == "--complete" ]; then
+  exec basher-list
+fi
+
 package="$1"
 
 if [ -z "$package" ]; then
