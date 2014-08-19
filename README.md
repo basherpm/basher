@@ -2,6 +2,8 @@
 
 A package manager for bash scripts and functions.
 
+Basher allows you to quickly install bash packages directly from github. Instead of looking for specific install instructions for each package and messing with your path, basher will create a central location for all packages and manage their binaries for you.
+
 [![Build Status](https://travis-ci.org/basherpm/basher.svg?branch=master)](https://travis-ci.org/basherpm/basher)
 
 ## Installation
