@@ -8,6 +8,12 @@ create_package() {
   git commit -m "package.sh"
 }
 
+create_link_package() {
+  local name="$1"
+  mkdir -p "${BASHER_PACKAGES_PATH}/link"
+  ln -s whatever "${BASHER_PACKAGES_PATH}/link/$name"
+}
+
 create_invalid_package() {
   local package="$1"
   mkdir -p "${BASHER_ORIGIN_DIR}/$package"

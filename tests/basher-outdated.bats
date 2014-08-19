@@ -20,3 +20,15 @@ load test_helper
   assert_success
   assert_output username/outdated
 }
+
+@test "ignores link packages" {
+  mock_clone
+  create_package username/outdated
+  basher-install username/outdated
+  create_exec username/outdated "second"
+  create_link_package skip
+
+  run basher-outdated
+  assert_success
+  assert_output username/outdated
+}
