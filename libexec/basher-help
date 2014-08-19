@@ -135,6 +135,11 @@ if [ "$1" = "--usage" ]; then
   shift
 fi
 
+# TAG completions
+if [ "$1" == "--complete" ]; then
+  exec basher-commands
+fi
+
 if [ -z "$1" ] || [ "$1" == "basher" ]; then
   echo "Usage: basher <command> [<args>]"
   [ -z "$usage" ] || exit
