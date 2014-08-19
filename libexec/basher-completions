@@ -1,1 +1,15 @@
 #!/usr/bin/env bash
+# Usage: basher completions <command>
+
+set -e
+
+COMMAND="$1"
+if [ -z "$COMMAND" ]; then
+  basher-help completions
+  exit 1
+fi
+
+COMMAND_PATH="$(command -v "basher-$COMMAND")"
+if grep -E "^([#%]|--|//) TAG completions" "$COMMAND_PATH" >/dev/null; then
+  exec "$COMMAND_PATH" --complete
+fi
