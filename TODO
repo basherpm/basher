@@ -1,0 +1,4 @@
+- template for test_helper.bash
+- template for binaries
+- generate directory structure on 'new' command
+- local install and require
