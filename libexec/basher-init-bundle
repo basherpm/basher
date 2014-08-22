@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Summary: Configure the shell environment for basher
+# Usage: eval "$(basher init-bundle -)"
+#
+# This command is meant to be used to load local basher
+# environments.
+#
+# For instance, add this line to the beginning of your
+# test_helper.bash file:
+#
+# eval "$(basher init-bundle -)"
+#
+# This will give you access to the 'require' function.
+
+set -e
+
+echo "export BASHER_ROOT=$BASHER_ROOT"
+
+echo 'export PATH="$BASHER_ROOT/cellar/bin:$PATH"'
+
+echo 'source "$BASHER_ROOT/runtime/require.bash"'
