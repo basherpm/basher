@@ -22,9 +22,9 @@ load test_helper
 }
 
 @test "calls link-bins" {
-  mock_command basher-link-bins
+  mock_command basher-_link-bins
   mkdir package2
   run basher-link package2
   assert_success
-  assert_output "basher-link-bins link/package2"
+  assert_output "basher-_link-bins link/package2"
 }

@@ -20,35 +20,23 @@ load test_helper
   assert_line "Usage: basher install <package>"
 }
 
-@test "gives a warning if there is no package.sh" {
-  create_invalid_package username/package
-  mock_clone
+@test "executes install steps in right order" {
+  mock_command basher-_clone
+  mock_command basher-_validate
+  mock_command basher-_deps
+  mock_command basher-_link-bins
 
   run basher-install username/package
-  assert_success
-  assert_line "WARNING: package.sh not found, linking any binaries in bin directory"
+  assert_success "basher-_clone username/package
+basher-_validate username/package
+basher-_deps username/package
+basher-_link-bins username/package"
 }
 
-@test "with a valid package, links each binary to the cellar bin" {
+@test "doesn't fail" {
   create_package username/package
-  create_exec username/package exec1
-  create_exec username/package exec2
   mock_clone
 
   run basher-install username/package
   assert_success
-  assert [ "$(readlink $BASHER_ROOT/cellar/bin/exec1)" = "${BASHER_PACKAGES_PATH}/username/package/bin/exec1" ]
-  assert [ "$(readlink $BASHER_ROOT/cellar/bin/exec2)" = "${BASHER_PACKAGES_PATH}/username/package/bin/exec2" ]
-}
-
-@test "with an invalid package, links each binary to the cellar bin" {
-  create_invalid_package username/package
-  create_exec username/package exec1
-  create_exec username/package exec2
-  mock_clone
-
-  run basher-install username/package
-  assert_success
-  assert [ "$(readlink $BASHER_ROOT/cellar/bin/exec1)" = "${BASHER_PACKAGES_PATH}/username/package/bin/exec1" ]
-  assert [ "$(readlink $BASHER_ROOT/cellar/bin/exec2)" = "${BASHER_PACKAGES_PATH}/username/package/bin/exec2" ]
 }

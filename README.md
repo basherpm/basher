@@ -52,10 +52,10 @@ Basher allows you to quickly install bash packages directly from github. Instead
 ### Installing packages
 
 ~~~ sh
-$ basher install sstephenson/bats
+$ basher install basherpm/bats
 ~~~
 
-This will install bats from https://github.com/sstephenson/bats and add `bin/bats` it to the PATH.
+This will install bats from https://github.com/basherpm/bats and add `bin/bats` it to the PATH.
 
 ### Using package runtimes
 
@@ -82,20 +82,23 @@ Packages are github repos (username/repo) which contain a `package.sh` file with
 ~~~ sh
 BIN=bin/exec1:bin/exec2
 RUNTIME=lib/functions.sh
+DEPS=username/repo:otheruser/repo
 ~~~
 
 BIN is a ":" separated list of binaries that will be added to the path.
 
 RUNTIME is a file that will be sourced when using the `require` function.
 
-If a `package.sh` file is not found, basher will try to link any binaries inside the `bin` folder of the project.
+DEPS is a ":" separated list of dependencies that need to be installed before this package.
+
+A 'package.sh' file needs to exist, but it can be empty.
 
 ## Development
 
 To run the tests, install bats:
 
 ~~~ sh
-$ basher install sstephenson/bats
+$ basher install basherpm/bats
 ~~~
 
 and then run:

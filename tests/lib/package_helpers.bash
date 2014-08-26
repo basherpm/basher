@@ -6,6 +6,7 @@ create_package() {
   touch package.sh
   git add .
   git commit -m "package.sh"
+  cd ${BASHER_CWD}
 }
 
 create_link_package() {
@@ -22,6 +23,7 @@ create_invalid_package() {
   touch dummy
   git add .
   git commit -m "dummy"
+  cd ${BASHER_CWD}
 }
 
 create_exec() {
@@ -43,6 +45,45 @@ create_exec() {
 
   git add .
   git commit -m "Add $exec"
+  cd ${BASHER_CWD}
+}
+
+create_dep() {
+  local package="$1"
+  local dep="$2"
+  cd "${BASHER_ORIGIN_DIR}/$package"
+
+  if [ -e "package.sh" ]; then
+    if grep -sq "DEPS=" "package.sh"; then
+      sed -e "/^DEPS=/ s;$;:$dep;" package.sh > package.sh.tmp
+      mv package.sh.tmp package.sh
+    else
+      echo "DEPS=$dep" >> package.sh
+    fi
+  fi
+
+  git add .
+  git commit -m "Add dependency on $dep"
+  cd ${BASHER_CWD}
+}
+
+create_testdep() {
+  local package="$1"
+  local dep="$2"
+  cd "${BASHER_ORIGIN_DIR}/$package"
+
+  if [ -e "package.sh" ]; then
+    if grep -sq "TESTDEPS=" "package.sh"; then
+      sed -e "/^TESTDEPS=/ s;$;:$dep;" package.sh > package.sh.tmp
+      mv package.sh.tmp package.sh
+    else
+      echo "TESTDEPS=$dep" >> package.sh
+    fi
+  fi
+
+  git add .
+  git commit -m "Add test dependency on $dep"
+  cd ${BASHER_CWD}
 }
 
 create_runtime() {
@@ -55,4 +96,5 @@ create_runtime() {
 
   git add .
   git commit -m "Add runtime $runtime"
+  cd ${BASHER_CWD}
 }

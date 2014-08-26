@@ -1,31 +1,31 @@
 #!/usr/bin/env bash
 #
 # Summary: Clones a package from github, but doesn't install it
-# Usage: basher clone <package>
+# Usage: basher _clone <package>
 
 set -e
 
 if [ "$#" -ne 1 ]; then
-  basher-help clone
+  basher-help _clone
   exit 1
 fi
 
 package="$1"
 
 if [ -z "$package" ]; then
-  basher-help clone
+  basher-help _clone
   exit 1
 fi
 
 IFS=/ read -r user name <<< "$package"
 
 if [ -z "$user" ]; then
-  basher-help clone
+  basher-help _clone
   exit 1
 fi
 
 if [ -z "$name" ]; then
-  basher-help clone
+  basher-help _clone
   exit 1
 fi
 

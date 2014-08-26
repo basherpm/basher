@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 # Usage: basher completions <command>
+# Summary: List completions for a command.
+#
+# In order to support completions, a command must have a comment
+# with the 'completions' TAG and provide a '--completions' argument.
 
 set -e
 

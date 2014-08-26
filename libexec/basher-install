@@ -28,5 +28,7 @@ if [ -z "$name" ]; then
   exit 1
 fi
 
-basher-clone "$package"
-basher-link-bins "$package"
+basher-_clone "$package"
+basher-_validate "$package"
+basher-_deps "$package"
+basher-_link-bins "$package"

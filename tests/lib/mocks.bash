@@ -11,5 +11,5 @@ SH
 }
 
 mock_clone() {
-  export PATH="${BATS_TEST_DIRNAME}/fixtures/commands/basher-clone:$PATH"
+  export PATH="${BATS_TEST_DIRNAME}/fixtures/commands/basher-_clone:$PATH"
 }
