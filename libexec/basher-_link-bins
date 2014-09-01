@@ -8,10 +8,8 @@ if [ -e "$BASHER_PACKAGES_PATH/$package/package.sh" ]; then
   source "$BASHER_PACKAGES_PATH/$package/package.sh" # TODO: make this secure?
   IFS=: read -a bins <<< "$BIN"
 else
-  echo "WARNING: package.sh not found, linking any binaries in bin directory"
-  bins=($BASHER_PACKAGES_PATH/$package/bin/*)
-  bins=("${bins[@]##*/}")
-  bins=("${bins[@]/#/bin/}")
+  echo "ERROR: package.sh not found."
+  exit 1
 fi
 
 for bin in "${bins[@]}"

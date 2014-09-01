@@ -15,6 +15,7 @@ load test_helper
 }
 
 @test "links the package to cellar under link user" {
+  mock_command basher-_link-bins
   mkdir package1
   run basher-link package1
   assert_success
