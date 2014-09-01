@@ -13,9 +13,3 @@ load test_helper
   assert_success
   assert_line 1 'export PATH="$BASHER_ROOT/cellar/bin:$PATH"'
 }
-
-@test "sources require runtime" {
-  run basher-init-bundle -
-  assert_success
-  assert_line 2 'source "$BASHER_ROOT/runtime/require.bash"'
-}

@@ -17,5 +17,3 @@ set -e
 echo "export BASHER_ROOT=$BASHER_ROOT"
 
 echo 'export PATH="$BASHER_ROOT/cellar/bin:$PATH"'
-
-echo 'source "$BASHER_ROOT/runtime/require.bash"'
