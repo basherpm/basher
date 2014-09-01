@@ -62,7 +62,7 @@ This will install bats from https://github.com/basherpm/bats and add `bin/bats` 
 If a package exports a runtime, you can include it in the current shell by running, for instance:
 
 ~~~ sh
-require juanibiapina/gg
+source "$(basher runtime-path juanibiapina/gg)"
 ~~~
 
 ### Command summary

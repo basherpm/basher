@@ -26,9 +26,6 @@ print_sh_commands(){
   echo "export BASHER_ROOT=$BASHER_ROOT"
 
   echo 'export PATH="$BASHER_ROOT/cellar/bin:$PATH"'
-
-  # TODO: is only read by sh type shells (not Fish)
-  echo 'source "$BASHER_ROOT/runtime/require.bash"'
 }
 
 case "$shell" in

@@ -28,7 +28,6 @@ mkdir -p "${BASHER_ORIGIN_DIR}"
 mkdir -p "${BASHER_CWD}"
 
 setup() {
-  source "${BATS_TEST_DIRNAME}/../runtime/require.bash"
   cd ${BASHER_CWD}
 }
 

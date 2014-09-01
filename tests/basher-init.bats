@@ -36,10 +36,3 @@ load test_helper
   refute_line 'source "$BASHER_ROOT/completions/basher.fakesh"'
   refute_line 'source "$BASHER_ROOT/completions/basher.other"'
 }
-
-@test "sources require runtime" {
-  run basher-init -
-  assert_success
-  assert_line 'source "$BASHER_ROOT/runtime/require.bash"'
-}
-
