@@ -32,7 +32,6 @@ create_exec() {
   cd "${BASHER_ORIGIN_DIR}/$package"
   mkdir -p bin
   touch bin/$exec
-  chmod +x bin/$exec
 
   if [ -e "package.sh" ]; then
     if grep -sq "BIN=" "package.sh"; then
