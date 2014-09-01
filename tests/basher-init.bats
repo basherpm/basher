@@ -25,7 +25,7 @@ load test_helper
   touch "$BASHER_ROOT/completions/basher.fakesh"
   run basher-init - fakesh
   assert_success
-  assert_line 4 'source "$BASHER_ROOT/completions/basher.fakesh"'
+  assert_line 3 'source "$BASHER_ROOT/completions/basher.fakesh"'
 }
 
 @test "does not setup shell completions if not available" {
