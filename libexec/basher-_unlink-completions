@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+package="$1"
+
+shopt -s nullglob
+
+if [ -e "$BASHER_PACKAGES_PATH/$package/package.sh" ]; then
+  source "$BASHER_PACKAGES_PATH/$package/package.sh" # TODO: make this secure?
+  IFS=: read -a bash_completions <<< "$BASH_COMPLETIONS"
+  IFS=: read -a zsh_completions <<< "$ZSH_COMPLETIONS"
+else
+  echo "ERROR: package.sh not found."
+  exit 1
+fi
+
+for completion in "${bash_completions[@]}"
+do
+  rm "$BASHER_ROOT/cellar/completions/bash/${completion##*/}"
+done
+
+for completion in "${zsh_completions[@]}"
+do
+  rm "$BASHER_ROOT/cellar/completions/zsh/${completion##*/}"
+done
