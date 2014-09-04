@@ -2,3 +2,5 @@
 - template for binaries
 - generate directory structure on 'new' command
 - local install and require
+- remove completions on uninstall
+- load shell completions on init

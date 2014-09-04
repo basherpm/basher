@@ -19,6 +19,8 @@ mkdir -p "${BASHER_ROOT}/tests"
 mkdir -p "${BASHER_ROOT}/cellar"
 mkdir -p "${BASHER_ROOT}/cellar/bin"
 mkdir -p "${BASHER_ROOT}/cellar/packages"
+mkdir -p "${BASHER_ROOT}/cellar/completions/bash"
+mkdir -p "${BASHER_ROOT}/cellar/completions/zsh"
 
 mkdir -p "${BASHER_TMP_BIN}"
 mkdir -p "${BASHER_TEST_DIR}/path"
