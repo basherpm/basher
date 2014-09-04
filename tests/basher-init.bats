@@ -20,7 +20,7 @@ load test_helper
   assert_line 2 'export PATH="$BASHER_ROOT/cellar/bin:$PATH"'
 }
 
-@test "setup shell completions if available" {
+@test "setup basher completions if available" {
   mkdir -p "$BASHER_ROOT/completions"
   touch "$BASHER_ROOT/completions/basher.fakesh"
   run basher-init - fakesh
@@ -28,11 +28,23 @@ load test_helper
   assert_line 3 'source "$BASHER_ROOT/completions/basher.fakesh"'
 }
 
-@test "does not setup shell completions if not available" {
+@test "does not setup basher completions if not available" {
   mkdir -p "$BASHER_ROOT/completions"
   touch "$BASHER_ROOT/completions/basher.other"
   run basher-init - fakesh
   assert_success
   refute_line 'source "$BASHER_ROOT/completions/basher.fakesh"'
   refute_line 'source "$BASHER_ROOT/completions/basher.other"'
+}
+
+@test "setup package completions (bash)" {
+  run basher-init - bash
+  assert_success
+  assert_line 3 'for f in $(command ls "$BASHER_ROOT/cellar/completions/bash"); do source "$BASHER_ROOT/cellar/completions/bash/$f"; done'
+}
+
+@test "setup package completions (zsh)" {
+  run basher-init - zsh
+  assert_success
+  assert_line 3 'fpath=("$BASHER_ROOT/cellar/completions/zsh" $fpath)'
 }
