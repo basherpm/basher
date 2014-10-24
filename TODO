@@ -2,3 +2,7 @@
 - template for binaries
 - generate directory structure on 'new' command
 - local install and require
+- improve uninstall tests
+- extract unlink-bins command
+- package completions for fish shell
+- add support for packages without package.sh
