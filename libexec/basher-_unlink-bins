@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+package="$1"
+
+source "$BASHER_PACKAGES_PATH/$package/package.sh"
+IFS=: read -a bins <<< "$BIN"
+
+for bin in "${bins[@]}"; do
+  rm -f "$BASHER_ROOT/cellar/bin/${bin##*/}"
+done

@@ -41,14 +41,7 @@ if [ ! -d "$BASHER_PACKAGES_PATH/$package" ]; then
 fi
 
 basher-_validate "$package"
-
-source "$BASHER_PACKAGES_PATH/$package/package.sh"
-IFS=: read -a bins <<< "$BIN"
-
-for bin in "${bins[@]}"; do
-  rm -f "$BASHER_ROOT/cellar/bin/${bin##*/}"
-done
-
+basher-_unlink-bins "$package"
 basher-_unlink-completions "$package"
 
 rm -rf "${BASHER_PACKAGES_PATH}/$package"
