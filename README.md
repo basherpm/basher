@@ -82,7 +82,6 @@ Packages are github repos (username/repo) which contain a `package.sh` file with
 ~~~ sh
 BIN=bin/exec1:bin/exec2
 RUNTIME=lib/functions.sh
-DEPS=username/repo:otheruser/repo
 BASH_COMPLETIONS=completions/package
 ZSH_COMPLETIONS=completions/_package
 ~~~
@@ -90,8 +89,6 @@ ZSH_COMPLETIONS=completions/_package
 BIN is a ":" separated list of binaries that will be added to the path.
 
 RUNTIME is a file that will be printed with the runtime-path command.
-
-DEPS is a ":" separated list of dependencies that need to be installed before this package.
 
 BASH_COMPLETIONS and ZSH_COMPLETIONS specify completions to be installed for this package.
 

@@ -30,6 +30,5 @@ fi
 
 basher-_clone "$package"
 basher-_validate "$package"
-basher-_deps "$package"
 basher-_link-bins "$package"
 basher-_link-completions "$package"

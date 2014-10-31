@@ -89,44 +89,6 @@ create_zsh_completions() {
   cd ${BASHER_CWD}
 }
 
-create_dep() {
-  local package="$1"
-  local dep="$2"
-  cd "${BASHER_ORIGIN_DIR}/$package"
-
-  if [ -e "package.sh" ]; then
-    if grep -sq "DEPS=" "package.sh"; then
-      sed -e "/^DEPS=/ s;$;:$dep;" package.sh > package.sh.tmp
-      mv package.sh.tmp package.sh
-    else
-      echo "DEPS=$dep" >> package.sh
-    fi
-  fi
-
-  git add .
-  git commit -m "Add dependency on $dep"
-  cd ${BASHER_CWD}
-}
-
-create_testdep() {
-  local package="$1"
-  local dep="$2"
-  cd "${BASHER_ORIGIN_DIR}/$package"
-
-  if [ -e "package.sh" ]; then
-    if grep -sq "TESTDEPS=" "package.sh"; then
-      sed -e "/^TESTDEPS=/ s;$;:$dep;" package.sh > package.sh.tmp
-      mv package.sh.tmp package.sh
-    else
-      echo "TESTDEPS=$dep" >> package.sh
-    fi
-  fi
-
-  git add .
-  git commit -m "Add test dependency on $dep"
-  cd ${BASHER_CWD}
-}
-
 create_runtime() {
   local package="$1"
   local runtime="$2"

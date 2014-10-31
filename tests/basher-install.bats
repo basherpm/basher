@@ -23,14 +23,12 @@ load test_helper
 @test "executes install steps in right order" {
   mock_command basher-_clone
   mock_command basher-_validate
-  mock_command basher-_deps
   mock_command basher-_link-bins
   mock_command basher-_link-completions
 
   run basher-install username/package
   assert_success "basher-_clone username/package
 basher-_validate username/package
-basher-_deps username/package
 basher-_link-bins username/package
 basher-_link-completions username/package"
 }
