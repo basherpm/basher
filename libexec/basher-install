@@ -29,5 +29,4 @@ if [ -z "$name" ]; then
 fi
 
 basher-_clone "$package"
-basher-_validate "$package"
 basher-_link-bins "$package"

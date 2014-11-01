@@ -3,9 +3,9 @@ create_package() {
   mkdir -p "${BASHER_ORIGIN_DIR}/$package"
   cd "${BASHER_ORIGIN_DIR}/$package"
   git init .
-  touch package.sh
+  touch README
   git add .
-  git commit -m "package.sh"
+  git commit -m "Initial commit"
   cd ${BASHER_CWD}
 }
 
@@ -13,17 +13,6 @@ create_link_package() {
   local name="$1"
   mkdir -p "${BASHER_PACKAGES_PATH}/link"
   ln -s whatever "${BASHER_PACKAGES_PATH}/link/$name"
-}
-
-create_invalid_package() {
-  local package="$1"
-  mkdir -p "${BASHER_ORIGIN_DIR}/$package"
-  cd "${BASHER_ORIGIN_DIR}/$package"
-  git init .
-  touch dummy
-  git add .
-  git commit -m "dummy"
-  cd ${BASHER_CWD}
 }
 
 create_exec() {

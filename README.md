@@ -69,9 +69,9 @@ This will install bats from https://github.com/basherpm/bats and add `bin/bats` 
 
 ## Packages
 
-Packages are github repos (username/repo) which contain a `package.sh` file.
+Packages are simply github repos (username/repo).
 
-A 'package.sh' file needs to exist, but it can be empty.
+Any files inside a bin directory are added to the path.
 
 ## Development
 
