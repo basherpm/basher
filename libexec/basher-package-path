@@ -1,0 +1,18 @@
+#!/usr/bin/env bash -e
+#
+# Summary: Outputs the path for a package
+# Usage: source "$(basher package-path <package>)/file.sh"
+
+# TAG completions
+if [ "$1" == "--complete" ]; then
+  exec basher-list
+fi
+
+if [ "$#" -ne 1 ]; then
+  basher-help package-path
+  exit 1
+fi
+
+package="$1"
+
+echo "$BASHER_PACKAGES_PATH/$package"
