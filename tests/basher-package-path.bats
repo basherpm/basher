@@ -4,7 +4,8 @@ load test_helper
 
 @test "without arguments, prints usage" {
   run basher-package-path
-  assert_failure "Usage: source \"\$(basher package-path <package>)/file.sh\""
+  assert_failure
+  assert_line "Usage: source \"\$(basher package-path <package>)/file.sh\""
 }
 
 @test "outputs the package path" {
