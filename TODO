@@ -6,3 +6,4 @@
 - package completions for fish shell
 - add runtime instructions to readme
 - update package information on readme
+- add completion support
