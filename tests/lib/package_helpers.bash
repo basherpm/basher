@@ -26,3 +26,15 @@ create_exec() {
   git commit -m "Add $exec"
   cd ${BASHER_CWD}
 }
+
+create_root_exec() {
+  local package="$1"
+  local exec="$2"
+  cd "${BASHER_ORIGIN_DIR}/$package"
+  touch $exec
+  chmod +x "$exec"
+
+  git add .
+  git commit -m "Add root exec: $exec"
+  cd ${BASHER_CWD}
+}

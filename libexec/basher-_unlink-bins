@@ -9,3 +9,11 @@ bins=("${bins[@]/#/bin/}")
 for bin in "${bins[@]}"; do
   rm -f "$BASHER_ROOT/cellar/bin/${bin##*/}"
 done
+
+bins=($(find "$BASHER_PACKAGES_PATH/$package" -maxdepth 1 -perm +111 -type f -or -type l))
+bins=("${bins[@]##*/}")
+
+for bin in "${bins[@]}"
+do
+  rm "$BASHER_ROOT/cellar/bin/$bin"
+done
