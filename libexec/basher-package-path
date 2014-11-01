@@ -1,7 +1,9 @@
-#!/usr/bin/env bash -e
+#!/usr/bin/env bash
 #
 # Summary: Outputs the path for a package
 # Usage: source "$(basher package-path <package>)/file.sh"
+
+set -e
 
 # TAG completions
 if [ "$1" == "--complete" ]; then
