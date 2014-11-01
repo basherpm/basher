@@ -4,8 +4,9 @@ package="$1"
 
 shopt -s nullglob
 
-source "$BASHER_PACKAGES_PATH/$package/package.sh" # TODO: make this secure?
-IFS=: read -a bins <<< "$BIN"
+bins=($BASHER_PACKAGES_PATH/$package/bin/*)
+bins=("${bins[@]##*/}")
+bins=("${bins[@]/#/bin/}")
 
 for bin in "${bins[@]}"
 do

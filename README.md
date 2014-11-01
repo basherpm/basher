@@ -80,13 +80,10 @@ source "$(basher runtime-path juanibiapina/gg)"
 Packages are github repos (username/repo) which contain a `package.sh` file with the following format:
 
 ~~~ sh
-BIN=bin/exec1:bin/exec2
 RUNTIME=lib/functions.sh
 BASH_COMPLETIONS=completions/package
 ZSH_COMPLETIONS=completions/_package
 ~~~
-
-BIN is a ":" separated list of binaries that will be added to the path.
 
 RUNTIME is a file that will be printed with the runtime-path command.
 

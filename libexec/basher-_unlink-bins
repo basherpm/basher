@@ -2,8 +2,9 @@
 
 package="$1"
 
-source "$BASHER_PACKAGES_PATH/$package/package.sh"
-IFS=: read -a bins <<< "$BIN"
+bins=($BASHER_PACKAGES_PATH/$package/bin/*)
+bins=("${bins[@]##*/}")
+bins=("${bins[@]/#/bin/}")
 
 for bin in "${bins[@]}"; do
   rm -f "$BASHER_ROOT/cellar/bin/${bin##*/}"
