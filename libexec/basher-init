@@ -28,14 +28,6 @@ print_sh_commands(){
   echo 'export PATH="$BASHER_ROOT/cellar/bin:$PATH"'
 }
 
-load_bash_package_completions() {
-  echo 'for f in $(command ls "$BASHER_ROOT/cellar/completions/bash"); do source "$BASHER_ROOT/cellar/completions/bash/$f"; done'
-}
-
-load_zsh_package_completions() {
-  echo 'fpath=("$BASHER_ROOT/cellar/completions/zsh" $fpath)'
-}
-
 case "$shell" in
   fish )
     print_fish_commands
@@ -48,12 +40,3 @@ esac
 if [ -e "$BASHER_ROOT/completions/basher.$shell" ]; then
   echo "source \"\$BASHER_ROOT/completions/basher.$shell\""
 fi
-
-case "$shell" in
-  bash )
-    load_bash_package_completions
-    ;;
-  zsh )
-    load_zsh_package_completions
-    ;;
-esac

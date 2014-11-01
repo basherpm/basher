@@ -20,4 +20,3 @@ mkdir -p "${BASHER_PACKAGES_PATH}/link"
 ln -s "$(pwd)/$directory" "${BASHER_PACKAGES_PATH}/link/$directory"
 
 basher-_link-bins "link/$directory"
-basher-_link-completions "link/$directory"

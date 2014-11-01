@@ -36,15 +36,3 @@ load test_helper
   refute_line 'source "$BASHER_ROOT/completions/basher.fakesh"'
   refute_line 'source "$BASHER_ROOT/completions/basher.other"'
 }
-
-@test "setup package completions (bash)" {
-  run basher-init - bash
-  assert_success
-  assert_line 3 'for f in $(command ls "$BASHER_ROOT/cellar/completions/bash"); do source "$BASHER_ROOT/cellar/completions/bash/$f"; done'
-}
-
-@test "setup package completions (zsh)" {
-  run basher-init - zsh
-  assert_success
-  assert_line 3 'fpath=("$BASHER_ROOT/cellar/completions/zsh" $fpath)'
-}

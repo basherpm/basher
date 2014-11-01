@@ -69,14 +69,7 @@ This will install bats from https://github.com/basherpm/bats and add `bin/bats` 
 
 ## Packages
 
-Packages are github repos (username/repo) which contain a `package.sh` file with the following format:
-
-~~~ sh
-BASH_COMPLETIONS=completions/package
-ZSH_COMPLETIONS=completions/_package
-~~~
-
-BASH_COMPLETIONS and ZSH_COMPLETIONS specify completions to be installed for this package.
+Packages are github repos (username/repo) which contain a `package.sh` file.
 
 A 'package.sh' file needs to exist, but it can be empty.
 
