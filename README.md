@@ -52,10 +52,10 @@ Basher allows you to quickly install bash packages directly from github. Instead
 ### Installing packages
 
 ~~~ sh
-$ basher install basherpm/bats
+$ basher install sstephenson/bats
 ~~~
 
-This will install bats from https://github.com/basherpm/bats and add `bin/bats` it to the PATH.
+This will install bats from https://github.com/sstephenson/bats and add `bin/bats` it to the PATH.
 
 ### Command summary
 
@@ -78,7 +78,7 @@ Any files inside a bin directory are added to the path.
 To run the tests, install bats:
 
 ~~~ sh
-$ basher install basherpm/bats
+$ basher install sstephenson/bats
 ~~~
 
 and then run:
