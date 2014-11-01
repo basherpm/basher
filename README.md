@@ -57,14 +57,6 @@ $ basher install basherpm/bats
 
 This will install bats from https://github.com/basherpm/bats and add `bin/bats` it to the PATH.
 
-### Using package runtimes
-
-If a package exports a runtime, you can include it in the current shell by running, for instance:
-
-~~~ sh
-source "$(basher runtime-path juanibiapina/gg)"
-~~~
-
 ### Command summary
 
 - `basher commands` - List commands
@@ -80,12 +72,9 @@ source "$(basher runtime-path juanibiapina/gg)"
 Packages are github repos (username/repo) which contain a `package.sh` file with the following format:
 
 ~~~ sh
-RUNTIME=lib/functions.sh
 BASH_COMPLETIONS=completions/package
 ZSH_COMPLETIONS=completions/_package
 ~~~
-
-RUNTIME is a file that will be printed with the runtime-path command.
 
 BASH_COMPLETIONS and ZSH_COMPLETIONS specify completions to be installed for this package.
 

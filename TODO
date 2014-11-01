@@ -5,3 +5,4 @@
 - improve uninstall tests
 - package completions for fish shell
 - add support for packages without package.sh
+- add runtime instructions to readme

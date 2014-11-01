@@ -79,16 +79,3 @@ create_zsh_completions() {
   git commit -m "Add bash completions"
   cd ${BASHER_CWD}
 }
-
-create_runtime() {
-  local package="$1"
-  local runtime="$2"
-  cd "${BASHER_ORIGIN_DIR}/$package"
-  touch "$runtime"
-
-  echo "RUNTIME=$runtime" >> package.sh
-
-  git add .
-  git commit -m "Add runtime $runtime"
-  cd ${BASHER_CWD}
-}
