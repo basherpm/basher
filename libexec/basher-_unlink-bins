@@ -10,6 +10,10 @@ for bin in "${bins[@]}"; do
   rm -f "$BASHER_ROOT/cellar/bin/${bin##*/}"
 done
 
+if [ -e "$BASHER_PACKAGES_PATH/$package/bin" ]; then
+  exit 0
+fi
+
 bins=($(find "$BASHER_PACKAGES_PATH/$package" -maxdepth 1 -perm +111 -type f -or -type l))
 bins=("${bins[@]##*/}")
 

@@ -25,3 +25,15 @@ load test_helper
   assert_success
   assert [ ! -e "$(readlink $BASHER_ROOT/cellar/bin/exec3)" ]
 }
+
+@test "doesn't remove root binaries if there is a bin folder" {
+  create_package username/package
+  create_root_exec username/package exec3
+  mock_clone
+  basher-install username/package
+  mkdir "$BASHER_PACKAGES_PATH/username/package/bin"
+
+  run basher-_unlink-bins username/package
+  assert_success
+  assert [ -e "$(readlink $BASHER_ROOT/cellar/bin/exec3)" ]
+}
