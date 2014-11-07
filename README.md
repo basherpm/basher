@@ -71,7 +71,20 @@ This will install bats from https://github.com/sstephenson/bats and add `bin/bat
 
 Packages are simply github repos (username/repo).
 
-Any files inside a bin directory are added to the path.
+Any files inside a bin directory are added to the path. If there is no bin directory, any executable files in the package root are added to the path.
+
+## Working packages
+
+- [basherpm/todo](https://github.com/basherpm/todo)
+- [bripkens/dock](https://github.com/bripkens/dock)
+- [juanibiapina/gg](https://github.com/juanibiapina/gg)
+- [juanibiapina/pg](https://github.com/juanibiapina/pg)
+- [pote/gpm](https://github.com/pote/gpm)
+- [pote/gvp](https://github.com/pote/gvp)
+- [sstephenson/bats](https://github.com/sstephenson/bats)
+- [treyhunner/tmuxstart](https://github.com/treyhunner/tmuxstart)
+
+And many others. If a repo doesn't work, create an issue or a pull request.
 
 ## Development
 
