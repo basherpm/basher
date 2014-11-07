@@ -55,7 +55,7 @@ Basher allows you to quickly install bash packages directly from github. Instead
 $ basher install sstephenson/bats
 ~~~
 
-This will install bats from https://github.com/sstephenson/bats and add `bin/bats` it to the PATH.
+This will install bats from https://github.com/sstephenson/bats and add `bin/bats` to the PATH.
 
 ### Command summary
 
