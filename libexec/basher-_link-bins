@@ -10,8 +10,10 @@ bins=("${bins[@]/#/bin/}")
 
 for bin in "${bins[@]}"
 do
-  ln -sf "$BASHER_PACKAGES_PATH/$package/$bin" "$BASHER_ROOT/cellar/bin/${bin##*/}"
-  chmod +x "$BASHER_ROOT/cellar/bin/${bin##*/}"
+  name="${bin##*/}"
+  name="${name%.sh}"
+  ln -sf "$BASHER_PACKAGES_PATH/$package/$bin" "$BASHER_ROOT/cellar/bin/${name}"
+  chmod +x "$BASHER_ROOT/cellar/bin/${name}"
 done
 
 if [ -e "$BASHER_PACKAGES_PATH/$package/bin" ]; then
@@ -23,5 +25,5 @@ bins=("${bins[@]##*/}")
 
 for bin in "${bins[@]}"
 do
-  ln -sf "$BASHER_PACKAGES_PATH/$package/$bin" "$BASHER_ROOT/cellar/bin/$bin"
+  ln -sf "$BASHER_PACKAGES_PATH/$package/$bin" "$BASHER_ROOT/cellar/bin/${bin%.sh}"
 done

@@ -7,7 +7,9 @@ bins=("${bins[@]##*/}")
 bins=("${bins[@]/#/bin/}")
 
 for bin in "${bins[@]}"; do
-  rm -f "$BASHER_ROOT/cellar/bin/${bin##*/}"
+  name="${bin##*/}"
+  name="${name%.sh}"
+  rm -f "$BASHER_ROOT/cellar/bin/${name}"
 done
 
 if [ -e "$BASHER_PACKAGES_PATH/$package/bin" ]; then
@@ -19,5 +21,5 @@ bins=("${bins[@]##*/}")
 
 for bin in "${bins[@]}"
 do
-  rm -f "$BASHER_ROOT/cellar/bin/$bin"
+  rm -f "$BASHER_ROOT/cellar/bin/${bin%.sh}"
 done
