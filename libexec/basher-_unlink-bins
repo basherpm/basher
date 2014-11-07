@@ -19,5 +19,5 @@ bins=("${bins[@]##*/}")
 
 for bin in "${bins[@]}"
 do
-  rm "$BASHER_ROOT/cellar/bin/$bin"
+  rm -f "$BASHER_ROOT/cellar/bin/$bin"
 done
