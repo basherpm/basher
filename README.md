@@ -11,7 +11,7 @@ Basher allows you to quickly install bash packages directly from github. Instead
 1. Checkout basher on `~/.basher`
 
     ~~~ sh
-    $ git clone git://github.com/basherpm/basher.git ~/.basher
+    $ git clone https://github.com/basherpm/basher.git ~/.basher
     ~~~
 
 2. Add `~/.basher/bin` to `$PATH` for easy access to the basher command-line utility.

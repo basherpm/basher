@@ -34,4 +34,4 @@ if [ -e "$BASHER_PACKAGES_PATH/$package" ]; then
   exit 1
 fi
 
-git clone "git://github.com/$package.git" "${BASHER_PACKAGES_PATH}/$package"
+git clone "https://github.com/$package.git" "${BASHER_PACKAGES_PATH}/$package"
