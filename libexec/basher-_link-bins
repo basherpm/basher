@@ -20,7 +20,7 @@ if [ -e "$BASHER_PACKAGES_PATH/$package/bin" ]; then
   exit 0
 fi
 
-bins=($(find "$BASHER_PACKAGES_PATH/$package" -maxdepth 1 -perm +111 -type f -or -type l))
+bins=($(find "$BASHER_PACKAGES_PATH/$package" -maxdepth 1 -perm /111 -type f -or -type l))
 bins=("${bins[@]##*/}")
 
 for bin in "${bins[@]}"
