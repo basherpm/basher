@@ -34,5 +34,5 @@ load test_helper
 
   run basher-_clone username/package
   assert_success
-  assert_output "git clone git://github.com/username/package.git ${BASHER_PACKAGES_PATH}/username/package"
+  assert_output "git clone https://github.com/username/package.git ${BASHER_PACKAGES_PATH}/username/package"
 }
