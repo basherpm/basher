@@ -6,13 +6,25 @@ create_package() {
   touch README
   git add .
   git commit -m "Initial commit"
-  cd ${BASHER_CWD}
+  cd "${BASHER_CWD}"
 }
 
 create_link_package() {
   local name="$1"
   mkdir -p "${BASHER_PACKAGES_PATH}/link"
   ln -s whatever "${BASHER_PACKAGES_PATH}/link/$name"
+}
+
+create_man() {
+  local package="$1"
+  local man="$2"
+  cd "${BASHER_ORIGIN_DIR}/$package"
+  mkdir -p man
+  touch "man/$man"
+
+  git add .
+  git commit -m "Add $man"
+  cd "${BASHER_CWD}"
 }
 
 create_exec() {

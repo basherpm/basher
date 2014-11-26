@@ -30,3 +30,4 @@ fi
 
 basher-_clone "$package"
 basher-_link-bins "$package"
+basher-_link-man "$package"

@@ -73,6 +73,8 @@ Packages are simply github repos (username/repo).
 
 Any files inside a bin directory are added to the path. If there is no bin directory, any executable files in the package root are added to the path.
 
+Any files inside a man directory are added to the manpath.
+
 ## Working packages
 
 - [basherpm/todo](https://github.com/basherpm/todo)
@@ -82,6 +84,7 @@ Any files inside a bin directory are added to the path. If there is no bin direc
 - [pote/gpm](https://github.com/pote/gpm)
 - [pote/gvp](https://github.com/pote/gvp)
 - [sstephenson/bats](https://github.com/sstephenson/bats)
+- [tj/git-extras](https://github.com/tj/git-extras)
 - [treyhunner/tmuxstart](https://github.com/treyhunner/tmuxstart)
 
 And many others. If a repo doesn't work, create an issue or a pull request.
