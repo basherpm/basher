@@ -50,3 +50,22 @@ create_root_exec() {
   git commit -m "Add root exec: $exec"
   cd ${BASHER_CWD}
 }
+
+create_dep() {
+  local package="$1"
+  local dep="$2"
+  cd "${BASHER_ORIGIN_DIR}/$package"
+
+  touch "package.sh"
+
+  if grep -sq "DEPS=" "package.sh"; then
+    sed -e "/^DEPS=/ s;$;:$dep;" package.sh > package.sh.tmp
+    mv package.sh.tmp package.sh
+  else
+    echo "DEPS=$dep" >> package.sh
+  fi
+
+  git add .
+  git commit -m "Add dependency on $dep"
+  cd ${BASHER_CWD}
+}
