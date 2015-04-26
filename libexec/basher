@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+#
+# Summary: A package manager for shell scripts
+#
+# Usage: basher <command> [<args>]
 
 resolve_link() {
   $(type -p greadlink readlink | head -1) "$1"
