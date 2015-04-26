@@ -31,6 +31,8 @@ export BASHER_PACKAGES_PATH
 bin_path="$(abs_dirname "$0")"
 export PATH="${bin_path}:${PATH}"
 
+basher-_check-deps
+
 command="$1"
 case "$command" in
 "")

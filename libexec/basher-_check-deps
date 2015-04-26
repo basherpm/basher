@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if ! command -v lasher >/dev/null 2>&1; then
+  echo "Installing dependencies"
+  echo
+  basher-install basherpm/lasher
+  echo
+fi
+
