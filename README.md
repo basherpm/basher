@@ -75,6 +75,12 @@ Any files inside a bin directory are added to the path. If there is no bin direc
 
 Any files inside a man directory are added to the manpath.
 
+Optionally, a repo might contain a `package.sh` file which specify dependencies in the following format:
+
+~~~ sh
+DEPS=user1/repo1:user2/repo2
+~~~
+
 ## Working packages
 
 - [basherpm/todo](https://github.com/basherpm/todo)
