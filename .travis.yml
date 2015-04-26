@@ -2,6 +2,8 @@ install: git clone https://github.com/sstephenson/bats.git
 before_script:
   - git config --global user.email "user@example.com"
   - git config --global user.name "User Name"
+  - git clone https://github.com/basherpm/lasher.git
+  - export PATH=$PWD/lasher/bin:$PATH
 script: bats/bin/bats --tap tests
 # skips unnecessary Ruby-specific setup
 language: c
