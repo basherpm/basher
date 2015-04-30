@@ -5,5 +5,10 @@ if ! command -v lasher >/dev/null 2>&1; then
   echo
   basher-install basherpm/lasher
   echo
+else
+  echo "Updating dependencies"
+  echo
+  basher-upgrade basherpm/lasher
+  echo
 fi
 

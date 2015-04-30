@@ -47,6 +47,16 @@ Basher allows you to quickly install bash packages directly from github. Instead
     status --is-interactive; and . (basher init -|psub)
     ~~~
 
+4. Run `basher update` to download dependencies
+
+    ~~~ sh
+    $ basher update
+    ~~~
+
+## Updating
+
+Run `basher update` to update basher and its dependencies.
+
 ## Usage
 
 ### Installing packages

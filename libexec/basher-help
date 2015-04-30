@@ -8,8 +8,6 @@ set -e
 
 command="$1"
 
-basher-_check-deps
-
 if [ -z "$command" ]; then
   exec lasher _help basher
 fi
