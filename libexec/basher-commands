@@ -5,4 +5,4 @@
 
 set -e
 
-basher-_commands basher
+lasher _commands basher
