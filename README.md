@@ -81,6 +81,8 @@ Optionally, a repo might contain a `package.sh` file which specify dependencies 
 DEPS=user1/repo1:user2/repo2
 ~~~
 
+These dependencies will be installed before the package itself.
+
 ## Working packages
 
 - [basherpm/todo](https://github.com/basherpm/todo)
