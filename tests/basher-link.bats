@@ -16,6 +16,7 @@ load test_helper
 
 @test "links the package to cellar under link user" {
   mock_command basher-_link-bins
+  mock_command basher-_link-completions
   mkdir package1
   run basher-link package1
   assert_success
@@ -24,8 +25,18 @@ load test_helper
 
 @test "calls link-bins" {
   mock_command basher-_link-bins
+  mock_command basher-_link-completions
   mkdir package2
   run basher-link package2
   assert_success
   assert_line "basher-_link-bins link/package2"
+}
+
+@test "calls link-completions" {
+  mock_command basher-_link-bins
+  mock_command basher-_link-completions
+  mkdir package2
+  run basher-link package2
+  assert_success
+  assert_line "basher-_link-completions link/package2"
 }

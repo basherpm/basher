@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+package="$1"
+
+if [ ! -e "$BASHER_PACKAGES_PATH/$package/package.sh" ]; then
+  exit
+fi
+
+shopt -s nullglob
+
+source "$BASHER_PACKAGES_PATH/$package/package.sh" # TODO: make this secure?
+IFS=: read -a bash_completions <<< "$BASH_COMPLETIONS"
+IFS=: read -a zsh_completions <<< "$ZSH_COMPLETIONS"
+
+for completion in "${bash_completions[@]}"
+do
+  ln -sf "$BASHER_PACKAGES_PATH/$package/$completion" "$BASHER_ROOT/cellar/completions/bash/${completion##*/}"
+done
+
+for completion in "${zsh_completions[@]}"
+do
+  ln -sf "$BASHER_PACKAGES_PATH/$package/$completion" "$BASHER_ROOT/cellar/completions/zsh/${completion##*/}"
+done

@@ -85,13 +85,13 @@ Any files inside a bin directory are added to the path. If there is no bin direc
 
 Any files inside a man directory are added to the manpath.
 
-Optionally, a repo might contain a `package.sh` file which specify dependencies in the following format:
+Optionally, a repo might contain a `package.sh` file which specifies dependencies and completions in the following format:
 
 ~~~ sh
 DEPS=user1/repo1:user2/repo2
+BASH_COMPLETIONS=completions/package
+ZSH_COMPLETIONS=completions/_package
 ~~~
-
-These dependencies will be installed before the package itself.
 
 ## Working packages
 
