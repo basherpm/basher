@@ -31,7 +31,7 @@ fi
 
 if [ -e "$BASHER_PACKAGES_PATH/$package" ]; then
   echo "Package '$package' is already present"
-  exit 1
+  exit 0
 fi
 
 git clone "https://github.com/$package.git" "${BASHER_PACKAGES_PATH}/$package"
