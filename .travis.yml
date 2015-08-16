@@ -7,3 +7,4 @@ before_script:
 script: bats/bin/bats --tap tests
 # skips unnecessary Ruby-specific setup
 language: c
+sudo: false
