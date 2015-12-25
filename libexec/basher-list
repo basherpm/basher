@@ -9,6 +9,17 @@ if [ "$#" -gt 0 ]; then
   basher-help list
   exit 1
 fi
+which wget &>/dev/null && {
+  dl() {
+    wget "$1" -O $2 $3
+  }
+  Q="-q"
+} || {
+  dl() {
+    curl -L "$1" -o $2 $3
+  }
+  Q="-s"
+}
 
 shopt -s nullglob
 
@@ -17,5 +28,6 @@ do
   username="$(dirname "$package_path")"
   username="${username##*/}"
   package="${package_path##*/}"
-  echo "$username/$package"
+  description=$(dl "https://api.github.com/repos/$username/package" - $Q | sed '/  "description": "/!d;s/  "description": "//g;s/",//g')
+  echo "$username/$package $description"
 done
