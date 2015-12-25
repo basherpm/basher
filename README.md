@@ -11,13 +11,13 @@ Basher allows you to quickly install bash packages directly from github. Instead
 1. Checkout basher on `~/.basher`
 
     ~~~ sh
-    $ git clone https://github.com/basherpm/basher.git ~/.basher
+    git clone https://github.com/basherpm/basher.git ~/.basher
     ~~~
 
 2. Add `~/.basher/bin` to `$PATH` for easy access to the basher command-line utility.
 
     ~~~ sh
-    $ echo 'export PATH="$HOME/.basher/bin:$PATH"' >> ~/.bash_profile
+    echo 'export PATH="$HOME/.basher/bin:$PATH"' >> ~/.bash_profile
     ~~~
 
     **Ubuntu Desktop note**: Modify your `~/.bashrc` instead of `~/.bash_profile`.
@@ -36,7 +36,7 @@ Basher allows you to quickly install bash packages directly from github. Instead
 3. Add `basher init` to your shell to enable basher runtime functions
 
     ~~~ sh
-    $ echo 'eval "$(basher init -)"' >> ~/.bash_profile
+    echo 'eval "$(basher init -)"' >> ~/.bash_profile
     ~~~
 
     _Same as in previous step, use `~/.bashrc` on Ubuntu, `~/.zshrc` for Zsh._
@@ -50,7 +50,7 @@ Basher allows you to quickly install bash packages directly from github. Instead
 4. Run `basher update` to download dependencies
 
     ~~~ sh
-    $ basher update
+    basher update
     ~~~
 
 ## Updating
@@ -62,7 +62,7 @@ Run `basher update` to update basher and its dependencies.
 ### Installing packages
 
 ~~~ sh
-$ basher install sstephenson/bats
+basher install sstephenson/bats
 ~~~
 
 This will install bats from https://github.com/sstephenson/bats and add `bin/bats` to the PATH.
@@ -112,11 +112,11 @@ And many others. If a repo doesn't work, create an issue or a pull request.
 To run the tests, install bats:
 
 ~~~ sh
-$ basher install sstephenson/bats
+basher install sstephenson/bats
 ~~~
 
 and then run:
 
 ~~~ sh
-$ bats tests
+bats tests
 ~~~
