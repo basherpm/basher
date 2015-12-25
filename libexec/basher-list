@@ -29,5 +29,5 @@ do
   username="${username##*/}"
   package="${package_path##*/}"
   description="$(dl "https://api.github.com/repos/$username/$package" - $Q | sed '/  "description": "/!d;s/  "description": "//g;s/",//g')"
-  echo "$username/$package $description"
+  echo -e "$username/$package\t$description"
 done
