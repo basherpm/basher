@@ -28,6 +28,6 @@ do
   username="$(dirname "$package_path")"
   username="${username##*/}"
   package="${package_path##*/}"
-  description=$(dl "https://api.github.com/repos/$username/package" - $Q | sed '/  "description": "/!d;s/  "description": "//g;s/",//g')
+  description="$(dl "https://api.github.com/repos/$username/$package" - $Q | sed '/  "description": "/!d;s/  "description": "//g;s/",//g')"
   echo "$username/$package $description"
 done
