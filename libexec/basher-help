@@ -2,14 +2,162 @@
 #
 # Summary: Display help for a command
 #
-# Usage: basher help [--usage] <command>
+# Usage: basher help [--usage] COMMAND
+#
+# Parses and displays help contents from a command's source file.
+#
+# A command is considered documented if it starts with a comment block
+# that has a `Summary:' or `Usage:' section. Usage instructions can
+# span multiple lines as long as subsequent lines are indented.
+# The remainder of the comment block is displayed as extended
+# documentation.
 
-set -e
+command_path() {
+  local command="$1"
+  command -v basher-"$command" || true
+}
 
-command="$1"
+extract_initial_comment_block() {
+  sed -ne "
+    /^#/ !{
+      q
+    }
 
-if [ -z "$command" ]; then
-  exec lasher _help basher
+    s/^#$/# /
+
+    /^# / {
+      s/^# //
+      p
+    }
+  "
+}
+
+collect_documentation() {
+  awk '
+    /^Summary:/ {
+      summary = substr($0, 10)
+      next
+    }
+
+    /^Usage:/ {
+      reading_usage = 1
+      usage = usage "\n" $0
+      next
+    }
+
+    /^( *$|       )/ && reading_usage {
+      usage = usage "\n" $0
+      next
+    }
+
+    {
+      reading_usage = 0
+      help = help "\n" $0
+    }
+
+    function escape(str) {
+      gsub(/[`\\$"]/, "\\\\&", str)
+      return str
+    }
+
+    function trim(str) {
+      sub(/^\n*/, "", str)
+      sub(/\n*$/, "", str)
+      return str
+    }
+
+    END {
+      if (usage || summary) {
+        print "summary=\"" escape(summary) "\""
+        print "usage=\"" escape(trim(usage)) "\""
+        print "help=\"" escape(trim(help)) "\""
+      }
+    }
+  '
+}
+
+documentation_for() {
+  local filename="$(command_path "$1")"
+  if [ -n "$filename" ]; then
+    extract_initial_comment_block < "$filename" | collect_documentation
+  fi
+}
+
+print_summary() {
+  local command="$1"
+  local summary usage help
+  eval "$(documentation_for "$command")"
+
+  if [ -n "$summary" ]; then
+    printf "   %-9s   %s\n" "$command" "$summary"
+  fi
+}
+
+print_summaries() {
+  for command; do
+    print_summary "$command"
+  done
+}
+
+print_help() {
+  local command="$1"
+  local summary usage help
+  eval "$(documentation_for "$command")"
+  [ -n "$help" ] || help="$summary"
+
+  if [ -n "$usage" -o -n "$summary" ]; then
+    if [ -n "$usage" ]; then
+      echo "$usage"
+    else
+      echo "Usage: basher ${command}"
+    fi
+    if [ -n "$help" ]; then
+      echo
+      echo "$help"
+      echo
+    fi
+  else
+    echo "Sorry, this command isn't documented yet." >&2
+    return 1
+  fi
+}
+
+print_usage() {
+  local command="$1"
+  local summary usage help
+  eval "$(documentation_for "$command")"
+  [ -z "$usage" ] || echo "$usage"
+}
+
+unset usage
+if [ "$1" = "--usage" ]; then
+  usage="1"
+  shift
 fi
 
-lasher _help basher "$command"
+# TAG completions
+if [ "$1" == "--complete" ]; then
+  exec basher-commands
+fi
+
+if [ -z "$1" ] || [ "$1" == "basher" ]; then
+  echo "Usage: basher <command> [<args>]"
+  [ -z "$usage" ] || exit
+  echo
+  echo "Some useful basher commands are:"
+  print_summaries help commands init new-command
+  echo
+  echo "See 'basher help <command>' for information on a specific command."
+else
+  command="$1"
+  if [ -n "$(command_path "$command")" ]; then
+    if [ -n "$usage" ]; then
+      print_usage "$command"
+    else
+      print_help "$command"
+    fi
+  else
+    echo "basher: no such command '$command'" >&2
+    exit 1
+  fi
+fi

@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+#
+# Summary: List all available commands for a package
+# Usage: basher _commands <package>
+#
+# Looks for executable files prefixed with package- and
+# display each suffix as an available command.
+
+set -e
+
+if [ "$#" -ne 1 ]; then
+  basher-help _commands
+  exit 1
+fi
+
+package="$1"
+
+IFS=: paths=($PATH)
+
+shopt -s nullglob
+
+{ for path in "${paths[@]}"; do
+    for command in "${path}/$package-"*; do
+      command="${command##*$package-}"
+      if [[ ! "$command" == _* ]]; then
+        echo ${command}
+      fi
+    done
+  done
+} | sort | uniq

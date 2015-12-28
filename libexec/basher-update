@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
-#
 # Summary: Updates basher to the latest version
-#
 # Usage: basher update
 
 set -e
@@ -10,8 +8,6 @@ if [ "$#" -gt 0 ]; then
   basher-help update
   exit 1
 fi
-
-basher-_check-deps
 
 cd $BASHER_ROOT
 git pull
