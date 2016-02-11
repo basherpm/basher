@@ -11,7 +11,6 @@ bins=("${bins[@]/#/bin/}")
 for bin in "${bins[@]}"
 do
   name="${bin##*/}"
-  name="${name%.sh}"
   ln -sf "$BASHER_PACKAGES_PATH/$package/$bin" "$BASHER_ROOT/cellar/bin/${name}"
   chmod +x "$BASHER_ROOT/cellar/bin/${name}"
 done
@@ -25,5 +24,5 @@ bins=("${bins[@]##*/}")
 
 for bin in "${bins[@]}"
 do
-  ln -sf "$BASHER_PACKAGES_PATH/$package/$bin" "$BASHER_ROOT/cellar/bin/${bin%.sh}"
+  ln -sf "$BASHER_PACKAGES_PATH/$package/$bin" "$BASHER_ROOT/cellar/bin/${bin}"
 done

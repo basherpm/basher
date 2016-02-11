@@ -13,7 +13,7 @@ load test_helper
 
   assert_success
   assert [ "$(readlink $BASHER_ROOT/cellar/bin/exec1)" = "${BASHER_PACKAGES_PATH}/username/package/bin/exec1" ]
-  assert [ "$(readlink $BASHER_ROOT/cellar/bin/exec2)" = "${BASHER_PACKAGES_PATH}/username/package/bin/exec2.sh" ]
+  assert [ "$(readlink $BASHER_ROOT/cellar/bin/exec2.sh)" = "${BASHER_PACKAGES_PATH}/username/package/bin/exec2.sh" ]
 }
 
 @test "links each exec file in package root to cellar bin" {
@@ -27,7 +27,7 @@ load test_helper
 
   assert_success
   assert [ "$(readlink $BASHER_ROOT/cellar/bin/exec3)" = "${BASHER_PACKAGES_PATH}/username/package/exec3" ]
-  assert [ "$(readlink $BASHER_ROOT/cellar/bin/exec4)" = "${BASHER_PACKAGES_PATH}/username/package/exec4.sh" ]
+  assert [ "$(readlink $BASHER_ROOT/cellar/bin/exec4.sh)" = "${BASHER_PACKAGES_PATH}/username/package/exec4.sh" ]
 }
 
 @test "doesn't link root bins if there is a bin folder" {
