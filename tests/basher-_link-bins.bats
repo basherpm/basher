@@ -10,7 +10,7 @@ load test_helper
   basher-_clone username/package
 
   run basher-_link-bins username/package
-  echo "$output"
+
   assert_success
   assert [ "$(readlink $BASHER_ROOT/cellar/bin/exec1)" = "${BASHER_PACKAGES_PATH}/username/package/bin/exec1" ]
   assert [ "$(readlink $BASHER_ROOT/cellar/bin/exec2)" = "${BASHER_PACKAGES_PATH}/username/package/bin/exec2.sh" ]
@@ -24,6 +24,7 @@ load test_helper
   basher-_clone username/package
 
   run basher-_link-bins username/package
+
   assert_success
   assert [ "$(readlink $BASHER_ROOT/cellar/bin/exec3)" = "${BASHER_PACKAGES_PATH}/username/package/exec3" ]
   assert [ "$(readlink $BASHER_ROOT/cellar/bin/exec4)" = "${BASHER_PACKAGES_PATH}/username/package/exec4.sh" ]
@@ -37,6 +38,7 @@ load test_helper
   basher-_clone username/package
 
   run basher-_link-bins username/package
+
   assert_success
   assert [ "$(readlink $BASHER_ROOT/cellar/bin/exec1)" = "${BASHER_PACKAGES_PATH}/username/package/bin/exec1" ]
   assert [ ! -e "$(readlink $BASHER_ROOT/cellar/bin/exec2)" ]
