@@ -102,6 +102,7 @@ above.
 - [sstephenson/bats](https://github.com/sstephenson/bats)
 - [tj/git-extras](https://github.com/tj/git-extras)
 - [treyhunner/tmuxstart](https://github.com/treyhunner/tmuxstart)
+- [bltavares/kickstart](https://github.com/bltavares/kickstart)
 
 And many others. If a repo doesn't work, create an issue or a pull request.
 
