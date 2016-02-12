@@ -1,4 +1,5 @@
-load lib/assertions
+load vendor/bats-core/load
+load vendor/bats-assert/load
 
 export BASHER_TEST_DIR="${BATS_TMPDIR}/basher"
 export BASHER_ORIGIN_DIR="${BASHER_TEST_DIR}/origin"
