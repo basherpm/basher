@@ -4,13 +4,20 @@ package="$1"
 
 shopt -s nullglob
 
-if [ -e "$BASHER_PACKAGES_PATH/$package/bin" ]; then
-  bins=($BASHER_PACKAGES_PATH/$package/bin/*)
-  bins=("${bins[@]##*/}")
-  bins=("${bins[@]/#/bin/}")
-else
-  bins=($(find "$BASHER_PACKAGES_PATH/$package" -maxdepth 1 -perm -u+x -type f -or -type l))
-  bins=("${bins[@]##*/}")
+if [ -e "$BASHER_PACKAGES_PATH/$package/package.sh" ]; then
+  source "$BASHER_PACKAGES_PATH/$package/package.sh"
+  IFS=: read -a bins <<< "$BINS"
+fi
+
+if [ -z "$bins" ]; then
+  if [ -e "$BASHER_PACKAGES_PATH/$package/bin" ]; then
+    bins=($BASHER_PACKAGES_PATH/$package/bin/*)
+    bins=("${bins[@]##*/}")
+    bins=("${bins[@]/#/bin/}")
+  else
+    bins=($(find "$BASHER_PACKAGES_PATH/$package" -maxdepth 1 -perm -u+x -type f -or -type l))
+    bins=("${bins[@]##*/}")
+  fi
 fi
 
 for bin in "${bins[@]}"

@@ -28,6 +28,27 @@ create_man() {
   cd "${BASHER_CWD}"
 }
 
+create_package_exec() {
+  local package="$1"
+  local exec="package_bin/$2"
+  cd "${BASHER_ORIGIN_DIR}/$package"
+  mkdir -p package_bin
+  touch $exec
+
+  touch "package.sh"
+
+  if grep -sq "BINS=" "package.sh"; then
+    sed -e "/^BINS=/ s;$;:$exec;" package.sh > package.sh.tmp
+    mv package.sh.tmp package.sh
+  else
+    echo "BINS=$exec" >> package.sh
+  fi
+
+  git add .
+  git commit -m "Add package exec: $exec"
+  cd ${BASHER_CWD}
+}
+
 create_exec() {
   local package="$1"
   local exec="$2"
