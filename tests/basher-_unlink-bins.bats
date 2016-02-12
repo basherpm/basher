@@ -39,3 +39,13 @@ load test_helper
   assert_success
   assert [ -e "$(readlink $BASHER_ROOT/cellar/bin/exec3)" ]
 }
+
+@test "does not fail if there are no binaries" {
+  create_package username/package
+  mock_clone
+  basher-install username/package
+
+  run basher-_unlink-bins username/package
+
+  assert_success
+}
