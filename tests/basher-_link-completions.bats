@@ -10,7 +10,6 @@ load test_helper
 
   run basher-_link-completions username/package
 
-  echo "$output"
   assert_success
   assert [ "$(readlink $BASHER_ROOT/cellar/completions/bash/comp.bash)" = "${BASHER_PACKAGES_PATH}/username/package/completions/comp.bash" ]
 }
@@ -25,4 +24,14 @@ load test_helper
 
   assert_success
   assert [ "$(readlink $BASHER_ROOT/cellar/completions/zsh/_exec)" = "${BASHER_PACKAGES_PATH}/username/package/completions/_exec" ]
+}
+
+@test "does not fail if package doesn't have any completions" {
+  create_package username/package
+  mock_clone
+  basher-_clone username/package
+
+  run basher-_link-completions username/package
+
+  assert_success
 }

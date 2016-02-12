@@ -4,6 +4,7 @@ create_package() {
   cd "${BASHER_ORIGIN_DIR}/$package"
   git init .
   touch README
+  touch package.sh
   git add .
   git commit -m "Initial commit"
   cd "${BASHER_CWD}"
