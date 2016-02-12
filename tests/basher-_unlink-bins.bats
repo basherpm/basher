@@ -12,7 +12,7 @@ load test_helper
   run basher-_unlink-bins username/package
   assert_success
   assert [ ! -e "$(readlink $BASHER_ROOT/cellar/bin/exec1)" ]
-  assert [ ! -e "$(readlink $BASHER_ROOT/cellar/bin/exec2)" ]
+  assert [ ! -e "$(readlink $BASHER_ROOT/cellar/bin/exec2.sh)" ]
 }
 
 @test "removes root binaries from the cellar bin" {
@@ -25,7 +25,7 @@ load test_helper
   run basher-_unlink-bins username/package
   assert_success
   assert [ ! -e "$(readlink $BASHER_ROOT/cellar/bin/exec3)" ]
-  assert [ ! -e "$(readlink $BASHER_ROOT/cellar/bin/exec4)" ]
+  assert [ ! -e "$(readlink $BASHER_ROOT/cellar/bin/exec4.sh)" ]
 }
 
 @test "doesn't remove root binaries if there is a bin folder" {

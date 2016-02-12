@@ -8,7 +8,6 @@ bins=("${bins[@]/#/bin/}")
 
 for bin in "${bins[@]}"; do
   name="${bin##*/}"
-  name="${name%.sh}"
   rm -f "$BASHER_ROOT/cellar/bin/${name}"
 done
 
@@ -21,5 +20,5 @@ bins=("${bins[@]##*/}")
 
 for bin in "${bins[@]}"
 do
-  rm -f "$BASHER_ROOT/cellar/bin/${bin%.sh}"
+  rm -f "$BASHER_ROOT/cellar/bin/${bin}"
 done
