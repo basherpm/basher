@@ -2,23 +2,17 @@
 
 package="$1"
 
-bins=($BASHER_PACKAGES_PATH/$package/bin/*)
-bins=("${bins[@]##*/}")
-bins=("${bins[@]/#/bin/}")
-
-for bin in "${bins[@]}"; do
-  name="${bin##*/}"
-  rm -f "$BASHER_ROOT/cellar/bin/${name}"
-done
-
 if [ -e "$BASHER_PACKAGES_PATH/$package/bin" ]; then
-  exit 0
+  bins=($BASHER_PACKAGES_PATH/$package/bin/*)
+  bins=("${bins[@]##*/}")
+  bins=("${bins[@]/#/bin/}")
+else
+  bins=($(find "$BASHER_PACKAGES_PATH/$package" -maxdepth 1 -perm -u+x -type f -or -type l))
+  bins=("${bins[@]##*/}")
 fi
-
-bins=($(find "$BASHER_PACKAGES_PATH/$package" -maxdepth 1 -perm -u+x -type f -or -type l))
-bins=("${bins[@]##*/}")
 
 for bin in "${bins[@]}"
 do
-  rm -f "$BASHER_ROOT/cellar/bin/${bin}"
+  name="${bin##*/}"
+  rm -f "$BASHER_ROOT/cellar/bin/${name}"
 done

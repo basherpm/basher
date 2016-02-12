@@ -4,25 +4,18 @@ package="$1"
 
 shopt -s nullglob
 
-bins=($BASHER_PACKAGES_PATH/$package/bin/*)
-bins=("${bins[@]##*/}")
-bins=("${bins[@]/#/bin/}")
+if [ -e "$BASHER_PACKAGES_PATH/$package/bin" ]; then
+  bins=($BASHER_PACKAGES_PATH/$package/bin/*)
+  bins=("${bins[@]##*/}")
+  bins=("${bins[@]/#/bin/}")
+else
+  bins=($(find "$BASHER_PACKAGES_PATH/$package" -maxdepth 1 -perm -u+x -type f -or -type l))
+  bins=("${bins[@]##*/}")
+fi
 
 for bin in "${bins[@]}"
 do
   name="${bin##*/}"
   ln -sf "$BASHER_PACKAGES_PATH/$package/$bin" "$BASHER_ROOT/cellar/bin/${name}"
   chmod +x "$BASHER_ROOT/cellar/bin/${name}"
-done
-
-if [ -e "$BASHER_PACKAGES_PATH/$package/bin" ]; then
-  exit 0
-fi
-
-bins=($(find "$BASHER_PACKAGES_PATH/$package" -maxdepth 1 -perm -u+x -type f -or -type l))
-bins=("${bins[@]##*/}")
-
-for bin in "${bins[@]}"
-do
-  ln -sf "$BASHER_PACKAGES_PATH/$package/$bin" "$BASHER_ROOT/cellar/bin/${bin}"
 done
