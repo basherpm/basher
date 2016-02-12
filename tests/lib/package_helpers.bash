@@ -77,11 +77,11 @@ create_bash_completions() {
   mkdir -p completions
   touch completions/$comp
 
-  if [ -e "package.sh" ]; then
-    if grep -sq "BASH_COMPLETIONS=" "package.sh"; then
-      sed -e "/^BASH_COMPLETIONS=/ s/$/:completions\/$comp/" package.sh > package.sh.tmp
-      mv package.sh.tmp package.sh
-    fi
+  touch "package.sh"
+
+  if grep -sq "BASH_COMPLETIONS=" "package.sh"; then
+    sed -e "/^BASH_COMPLETIONS=/ s/$/:completions\/$comp/" package.sh > package.sh.tmp
+    mv package.sh.tmp package.sh
   else
     echo "BASH_COMPLETIONS=completions/$comp" >> package.sh
   fi
@@ -98,11 +98,11 @@ create_zsh_completions() {
   mkdir -p completions
   touch completions/$comp
 
-  if [ -e "package.sh" ]; then
-    if grep -sq "ZSH_COMPLETIONS=" "package.sh"; then
-      sed -e "/^ZSH_COMPLETIONS=/ s/$/:completions\/$comp/" package.sh > package.sh.tmp
-      mv package.sh.tmp package.sh
-    fi
+  touch "package.sh"
+
+  if grep -sq "ZSH_COMPLETIONS=" "package.sh"; then
+    sed -e "/^ZSH_COMPLETIONS=/ s/$/:completions\/$comp/" package.sh > package.sh.tmp
+    mv package.sh.tmp package.sh
   else
     echo "ZSH_COMPLETIONS=completions/$comp" >> package.sh
   fi
