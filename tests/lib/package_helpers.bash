@@ -92,6 +92,23 @@ create_dep() {
   cd ${BASHER_CWD}
 }
 
+create_runtime() {
+  local package="$1"
+  local shell="$2"
+  local file="$3"
+  cd "${BASHER_ORIGIN_DIR}/$package"
+  touch $file
+
+  touch "package.sh"
+
+  echo "${shell}_RUNTIME=${file}" >> package.sh
+
+  git add .
+  git commit -m "Add ${shell} runtime"
+
+  cd ${BASHER_CWD}
+}
+
 create_bash_completions() {
   local package="$1"
   local comp="$2"

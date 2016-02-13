@@ -28,6 +28,25 @@ print_sh_commands(){
   echo 'export PATH="$BASHER_ROOT/cellar/bin:$PATH"'
 }
 
+print_sh_basher_function() {
+  cat <<SH
+basher() {
+  local command
+  command="\$1"
+  if [ "\$#" -gt 0 ]; then
+    shift
+  fi
+
+  case "\$command" in
+  include)
+    eval "\$(command basher "\$command" "\$@")";;
+  *)
+    command basher "\$command" "\$@";;
+  esac
+}
+SH
+}
+
 load_bash_package_completions() {
   echo 'for f in $(command ls "$BASHER_ROOT/cellar/completions/bash"); do source "$BASHER_ROOT/cellar/completions/bash/$f"; done'
 }
@@ -55,5 +74,13 @@ case "$shell" in
     ;;
   zsh )
     load_zsh_package_completions
+    ;;
+esac
+
+case "$shell" in
+  fish )
+    ;;
+  * )
+    print_sh_basher_function
     ;;
 esac

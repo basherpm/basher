@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+#
+# Summary: Includes a package runtime in the current shell
+# Usage: basher include <package>
+#
+# Sources the file defined as the BASH_RUNTIME (or other shell) in the
+# package.sh. This allows a package to define functions that can be included
+# in a shell.
+#
+# For this command to work, basher needs to be loaded as a function. This
+# should be done automatically by `basher init`.
+
+set -e
+
+package="$1"
+
+if [ -z "$package" ]; then
+  basher-help include
+  exit 1
+fi
+
+if [ ! -e "$BASHER_PACKAGES_PATH/$package/package.sh" ]; then
+  echo "basher: package '$package' does not provide a runtime" 1>&2
+  exit 1
+fi
+
+source "$BASHER_PACKAGES_PATH/$package/package.sh"
+
+config_key="${BASHER_SHELL^^}_RUNTIME"
+file=${!config_key}
+
+if [ -z "$file" ]; then
+  echo "basher: package '$package' does not provide a runtime for '$BASHER_SHELL'" 1>&2
+  exit 1
+fi
+
+echo "source \"$BASHER_PACKAGES_PATH/$package/$file\""
