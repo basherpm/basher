@@ -104,6 +104,7 @@ above.
 - [bripkens/dock](https://github.com/bripkens/dock)
 - [juanibiapina/gg](https://github.com/juanibiapina/gg)
 - [juanibiapina/pg](https://github.com/juanibiapina/pg)
+- [juanibiapina/smart-grep](https://github.com/juanibiapina/smart-grep)
 - [juanibiapina/todo](https://github.com/juanibiapina/todo)
 - [pote/gpm](https://github.com/pote/gpm)
 - [pote/gvp](https://github.com/pote/gvp)
