@@ -94,6 +94,7 @@ above.
 ## Working packages
 
 - [basherpm/todo](https://github.com/basherpm/todo)
+- [bltavares/kickstart](https://github.com/bltavares/kickstart)
 - [bripkens/dock](https://github.com/bripkens/dock)
 - [juanibiapina/gg](https://github.com/juanibiapina/gg)
 - [juanibiapina/pg](https://github.com/juanibiapina/pg)
@@ -102,7 +103,6 @@ above.
 - [sstephenson/bats](https://github.com/sstephenson/bats)
 - [tj/git-extras](https://github.com/tj/git-extras)
 - [treyhunner/tmuxstart](https://github.com/treyhunner/tmuxstart)
-- [bltavares/kickstart](https://github.com/bltavares/kickstart)
 
 And many others. If a repo doesn't work, create an issue or a pull request.
 
