@@ -3,7 +3,7 @@
 load test_helper
 
 @test "detects the shell" {
-  SHELL=/bin/false run basher-init - bash
+  SHELL=/bin/false run basher-init -
   assert_success
   assert_line 0 'export BASHER_SHELL=bash'
 }
