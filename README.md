@@ -100,11 +100,11 @@ above.
 
 ## Working packages
 
-- [basherpm/todo](https://github.com/basherpm/todo)
 - [bltavares/kickstart](https://github.com/bltavares/kickstart)
 - [bripkens/dock](https://github.com/bripkens/dock)
 - [juanibiapina/gg](https://github.com/juanibiapina/gg)
 - [juanibiapina/pg](https://github.com/juanibiapina/pg)
+- [juanibiapina/todo](https://github.com/juanibiapina/todo)
 - [pote/gpm](https://github.com/pote/gpm)
 - [pote/gvp](https://github.com/pote/gvp)
 - [sstephenson/bats](https://github.com/sstephenson/bats)
