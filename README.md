@@ -1,8 +1,11 @@
 # basher
 
-A package manager for bash scripts and functions.
+A package manager for shell scripts and functions.
 
-Basher allows you to quickly install bash packages directly from github. Instead of looking for specific install instructions for each package and messing with your path, basher will create a central location for all packages and manage their binaries for you.
+Basher allows you to quickly install shell packages directly from github.
+Instead of looking for specific install instructions for each package and
+messing with your path, basher will create a central location for all packages
+and manage their binaries for you.
 
 [![Build Status](https://travis-ci.org/basherpm/basher.svg?branch=master)](https://travis-ci.org/basherpm/basher)
 
@@ -75,11 +78,13 @@ This will install bats from https://github.com/sstephenson/bats and add `bin/bat
 
 Packages are simply github repos (username/repo).
 
-Any files inside a bin directory are added to the path. If there is no bin directory, any executable files in the package root are added to the path.
+Any files inside a bin directory are added to the path. If there is no bin
+directory, any executable files in the package root are added to the path.
 
 Any files inside a man directory are added to the manpath.
 
-Optionally, a repo might contain a `package.sh` file which specifies binaries, dependencies and completions in the following format:
+Optionally, a repo might contain a `package.sh` file which specifies binaries,
+dependencies and completions in the following format:
 
 ~~~ sh
 BINS=folder/file1:folder/file2.sh
