@@ -122,8 +122,14 @@ To run the tests, install bats:
 $ basher install sstephenson/bats
 ~~~
 
+update submodules:
+
+~~~ sh
+$ git submodule update --init
+~~~
+
 and then run:
 
 ~~~ sh
-$ bats tests
+$ make
 ~~~
