@@ -21,5 +21,8 @@ fi
 for bin in "${bins[@]}"
 do
   name="${bin##*/}"
+  if ${REMOVE_EXTENSION:-false}; then
+    name="${name%%.*}"
+  fi
   rm -f "$BASHER_ROOT/cellar/bin/${name}"
 done
