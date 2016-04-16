@@ -83,7 +83,8 @@ Packages are simply github repos (username/repo).
 Any files inside a bin directory are added to the path. If there is no bin
 directory, any executable files in the package root are added to the path.
 
-Any files inside a man directory are added to the manpath.
+Any manpages (files ended in `\.[0-9]`) inside a `man` directory are added
+to the manpath.
 
 Optionally, a repo might contain a `package.sh` file which specifies binaries,
 dependencies and completions in the following format:
