@@ -23,6 +23,9 @@ fi
 for bin in "${bins[@]}"
 do
   name="${bin##*/}"
+  if ${REMOVE_EXTENSION:-false}; then
+    name="${name%%.*}"
+  fi
   ln -sf "$BASHER_PACKAGES_PATH/$package/$bin" "$BASHER_ROOT/cellar/bin/${name}"
   chmod +x "$BASHER_ROOT/cellar/bin/${name}"
 done

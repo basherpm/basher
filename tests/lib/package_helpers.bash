@@ -73,6 +73,25 @@ create_root_exec() {
   cd ${BASHER_CWD}
 }
 
+set_remove_extension() {
+  local package="$1"
+  local remove_extension="$2"
+  cd "${BASHER_ORIGIN_DIR}/$package"
+
+  touch "package.sh"
+
+  if grep -sq "REMOVE_EXTENSION=" "package.sh"; then
+    sed -e "s/^REMOVE_EXTENSION=$remove_extension//" package.sh > package.sh.tmp
+    mv package.sh.tmp package.sh
+  else
+    echo "REMOVE_EXTENSION=$remove_extension" >> package.sh
+  fi
+
+  git add .
+  git commit -m "Set REMOVE_EXTENSION to $remove_extension."
+  cd ${BASHER_CWD}
+}
+
 create_dep() {
   local package="$1"
   local dep="$2"

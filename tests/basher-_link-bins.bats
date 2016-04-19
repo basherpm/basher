@@ -83,3 +83,33 @@ load test_helper
 
   assert_success
 }
+
+@test "remove extension if REMOVE_EXTENSION is true" {
+  create_package username/package
+  create_exec username/package exec1
+  create_exec username/package exec2.sh
+  set_remove_extension username/package true
+  mock_clone
+  basher-_clone username/package
+
+  run basher-_link-bins username/package
+
+  assert_success
+  assert [ "$(readlink $BASHER_ROOT/cellar/bin/exec1)" = "${BASHER_PACKAGES_PATH}/username/package/bin/exec1" ]
+  assert [ "$(readlink $BASHER_ROOT/cellar/bin/exec2)" = "${BASHER_PACKAGES_PATH}/username/package/bin/exec2.sh" ]
+}
+
+@test "does not remove extension if REMOVE_EXTENSION is false" {
+  create_package username/package
+  create_exec username/package exec1
+  create_exec username/package exec2.sh
+  set_remove_extension username/package false
+  mock_clone
+  basher-_clone username/package
+
+  run basher-_link-bins username/package
+
+  assert_success
+  assert [ "$(readlink $BASHER_ROOT/cellar/bin/exec1)" = "${BASHER_PACKAGES_PATH}/username/package/bin/exec1" ]
+  assert [ "$(readlink $BASHER_ROOT/cellar/bin/exec2.sh)" = "${BASHER_PACKAGES_PATH}/username/package/bin/exec2.sh" ]
+}

@@ -88,3 +88,31 @@ load test_helper
 
   assert_success
 }
+
+@test "removes binary when REMOVE_EXTENSION is true" {
+  create_package username/package
+  create_exec username/package exec1
+  create_exec username/package exec2.sh
+  set_remove_extension username/package true
+  mock_clone
+  basher-install username/package
+
+  run basher-_unlink-bins username/package
+  assert_success
+  assert [ ! -e "$(readlink $BASHER_ROOT/cellar/bin/exec1)" ]
+  assert [ ! -e "$(readlink $BASHER_ROOT/cellar/bin/exec2)" ]
+}
+
+@test "removes binary when REMOVE_EXTENSION is false" {
+  create_package username/package
+  create_exec username/package exec1
+  create_exec username/package exec2.sh
+  set_remove_extension username/package false
+  mock_clone
+  basher-install username/package
+
+  run basher-_unlink-bins username/package
+  assert_success
+  assert [ ! -e "$(readlink $BASHER_ROOT/cellar/bin/exec1)" ]
+  assert [ ! -e "$(readlink $BASHER_ROOT/cellar/bin/exec2.sh)" ]
+}
