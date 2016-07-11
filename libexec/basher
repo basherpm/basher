@@ -22,32 +22,37 @@ abs_dirname() {
   cd "$cwd"
 }
 
-if [ -z "$BASHER_ROOT" ]; then
-  BASHER_ROOT="$HOME/.basher"
-fi
-export BASHER_ROOT
-
-if [ -z "$BASHER_PACKAGES_PATH" ]; then
-  BASHER_PACKAGES_PATH="$BASHER_ROOT/cellar/packages"
-fi
-export BASHER_PACKAGES_PATH
-
-bin_path="$(abs_dirname "$0")"
-export PATH="${bin_path}:${PATH}"
-
-command="$1"
-case "$command" in
-"")
-  basher-help
-  ;;
-* )
-  command_path="$(command -v "basher-$command" || true)"
-  if [ -z "$command_path" ]; then
-    echo "basher: no such command '$command'" >&2
-    exit 1
+main() {
+  if [ -z "$BASHER_ROOT" ]; then
+    BASHER_ROOT="$HOME/.basher"
   fi
+  export BASHER_ROOT
 
-  shift 1
-  exec "$command_path" "$@"
-  ;;
-esac
+  if [ -z "$BASHER_PACKAGES_PATH" ]; then
+    BASHER_PACKAGES_PATH="$BASHER_ROOT/cellar/packages"
+  fi
+  export BASHER_PACKAGES_PATH
+
+  bin_path="$(abs_dirname "$0")"
+  export PATH="${bin_path}:${PATH}"
+
+  command="$1"
+  case "$command" in
+  "")
+    basher-help
+    ;;
+  * )
+    command_path="$(command -v "basher-$command" || true)"
+    if [ -z "$command_path" ]; then
+      echo "basher: no such command '$command'" >&2
+      exit 1
+    fi
+
+    shift 1
+    exec "$command_path" "$@"
+    ;;
+  esac
+}
+
+return 0 2>/dev/null || true
+main "$@"
