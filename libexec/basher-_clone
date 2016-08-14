@@ -5,17 +5,25 @@
 
 set -e
 
-if [ "$#" -ne 1 ]; then
+if [ "$#" -lt 1 ]; then
   basher-help _clone
   exit 1
 fi
 
-package="$1"
+package=$1
 
 if [ -z "$package" ]; then
   basher-help _clone
   exit 1
 fi
+
+site=${2:-github.com}
+proto=https
+
+[[ $site == *@* ]] && {
+  IFS=@ read -r login site <<< "$site"
+  proto=ssh
+}
 
 IFS=/ read -r user name <<< "$package"
 
@@ -34,4 +42,6 @@ if [ -e "$BASHER_PACKAGES_PATH/$package" ]; then
   exit 0
 fi
 
-git clone --depth=1 --recursive "https://github.com/$package.git" "${BASHER_PACKAGES_PATH}/$package"
+[[ $proto == "ssh" ]] && repo=$login${login:+@}$site: || repo=$proto://$site/
+
+git clone --depth=1 --recursive "$repo$package".git "${BASHER_PACKAGES_PATH}/$package"
