@@ -17,6 +17,8 @@ function __fish_basher_using_command
 end
 
 complete -f -c basher -n '__fish_basher_needs_command' -a '(basher commands)'
-for cmd in (basher commands)
+set --local basher_commands commands completions help init \
+    install link list outdated package-path uninstall update upgrade
+for cmd in $basher_commands
   complete -f -c basher -n "__fish_basher_using_command $cmd" -a "(basher completions $cmd)"
 end
