@@ -20,7 +20,7 @@ load test_helper
   assert_line "Usage: basher install [site]/<package>"
 }
 
-@test "executes install steps in right order and " {
+@test "executes install steps in right order" {
   mock_command basher-_clone
   mock_command basher-_deps
   mock_command basher-_link-bins
