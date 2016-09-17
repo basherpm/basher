@@ -2,10 +2,10 @@
 
 A package manager for shell scripts and functions.
 
-Basher allows you to quickly install shell packages directly from github.
-Instead of looking for specific install instructions for each package and
-messing with your path, basher will create a central location for all packages
-and manage their binaries for you.
+Basher allows you to quickly install shell packages directly from github (or
+other sites). Instead of looking for specific install instructions for each
+package and messing with your path, basher will create a central location for
+all packages and manage their binaries for you.
 
 Even though it is called basher, it also works with zsh and fish.
 
@@ -58,7 +58,7 @@ Run `basher update` to update basher.
 
 ## Usage
 
-### Installing packages
+### Installing packages from github.com
 
 ~~~ sh
 $ basher install sstephenson/bats
@@ -66,15 +66,23 @@ $ basher install sstephenson/bats
 
 This will install bats from https://github.com/sstephenson/bats and add `bin/bats` to the PATH.
 
+### Installing packges from other sites
+
+~~~ sh
+$ basher install bitbucket.org/user/repo_name
+~~~
+
+This will install `repo_name` from https://bitbucket.org/user/repo_name
+
 ### Command summary
 
 - `basher commands` - List commands
-- `basher help <command>` - Displays help for a command
+- `basher help <command>` - Display help for a command
 - `basher uninstall <package>` - Uninstall a package
 - `basher update` - Update basher to latest version from master
 - `basher list` - List installed packages
 - `basher outdated` - List packages which are not in the latest version
-- `basher upgrade <package>` - Upgrades a package to the latest version
+- `basher upgrade <package>` - Upgrade a package to the latest version
 
 ### Configuration options
 
@@ -85,7 +93,8 @@ globally or before each command:
 
 ## Packages
 
-Packages are simply github repos (username/repo).
+Packages are simply repos (username/repo). You may also specify a site
+(site/username/repo).
 
 Any files inside a bin directory are added to the path. If there is no bin
 directory, any executable files in the package root are added to the path.

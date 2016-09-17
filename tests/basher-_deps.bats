@@ -13,7 +13,7 @@ load test_helper
   mock_clone
   mock_command basher-install
   create_package "user/main"
-  basher-_clone user/main
+  basher-_clone site user/main
 
   run basher-_deps user/main
 
@@ -26,7 +26,7 @@ load test_helper
   create_package "user/main"
   create_dep "user/main" "user/dep1"
   create_dep "user/main" "user/dep2"
-  basher-_clone user/main
+  basher-_clone site user/main
 
   run basher-_deps user/main
 

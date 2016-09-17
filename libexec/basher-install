@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
-# Summary: Installs a package from github
-# Usage: basher install <package>
+#
+# Summary: Installs a package from github (or a custom site)
+#
+# Usage: basher install [site]/<package>
 
 set -e
 
@@ -9,7 +11,13 @@ if [ "$#" -ne 1 ]; then
   exit 1
 fi
 
-package="$1"
+if [[ "$1" = */*/* ]]; then
+  IFS=/ read -r site user name <<< "$1"
+  package="${user}/${name}"
+else
+  package="$1"
+  site="github.com"
+fi
 
 if [ -z "$package" ]; then
   basher-help install
@@ -28,7 +36,7 @@ if [ -z "$name" ]; then
   exit 1
 fi
 
-basher-_clone "$package"
+basher-_clone "$site" "$package"
 basher-_deps "$package"
 basher-_link-bins "$package"
 basher-_link-man "$package"

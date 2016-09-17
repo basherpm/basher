@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
-package="$1"
+site="$1"
+package="$2"
 
 git clone "${BASHER_ORIGIN_DIR}/$package" "${BASHER_PACKAGES_PATH}/$package"

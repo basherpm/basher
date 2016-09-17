@@ -7,7 +7,7 @@ load test_helper
   create_package_exec username/package exec1
   create_package_exec username/package exec2.sh
   mock_clone
-  basher-_clone username/package
+  basher-_clone site username/package
 
   run basher-_link-bins username/package
 
@@ -21,7 +21,7 @@ load test_helper
   create_exec username/package exec1
   create_exec username/package exec2.sh
   mock_clone
-  basher-_clone username/package
+  basher-_clone site username/package
 
   run basher-_link-bins username/package
 
@@ -35,7 +35,7 @@ load test_helper
   create_root_exec username/package exec3
   create_root_exec username/package exec4.sh
   mock_clone
-  basher-_clone username/package
+  basher-_clone site username/package
 
   run basher-_link-bins username/package
 
@@ -49,7 +49,7 @@ load test_helper
   create_exec username/package exec1
   create_root_exec username/package exec2
   mock_clone
-  basher-_clone username/package
+  basher-_clone site username/package
 
   run basher-_link-bins username/package
 
@@ -64,7 +64,7 @@ load test_helper
   create_root_exec username/package exec2
   create_package_exec username/package exec3
   mock_clone
-  basher-_clone username/package
+  basher-_clone site username/package
 
   run basher-_link-bins username/package
 
@@ -77,7 +77,7 @@ load test_helper
 @test "does not fail if there are no binaries" {
   create_package username/package
   mock_clone
-  basher-_clone username/package
+  basher-_clone site username/package
 
   run basher-_link-bins username/package
 
@@ -90,7 +90,7 @@ load test_helper
   create_exec username/package exec2.sh
   set_remove_extension username/package true
   mock_clone
-  basher-_clone username/package
+  basher-_clone site username/package
 
   run basher-_link-bins username/package
 
@@ -105,7 +105,7 @@ load test_helper
   create_exec username/package exec2.sh
   set_remove_extension username/package false
   mock_clone
-  basher-_clone username/package
+  basher-_clone site username/package
 
   run basher-_link-bins username/package
 
