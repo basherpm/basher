@@ -29,7 +29,7 @@ load test_helper
   assert_output "Package 'username/package' is already present"
 }
 
-@test "overwriting site" {
+@test "using a different site" {
   mock_command git
 
   run basher-_clone site username/package
