@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-username="$1"
-package="$2"
+package="$1"
 
-git clone "${BASHER_ORIGIN_DIR}/$username/$package" "${BASHER_PACKAGES_PATH}/$username/$package"
+git clone "${BASHER_ORIGIN_DIR}/$package" "${BASHER_PACKAGES_PATH}/$package"
