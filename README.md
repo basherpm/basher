@@ -76,6 +76,13 @@ This will install bats from https://github.com/sstephenson/bats and add `bin/bat
 - `basher outdated` - List packages which are not in the latest version
 - `basher upgrade <package>` - Upgrades a package to the latest version
 
+### Configuration options
+
+To change the behavior of basher, you can set the following variables either
+globally or before each command:
+
+- `BASHER_FULL_CLONE=true` - Clones the full repo history instead of only the last commit (useful for package development)
+
 ## Packages
 
 Packages are simply github repos (username/repo).

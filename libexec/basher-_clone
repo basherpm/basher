@@ -34,4 +34,10 @@ if [ -e "$BASHER_PACKAGES_PATH/$package" ]; then
   exit 0
 fi
 
-git clone --depth=1 --recursive "https://github.com/$package.git" "${BASHER_PACKAGES_PATH}/$package"
+if [ "$BASHER_FULL_CLONE" = "true" ]; then
+  DEPTH_OPTION=""
+else
+  DEPTH_OPTION="--depth=1"
+fi
+
+git clone ${DEPTH_OPTION} --recursive "https://github.com/$package.git" "${BASHER_PACKAGES_PATH}/$package"
