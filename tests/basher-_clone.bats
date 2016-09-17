@@ -5,25 +5,25 @@ load test_helper
 @test "without arguments prints usage" {
   run basher-_clone
   assert_failure
-  assert_line "Usage: basher _clone <site> <package>"
+  assert_line "Usage: basher _clone <use_ssh> <site> <package>"
 }
 
 @test "invalid package prints usage" {
-  run basher-_clone github.com invalid_package
+  run basher-_clone false github.com invalid_package
   assert_failure
-  assert_line "Usage: basher _clone <site> <package>"
+  assert_line "Usage: basher _clone <use_ssh> <site> <package>"
 }
 
 @test "too many arguments prints usage" {
-  run basher-_clone site a/b third_arg
+  run basher-_clone false site a/b third_arg
   assert_failure
-  assert_line "Usage: basher _clone <site> <package>"
+  assert_line "Usage: basher _clone <use_ssh> <site> <package>"
 }
 
 @test "does nothing if package is already present" {
   mkdir -p "$BASHER_PACKAGES_PATH/username/package"
 
-  run basher-_clone github.com username/package
+  run basher-_clone false github.com username/package
 
   assert_success
   assert_output "Package 'username/package' is already present"
@@ -32,7 +32,7 @@ load test_helper
 @test "using a different site" {
   mock_command git
 
-  run basher-_clone site username/package
+  run basher-_clone false site username/package
   assert_success
   assert_output "git clone --depth=1 --recursive https://site/username/package.git ${BASHER_PACKAGES_PATH}/username/package"
 }
@@ -41,7 +41,7 @@ load test_helper
   export BASHER_FULL_CLONE=
   mock_command git
 
-  run basher-_clone github.com username/package
+  run basher-_clone false github.com username/package
   assert_success
   assert_output "git clone --depth=1 --recursive https://github.com/username/package.git ${BASHER_PACKAGES_PATH}/username/package"
 }
@@ -50,7 +50,7 @@ load test_helper
   export BASHER_FULL_CLONE=true
   mock_command git
 
-  run basher-_clone github.com username/package
+  run basher-_clone false github.com username/package
   assert_success
   assert_output "git clone --recursive https://github.com/username/package.git ${BASHER_PACKAGES_PATH}/username/package"
 }
@@ -59,7 +59,15 @@ load test_helper
   export BASHER_FULL_CLONE=false
   mock_command git
 
-  run basher-_clone github.com username/package
+  run basher-_clone false github.com username/package
   assert_success
   assert_output "git clone --depth=1 --recursive https://github.com/username/package.git ${BASHER_PACKAGES_PATH}/username/package"
+}
+
+@test "using ssh protocol" {
+  mock_command git
+
+  run basher-_clone true site username/package
+  assert_success
+  assert_output "git clone --depth=1 --recursive git@site:username/package.git ${BASHER_PACKAGES_PATH}/username/package"
 }

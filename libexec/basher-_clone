@@ -2,17 +2,23 @@
 #
 # Summary: Clones a package from a site, but doesn't install it
 #
-# Usage: basher _clone <site> <package>
+# Usage: basher _clone <use_ssh> <site> <package>
 
 set -e
 
-if [ "$#" -ne 2 ]; then
+if [ "$#" -ne 3 ]; then
   basher-help _clone
   exit 1
 fi
 
-site="$1"
-package="$2"
+use_ssh="$1"
+site="$2"
+package="$3"
+
+if [ -z "$use_ssh" ]; then
+  basher-help _clone
+  exit 1
+fi
 
 if [ -z "$site" ]; then
   basher-help _clone
@@ -47,4 +53,10 @@ else
   DEPTH_OPTION="--depth=1"
 fi
 
-git clone ${DEPTH_OPTION} --recursive "https://${site}/$package.git" "${BASHER_PACKAGES_PATH}/$package"
+if [ "$use_ssh" = "true" ]; then
+  URI="git@$site:$package.git"
+else
+  URI="https://${site}/$package.git"
+fi
+
+git clone ${DEPTH_OPTION} --recursive "$URI" "${BASHER_PACKAGES_PATH}/$package"

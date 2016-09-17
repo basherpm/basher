@@ -6,7 +6,7 @@ load test_helper
   create_package username/package
   create_bash_completions username/package comp.bash
   mock_clone
-  basher-_clone site username/package
+  basher-_clone false site username/package
 
   run basher-_link-completions username/package
 
@@ -18,7 +18,7 @@ load test_helper
   create_package username/package
   create_zsh_completions username/package _exec
   mock_clone
-  basher-_clone site username/package
+  basher-_clone false site username/package
 
   run basher-_link-completions username/package
 
@@ -29,7 +29,7 @@ load test_helper
 @test "does not fail if package doesn't have any completions" {
   create_package username/package
   mock_clone
-  basher-_clone site username/package
+  basher-_clone false site username/package
 
   run basher-_link-completions username/package
 

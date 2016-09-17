@@ -7,7 +7,7 @@ load test_helper
   create_man username/package exec.1
   create_man username/package exec.2
   mock_clone
-  basher-_clone site username/package
+  basher-_clone false site username/package
 
   run basher-_link-man username/package
 echo "$output"

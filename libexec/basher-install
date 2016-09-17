@@ -2,9 +2,20 @@
 #
 # Summary: Installs a package from github (or a custom site)
 #
-# Usage: basher install [site]/<package>
+# Usage: basher install [--ssh] [site]/<package>
 
 set -e
+
+use_ssh="false"
+
+for i in "$@"; do
+  case $i in
+    --ssh)
+    use_ssh="true"
+    shift
+    ;;
+  esac
+done
 
 if [ "$#" -ne 1 ]; then
   basher-help install
@@ -36,7 +47,7 @@ if [ -z "$name" ]; then
   exit 1
 fi
 
-basher-_clone "$site" "$package"
+basher-_clone "$use_ssh" "$site" "$package"
 basher-_deps "$package"
 basher-_link-bins "$package"
 basher-_link-man "$package"

@@ -74,6 +74,15 @@ $ basher install bitbucket.org/user/repo_name
 
 This will install `repo_name` from https://bitbucket.org/user/repo_name
 
+### Using ssh instead of https
+
+If you want to do local development on installed packages and you have ssh
+access to the site, use `--ssh` to override the protocol:
+
+~~~ sh
+$ basher install --ssh juanibiapina/gg
+~~~
+
 ### Command summary
 
 - `basher commands` - List commands
