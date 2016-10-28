@@ -1,1 +1,2 @@
-../libexec/basher
+#/bin/sh
+$(dirname $0)/../libexec/basher
