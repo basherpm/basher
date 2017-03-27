@@ -5,19 +5,27 @@ load test_helper
 @test "without arguments prints usage" {
   run basher-_clone
   assert_failure
-  assert_line "Usage: basher _clone <use_ssh> <site> <package>"
+  assert_line "Usage: basher _clone <use_ssh> <site> <package> [<ref>]"
 }
 
 @test "invalid package prints usage" {
   run basher-_clone false github.com invalid_package
   assert_failure
-  assert_line "Usage: basher _clone <use_ssh> <site> <package>"
+  assert_line "Usage: basher _clone <use_ssh> <site> <package> [<ref>]"
 }
 
 @test "too many arguments prints usage" {
-  run basher-_clone false site a/b third_arg
+  run basher-_clone false site a/b ref fourth_arg
   assert_failure
-  assert_line "Usage: basher _clone <use_ssh> <site> <package>"
+  assert_line "Usage: basher _clone <use_ssh> <site> <package> [<ref>]"
+}
+
+@test "install a specific version" {
+  mock_command git
+
+  run basher-_clone false site username/package version
+  assert_success
+  assert_output "git clone --depth=1 -b version --recursive https://site/username/package.git ${BASHER_PACKAGES_PATH}/username/package"
 }
 
 @test "does nothing if package is already present" {

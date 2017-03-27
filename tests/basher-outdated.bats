@@ -32,3 +32,15 @@ load test_helper
   assert_success
   assert_output username/outdated
 }
+
+@test "ignore packages checked out with a tag or ref" {
+  mock_clone
+  create_package username/tagged
+  basher-install username/tagged
+
+  create_command git 'if [ "$1" = "symbolic-ref" ]; then exit 128; fi'
+
+  run basher-outdated
+  assert_success
+  assert_output ""
+}
