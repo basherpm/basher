@@ -15,8 +15,10 @@ do
   if [ ! -L "$package_path" ]; then
     cd $package_path
     git remote update > /dev/null 2>&1
-    if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/HEAD)" ]; then
-      echo "$package"
+    if git symbolic-ref --short -q HEAD > /dev/null; then
+        if [ "$(git rev-list --count HEAD...HEAD@{upstream})" -gt 0 ]; then
+          echo "$package"
+        fi
     fi
   fi
 done

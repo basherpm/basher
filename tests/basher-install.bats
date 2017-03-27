@@ -5,19 +5,19 @@ load test_helper
 @test "without arguments prints usage" {
   run basher-install
   assert_failure
-  assert_line "Usage: basher install [--ssh] [site]/<package>"
+  assert_line "Usage: basher install [--ssh] [site]/<package>[@ref]"
 }
 
 @test "incorrect argument prints usage" {
   run basher-install first_arg
   assert_failure
-  assert_line "Usage: basher install [--ssh] [site]/<package>"
+  assert_line "Usage: basher install [--ssh] [site]/<package>[@ref]"
 }
 
 @test "too many arguments prints usage" {
   run basher-install a/b wrong
   assert_failure
-  assert_line "Usage: basher install [--ssh] [site]/<package>"
+  assert_line "Usage: basher install [--ssh] [site]/<package>[@ref]"
 }
 
 @test "executes install steps in right order" {
@@ -69,6 +69,30 @@ basher-_link-completions username/package"
   run basher-install --ssh username/package
 
   assert_line "basher-_clone true github.com username/package"
+}
+
+@test "installs with custom version" {
+  mock_command basher-_clone
+  mock_command basher-_deps
+  mock_command basher-_link-bins
+  mock_command basher-_link-man
+  mock_command basher-_link-completions
+
+  run basher-install username/package@v1.2.3
+
+  assert_line "basher-_clone false github.com username/package v1.2.3"
+}
+
+@test "empty version is ignored" {
+  mock_command basher-_clone
+  mock_command basher-_deps
+  mock_command basher-_link-bins
+  mock_command basher-_link-man
+  mock_command basher-_link-completions
+
+  run basher-install username/package@
+
+  assert_line "basher-_clone false github.com username/package"
 }
 
 @test "doesn't fail" {
