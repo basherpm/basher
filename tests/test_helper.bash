@@ -7,7 +7,10 @@ export BASHER_CWD="${BASHER_TEST_DIR}/cwd"
 export BASHER_TMP_BIN="${BASHER_TEST_DIR}/bin"
 
 export BASHER_ROOT="${BASHER_TEST_DIR}/root"
-export BASHER_PACKAGES_PATH="$BASHER_ROOT/cellar/packages"
+export BASHER_PREFIX="${BASHER_ROOT}/cellar"
+export BASHER_INSTALL_BIN="${BASHER_PREFIX}/bin"
+export BASHER_INSTALL_MAN="${BASHER_PREFIX}/man"
+export BASHER_PACKAGES_PATH="$BASHER_PREFIX/packages"
 
 export FIXTURES_DIR="${BATS_TEST_DIRNAME}/fixtures"
 
@@ -17,11 +20,11 @@ export PATH="${BASHER_TMP_BIN}:$PATH"
 
 mkdir -p "${BASHER_ROOT}/libexec"
 mkdir -p "${BASHER_ROOT}/tests"
-mkdir -p "${BASHER_ROOT}/cellar"
-mkdir -p "${BASHER_ROOT}/cellar/bin"
-mkdir -p "${BASHER_ROOT}/cellar/packages"
-mkdir -p "${BASHER_ROOT}/cellar/completions/bash"
-mkdir -p "${BASHER_ROOT}/cellar/completions/zsh"
+mkdir -p "${BASHER_PREFIX}"
+mkdir -p "${BASHER_INSTALL_BIN}"
+mkdir -p "${BASHER_PACKAGES_PATH}"
+mkdir -p "${BASHER_PREFIX}/completions/bash"
+mkdir -p "${BASHER_PREFIX}/completions/zsh"
 
 mkdir -p "${BASHER_TMP_BIN}"
 mkdir -p "${BASHER_TEST_DIR}/path"

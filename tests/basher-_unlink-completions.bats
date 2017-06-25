@@ -2,7 +2,7 @@
 
 load test_helper
 
-@test "unlinks bash completions from the cellar" {
+@test "unlinks bash completions from prefix/completions" {
   create_package username/package
   create_bash_completions username/package comp.bash
   mock_clone
@@ -10,10 +10,10 @@ load test_helper
 
   run basher-_unlink-completions username/package
   assert_success
-  assert [ ! -e "$($BASHER_ROOT/cellar/completions/bash/comp.bash)" ]
+  assert [ ! -e "$($BASHER_PREFIX/completions/bash/comp.bash)" ]
 }
 
-@test "unlinks zsh completions from the cellar" {
+@test "unlinks zsh completions from prefix/completions" {
   create_package username/package
   create_zsh_completions username/package _exec
   mock_clone
@@ -21,5 +21,5 @@ load test_helper
 
   run basher-_unlink-completions username/package
   assert_success
-  assert [ ! -e "$(readlink $BASHER_ROOT/cellar/completions/zsh/_exec)" ]
+  assert [ ! -e "$(readlink $BASHER_PREFIX/completions/zsh/_exec)" ]
 }

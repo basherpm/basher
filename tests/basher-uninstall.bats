@@ -44,7 +44,7 @@ load test_helper
 
   run basher-uninstall username/package
   assert_success
-  [ ! -e "$BASHER_ROOT/cellar/bin/exec1" ]
+  [ ! -e "$BASHER_INSTALL_BIN/exec1" ]
 }
 
 @test "does not remove other package directories and binaries" {
@@ -59,5 +59,5 @@ load test_helper
   run basher-uninstall username/package1
   assert_success
   [ -d "$BASHER_PACKAGES_PATH/username/package2" ]
-  [ -e "$BASHER_ROOT/cellar/bin/exec2" ]
+  [ -e "$BASHER_INSTALL_BIN/exec2" ]
 }

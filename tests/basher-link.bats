@@ -14,7 +14,7 @@ load test_helper
   assert_output "Directory 'invalid' not found."
 }
 
-@test "links the package to cellar under link user" {
+@test "links the package to packages under link user" {
   mock_command basher-_link-bins
   mock_command basher-_link-completions
   mkdir package1

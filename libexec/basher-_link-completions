@@ -14,10 +14,10 @@ IFS=: read -a zsh_completions <<< "$ZSH_COMPLETIONS"
 
 for completion in "${bash_completions[@]}"
 do
-  ln -sf "$BASHER_PACKAGES_PATH/$package/$completion" "$BASHER_ROOT/cellar/completions/bash/${completion##*/}"
+  ln -sf "$BASHER_PACKAGES_PATH/$package/$completion" "$BASHER_PREFIX/completions/bash/${completion##*/}"
 done
 
 for completion in "${zsh_completions[@]}"
 do
-  ln -sf "$BASHER_PACKAGES_PATH/$package/$completion" "$BASHER_ROOT/cellar/completions/zsh/${completion##*/}"
+  ln -sf "$BASHER_PACKAGES_PATH/$package/$completion" "$BASHER_PREFIX/completions/zsh/${completion##*/}"
 done
