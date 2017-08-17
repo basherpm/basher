@@ -27,10 +27,25 @@ if [ -z "$BASHER_ROOT" ]; then
 fi
 export BASHER_ROOT
 
+if [ -z "$BASHER_PREFIX" ]; then
+  BASHER_PREFIX="$BASHER_ROOT/cellar"
+fi
+export BASHER_PREFIX
+
 if [ -z "$BASHER_PACKAGES_PATH" ]; then
-  BASHER_PACKAGES_PATH="$BASHER_ROOT/cellar/packages"
+  BASHER_PACKAGES_PATH="$BASHER_PREFIX/packages"
 fi
 export BASHER_PACKAGES_PATH
+
+if [ -z "$BASHER_INSTALL_BIN" ]; then
+  BASHER_INSTALL_BIN="$BASHER_PREFIX/bin"
+fi
+export BASHER_INSTALL_BIN
+
+if [ -z "$BASHER_INSTALL_MAN" ]; then
+  BASHER_INSTALL_MAN="$BASHER_PREFIX/man"
+fi
+export BASHER_INSTALL_MAN
 
 bin_path="$(abs_dirname "$0")"
 export PATH="${bin_path}:${PATH}"
