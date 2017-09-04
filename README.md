@@ -139,6 +139,7 @@ above.
 - [pote/gvp](https://github.com/pote/gvp)
 - [sstephenson/bats](https://github.com/sstephenson/bats)
 - [tj/git-extras](https://github.com/tj/git-extras)
+- [jimeh/tmuxifier](https://github.com/jimeh/tmuxifier)
 - [treyhunner/tmuxstart](https://github.com/treyhunner/tmuxstart)
 
 And many others. If a repo doesn't work, create an issue or a pull request.
