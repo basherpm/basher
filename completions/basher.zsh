@@ -2,7 +2,7 @@ if [[ ! -o interactive ]]; then
     return
 fi
 
-compctl -K _basher basher
+compsys -K _basher basher
 
 _basher() {
   local words completions
