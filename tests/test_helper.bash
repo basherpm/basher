@@ -19,6 +19,7 @@ export PATH="${BATS_TEST_DIRNAME}/../libexec:$PATH"
 export PATH="${BASHER_TMP_BIN}:$PATH"
 
 mkdir -p "$BASHER_ROOT"
+mkdir -p "$BASHER_ROOT/lib"
 
 mkdir -p "${BASHER_TMP_BIN}"
 mkdir -p "${BASHER_TEST_DIR}/path"

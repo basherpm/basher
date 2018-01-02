@@ -26,6 +26,17 @@ load test_helper
   assert_line -n 3 'export PATH="$BASHER_ROOT/cellar/bin:$PATH"'
 }
 
+@test "setup include function if it exists" {
+  touch "$BASHER_ROOT/lib/include.fakesh"
+  run basher-init - fakesh
+  assert_line -n 4 'source "$BASHER_ROOT/lib/include.fakesh"'
+}
+
+@test "doesn't setup include function if it doesn't exist" {
+  run basher-init - fakesh
+  refute_line 'source "$BASHER_ROOT/lib/include.fakesh"'
+}
+
 @test "setup basher completions if available" {
   mkdir -p "$BASHER_ROOT/completions"
   touch "$BASHER_ROOT/completions/basher.fakesh"
