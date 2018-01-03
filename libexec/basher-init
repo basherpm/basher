@@ -15,6 +15,7 @@ fi
 print_fish_commands() {
   echo "setenv BASHER_SHELL $shell"
   echo "setenv BASHER_ROOT $BASHER_ROOT"
+  echo "setenv BASHER_PREFIX $BASHER_PREFIX"
 
   echo 'if not contains $BASHER_ROOT/cellar/bin $PATH'
   echo 'setenv PATH $BASHER_ROOT/cellar/bin $PATH'
@@ -24,6 +25,7 @@ print_fish_commands() {
 print_sh_commands(){
   echo "export BASHER_SHELL=$shell"
   echo "export BASHER_ROOT=$BASHER_ROOT"
+  echo "export BASHER_PREFIX=$BASHER_PREFIX"
 
   echo 'export PATH="$BASHER_ROOT/cellar/bin:$PATH"'
 }

@@ -14,10 +14,16 @@ load test_helper
   assert_line -n 1 'export BASHER_ROOT=/lol'
 }
 
+@test "exports BASHER_PREFIX" {
+  BASHER_PREFIX=/lol run basher-init - bash
+  assert_success
+  assert_line -n 2 'export BASHER_PREFIX=/lol'
+}
+
 @test "adds cellar/bin to path" {
   run basher-init - bash
   assert_success
-  assert_line -n 2 'export PATH="$BASHER_ROOT/cellar/bin:$PATH"'
+  assert_line -n 3 'export PATH="$BASHER_ROOT/cellar/bin:$PATH"'
 }
 
 @test "setup basher completions if available" {
@@ -25,7 +31,7 @@ load test_helper
   touch "$BASHER_ROOT/completions/basher.fakesh"
   run basher-init - fakesh
   assert_success
-  assert_line -n 3 'source "$BASHER_ROOT/completions/basher.fakesh"'
+  assert_line -n 4 'source "$BASHER_ROOT/completions/basher.fakesh"'
 }
 
 @test "does not setup basher completions if not available" {
@@ -40,11 +46,11 @@ load test_helper
 @test "setup package completions (bash)" {
   run basher-init - bash
   assert_success
-  assert_line -n 3 'for f in $(command ls "$BASHER_ROOT/cellar/completions/bash"); do source "$BASHER_ROOT/cellar/completions/bash/$f"; done'
+  assert_line -n 4 'for f in $(command ls "$BASHER_ROOT/cellar/completions/bash"); do source "$BASHER_ROOT/cellar/completions/bash/$f"; done'
 }
 
 @test "setup package completions (zsh)" {
   run basher-init - zsh
   assert_success
-  assert_line -n 3 'fpath=("$BASHER_ROOT/cellar/completions/zsh" $fpath)'
+  assert_line -n 4 'fpath=("$BASHER_ROOT/cellar/completions/zsh" $fpath)'
 }
