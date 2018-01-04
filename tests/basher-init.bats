@@ -27,9 +27,8 @@ load test_helper
 }
 
 @test "setup include function if it exists" {
-  touch "$BASHER_ROOT/lib/include.fakesh"
-  run basher-init - fakesh
-  assert_line -n 4 'source "$BASHER_ROOT/lib/include.fakesh"'
+  run basher-init - bash
+  assert_line -n 4 'source "$BASHER_ROOT/lib/include.bash"'
 }
 
 @test "doesn't setup include function if it doesn't exist" {
@@ -38,16 +37,12 @@ load test_helper
 }
 
 @test "setup basher completions if available" {
-  mkdir -p "$BASHER_ROOT/completions"
-  touch "$BASHER_ROOT/completions/basher.fakesh"
-  run basher-init - fakesh
+  run basher-init - bash
   assert_success
-  assert_line -n 4 'source "$BASHER_ROOT/completions/basher.fakesh"'
+  assert_line -n 5 'source "$BASHER_ROOT/completions/basher.bash"'
 }
 
 @test "does not setup basher completions if not available" {
-  mkdir -p "$BASHER_ROOT/completions"
-  touch "$BASHER_ROOT/completions/basher.other"
   run basher-init - fakesh
   assert_success
   refute_line 'source "$BASHER_ROOT/completions/basher.fakesh"'
@@ -57,11 +52,11 @@ load test_helper
 @test "setup package completions (bash)" {
   run basher-init - bash
   assert_success
-  assert_line -n 4 'for f in $(command ls "$BASHER_ROOT/cellar/completions/bash"); do source "$BASHER_ROOT/cellar/completions/bash/$f"; done'
+  assert_line -n 6 'for f in $(command ls "$BASHER_ROOT/cellar/completions/bash"); do source "$BASHER_ROOT/cellar/completions/bash/$f"; done'
 }
 
 @test "setup package completions (zsh)" {
   run basher-init - zsh
   assert_success
-  assert_line -n 4 'fpath=("$BASHER_ROOT/cellar/completions/zsh" $fpath)'
+  assert_line -n 6 'fpath=("$BASHER_ROOT/cellar/completions/zsh" $fpath)'
 }
