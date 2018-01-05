@@ -66,7 +66,7 @@ $ basher install sstephenson/bats
 
 This will install bats from https://github.com/sstephenson/bats and add `bin/bats` to the PATH.
 
-### Installing packges from other sites
+### Installing packages from other sites
 
 ~~~ sh
 $ basher install bitbucket.org/user/repo_name
