@@ -83,6 +83,17 @@ access to the site, use `--ssh` to override the protocol:
 $ basher install --ssh juanibiapina/gg
 ~~~
 
+### Sourcing files from a package into current shell
+
+Basher provides an `include` function that allows sourcing files into the
+current shell. After installing a package, you can run:
+
+```
+include username/repo lib/file.sh
+```
+
+This will source a file `lib/file.sh` under the package `username/repo`.
+
 ### Command summary
 
 - `basher commands` - List commands
