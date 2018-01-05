@@ -17,6 +17,19 @@ create_link_package() {
   ln -s "${BASHER_ORIGIN_DIR}/$name" "${BASHER_PACKAGES_PATH}/link/$name"
 }
 
+create_file() {
+  local package="$1"
+  local filename="$2"
+  local content="$3"
+
+  cd "${BASHER_ORIGIN_DIR}/$package"
+  echo "$content" > "$filename"
+
+  git add .
+  git commit -m "Add $filename"
+  cd "${BASHER_CWD}"
+}
+
 create_man() {
   local package="$1"
   local man="$2"
