@@ -66,7 +66,7 @@ $ basher install sstephenson/bats
 
 This will install bats from https://github.com/sstephenson/bats and add `bin/bats` to the PATH.
 
-### Installing packges from other sites
+### Installing packages from other sites
 
 ~~~ sh
 $ basher install bitbucket.org/user/repo_name
@@ -82,6 +82,17 @@ access to the site, use `--ssh` to override the protocol:
 ~~~ sh
 $ basher install --ssh juanibiapina/gg
 ~~~
+
+### Sourcing files from a package into current shell
+
+Basher provides an `include` function that allows sourcing files into the
+current shell. After installing a package, you can run:
+
+```
+include username/repo lib/file.sh
+```
+
+This will source a file `lib/file.sh` under the package `username/repo`.
 
 ### Command summary
 
