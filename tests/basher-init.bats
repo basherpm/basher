@@ -28,7 +28,7 @@ load test_helper
 
 @test "setup include function if it exists" {
   run basher-init - bash
-  assert_line -n 4 'source "$BASHER_ROOT/lib/include.bash"'
+  assert_line -n 4 '. "$BASHER_ROOT/lib/include.bash"'
 }
 
 @test "doesn't setup include function if it doesn't exist" {
@@ -39,7 +39,7 @@ load test_helper
 @test "setup basher completions if available" {
   run basher-init - bash
   assert_success
-  assert_line -n 5 'source "$BASHER_ROOT/completions/basher.bash"'
+  assert_line -n 5 '. "$BASHER_ROOT/completions/basher.bash"'
 }
 
 @test "does not setup basher completions if not available" {
@@ -60,3 +60,14 @@ load test_helper
   assert_success
   assert_line -n 6 'fpath=("$BASHER_ROOT/cellar/completions/zsh" $fpath)'
 }
+
+hasShell() {
+  which "$1" &>>/dev/null
+}
+
+@test "is sh-compatible" {
+  hasShell sh || skip "sh was not found in path."
+  run sh -ec 'eval "$(basher init - sh)"'
+  assert_success
+}
+
