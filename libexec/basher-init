@@ -48,11 +48,11 @@ case "$shell" in
 esac
 
 if [ -e "$BASHER_ROOT/lib/include.$shell" ]; then
-  echo "source \"\$BASHER_ROOT/lib/include.$shell\""
+  echo ". \"\$BASHER_ROOT/lib/include.$shell\""
 fi
 
 if [ -e "$BASHER_ROOT/completions/basher.$shell" ]; then
-  echo "source \"\$BASHER_ROOT/completions/basher.$shell\""
+  echo ". \"\$BASHER_ROOT/completions/basher.$shell\""
 fi
 
 case "$shell" in
