@@ -61,10 +61,10 @@ Run `basher update` to update basher.
 ### Installing packages from github.com
 
 ~~~ sh
-$ basher install sstephenson/bats
+$ basher install bats-core/bats-core
 ~~~
 
-This will install bats from https://github.com/sstephenson/bats and add `bin/bats` to the PATH.
+This will install bats from https://github.com/bats-core/bats-core and add `bin/bats` to the PATH.
 
 ### Installing packages from other sites
 
@@ -138,6 +138,7 @@ above.
 
 ## Working packages
 
+- [bats-core/bats-core](https://github.com/bats-core/bats-core)
 - [bltavares/kickstart](https://github.com/bltavares/kickstart)
 - [bripkens/dock](https://github.com/bripkens/dock)
 - [juanibiapina/gg](https://github.com/juanibiapina/gg)
@@ -145,7 +146,6 @@ above.
 - [juanibiapina/todo](https://github.com/juanibiapina/todo)
 - [pote/gpm](https://github.com/pote/gpm)
 - [pote/gvp](https://github.com/pote/gvp)
-- [sstephenson/bats](https://github.com/sstephenson/bats)
 - [tj/git-extras](https://github.com/tj/git-extras)
 - [jimeh/tmuxifier](https://github.com/jimeh/tmuxifier)
 - [treyhunner/tmuxstart](https://github.com/treyhunner/tmuxstart)
@@ -157,7 +157,7 @@ And many others. If a repo doesn't work, create an issue or a pull request.
 To run the tests, install bats:
 
 ~~~ sh
-$ basher install sstephenson/bats
+$ basher install bats-core/bats-core
 ~~~
 
 update submodules:

@@ -6,7 +6,7 @@ Write a [good commit message][commit].
 
 ## Use the test suite
 
-To run the tests, make sure [bats](https://github.com/sstephenson/bats) is
+To run the tests, make sure [bats](https://github.com/bats-core/bats-core) is
 installed and run:
 
 ```
