@@ -47,3 +47,33 @@ load test_helper
   assert_success
   assert_output "DONE"
 }
+
+@test "includes a file only once" {
+  create_package username/repo
+  create_file username/repo function.sh "func_name() { echo DONE; }"
+  mock_clone
+  basher-_clone false site username/repo
+
+  eval "$(basher-init - sh)"
+  include_once username/repo function.sh
+
+  [[ "$BASHER_INCLUDED_ONCE" == ":username/repo/function.sh" ]]
+
+  run func_name
+  assert_success
+  assert_output "DONE"
+
+  basher uninstall username/repo
+
+  create_file username/repo function.sh "func_name() { echo FLOOPIEDOOPIE; }"
+  mock_clone
+  basher-_clone false site username/repo
+
+  declare expected="$BASHER_INCLUDED_ONCE"
+  include_once username/repo function.sh
+  [[ "$expected" == "$BASHER_INCLUDED_ONCE" ]]
+
+  run func_name
+  assert_success
+  assert_output "DONE"
+}

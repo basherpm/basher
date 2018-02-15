@@ -19,3 +19,8 @@ include() {
     return 1
   fi
 }
+
+include_once() {
+  [[ "$BASHER_INCLUDED_ONCE" == *"$1/$2"* ]] && return 0
+  include "$@" && BASHER_INCLUDED_ONCE="${BASHER_INCLUDED_ONCE}:$1/$2"
+}
