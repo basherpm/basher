@@ -1,8 +1,16 @@
-include() {
-  local package="$1"
-  local file="$2"
+declare -a BASHER_INCLUDED
 
-  if [ -z "$package" ] || [ -z "$file" ]; then
+include() {
+  for name in "${BASHER_INCLUDED[@]}"; do
+    if [[ "$name" == "$1/$2" ]]; then
+      return 0
+    fi
+  done
+
+  local package="$1"
+  local file_name="$2"
+
+  if [ -z "$package" ] || [ -z "$file_name" ]; then
     echo "Usage: include <package> <file>" >&2
     return 1
   fi
@@ -12,10 +20,12 @@ include() {
     return 1
   fi
 
-  if [ -e "$BASHER_PREFIX/packages/$package/$file" ]; then
-    . "$BASHER_PREFIX/packages/$package/$file" >&2
+  local file="$BASHER_PREFIX/packages/$package/$file_name"
+
+  if [ -e "$file" ]; then
+    . "$file" >&2 && BASHER_INCLUDED+=("$package/$file_name")
   else
-    echo "File not found: $BASHER_PREFIX/packages/$package/$file" >&2
+    echo "File not found: $file" >&2
     return 1
   fi
 }
