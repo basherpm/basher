@@ -1,0 +1,108 @@
+#!/usr/bin/env bash
+: ${BASHER_DIR:=$HOME/.basher}
+: ${BASHER_BIN:=$BASHER_DIR/bin}
+: ${VERBOSITY:=0}
+
+set -e
+set -u
+
+# Check if a command exists
+check_cmd () {
+  if ! test_cmd_loc="$(type -p "$1")" || [[ -z "$test_cmd_loc" ]]; then
+    echo "$1 was not found in your path!"
+    echo "To proceed please install $1 to your path and try again!"
+    exit 1
+  fi
+}
+
+horizontal_rule () {
+  printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' -
+}
+
+squawk () {
+  # This function simplifies error reporting and verbosity
+  # call it by preceding your message with a verbosity level
+  # e.g. `squawk 3 "This is a squawk"`
+  # if the current verbosity level is greater than or equal 
+  # the number given then this function will echo out your message
+  # and pad it with # to let you now how verbose that message was
+  squawk_lvl=$1
+  squawk=$2
+
+  if [[ "$VERBOSITY" -ge "$squawk_lvl" ]] ; then
+  count_squawk=0
+    while [[ "$count_squawk" -lt "$squawk_lvl" ]]; do
+      echo -n "#"
+      count_squawk=`expr $count_squawk + 1`
+    done
+    echo " $squawk"
+  fi
+}
+
+chkdir () {
+  if [[ ! -w $1 ]] ; then
+    sudo mkdir -p $1
+    sudo chown $USER. $1
+  fi
+  if [[ ! -w $1 ]] ; then
+    echo "Cannot write to $1, please check your permissions"
+    exit 2
+  fi
+}
+
+# these vars are used by the following functions
+LINE_TO_ADD=''
+TARGET_FILE_FOR_ADD=''
+
+check_if_line_exists()
+{
+  squawk 7 " Checking for '$LINE_TO_ADD'  in $TARGET_FILE_FOR_ADD"
+  grep -qsFx "$LINE_TO_ADD" $TARGET_FILE_FOR_ADD
+}
+
+add_line_to()
+{
+  squawk 5 " Adding '$LINE_TO_ADD'  to $TARGET_FILE_FOR_ADD"
+  TARGET_FILE=$TARGET_FILE_FOR_ADD
+    [[ -w "$TARGET_FILE" ]] || TARGET_FILE=$TARGET_FILE_FOR_ADD
+    printf "%s\n" "$LINE_TO_ADD" >> "$TARGET_FILE"
+    horizontal_rule
+    echo "$LINE_TO_ADD has been added to $TARGET_FILE you will need to source $TARGET_FILE or log out and log back in to activate it"
+    horizontal_rule
+}
+
+dotfiles_install () {
+  squawk 1 ' Adjusting dotfiles'
+  touch $HOME/.zshrc
+  touch $HOME/.bashrc
+  LINE_TO_ADD="$(printf "export PATH=%s:\$PATH" $BASHER_BIN)"
+  TARGET_FILE_FOR_ADD=$HOME/.bashrc
+  check_if_line_exists || add_line_to
+  TARGET_FILE_FOR_ADD=$HOME/.zshrc
+  check_if_line_exists || add_line_to
+  LINE_TO_ADD='eval "$(basher init -)"'
+  TARGET_FILE_FOR_ADD=$HOME/.bashrc
+  check_if_line_exists || add_line_to
+  TARGET_FILE_FOR_ADD=$HOME/.zshrc
+  check_if_line_exists || add_line_to
+}
+
+
+main () {
+  check_cmd git
+  dotfiles_install
+  if [[ -d "$BASHER_DIR" ]]; then
+    echo "basher appears to already be installed to $BASHER_DIR, try `basher update` instead"
+  else
+    git clone --depth=1 https://github.com/basherpm/basher.git ~/.basher
+  fi
+  # make a bin dir in $HOME and add it to path
+  chkdir $BASHER_BIN
+  horizontal_rule
+  echo 'Basher has been installed, enjoy! -- please visit the github page for all issues and support'
+  echo '|-->  https://github.com/basherpm/basher  <--|'
+  exit 0
+}
+
+# wrap everything in a function to ensure the entire script is downloaded before executing
+main $@
