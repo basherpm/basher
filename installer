@@ -2,7 +2,6 @@
 : ${BASHER_DIR:=$HOME/.basher}
 : ${BASHER_BIN:=$BASHER_DIR/bin}
 : ${VERBOSITY:=0}
-TARGET=$1
 
 set -e
 set -u
