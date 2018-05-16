@@ -146,7 +146,28 @@ create_bash_completions() {
   cd ${BASHER_CWD}
 }
 
-create_zsh_completions() {
+create_zsh_compsys_completions() {
+  local package="$1"
+  local comp="$2"
+  cd "${BASHER_ORIGIN_DIR}/$package"
+  mkdir -p completions
+  echo "#compdef $2" > completions/$comp
+
+  touch "package.sh"
+
+  if grep -sq "ZSH_COMPLETIONS=" "package.sh"; then
+    sed -e "/^ZSH_COMPLETIONS=/ s/$/:completions\/$comp/" package.sh > package.sh.tmp
+    mv package.sh.tmp package.sh
+  else
+    echo "ZSH_COMPLETIONS=completions/$comp" >> package.sh
+  fi
+
+  git add .
+  git commit -m "Add bash completions"
+  cd ${BASHER_CWD}
+}
+
+create_zsh_compctl_completions() {
   local package="$1"
   local comp="$2"
   cd "${BASHER_ORIGIN_DIR}/$package"

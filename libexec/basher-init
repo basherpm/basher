@@ -35,7 +35,8 @@ load_bash_package_completions() {
 }
 
 load_zsh_package_completions() {
-  echo 'fpath=("$BASHER_ROOT/cellar/completions/zsh" $fpath)'
+  echo 'fpath=("$BASHER_ROOT/cellar/completions/zsh/compsys" $fpath)'
+  echo 'for f in $(command ls "$BASHER_ROOT/cellar/completions/zsh/compctl"); do source "$BASHER_ROOT/cellar/completions/zsh/compctl/$f"; done'
 }
 
 case "$shell" in

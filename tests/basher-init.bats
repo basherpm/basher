@@ -58,7 +58,8 @@ load test_helper
 @test "setup package completions (zsh)" {
   run basher-init - zsh
   assert_success
-  assert_line -n 6 'fpath=("$BASHER_ROOT/cellar/completions/zsh" $fpath)'
+  assert_line -n 6 'fpath=("$BASHER_ROOT/cellar/completions/zsh/compsys" $fpath)'
+  assert_line -n 7 'for f in $(command ls "$BASHER_ROOT/cellar/completions/zsh/compctl"); do source "$BASHER_ROOT/cellar/completions/zsh/compctl/$f"; done'
 }
 
 hasShell() {
