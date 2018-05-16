@@ -1,0 +1,9 @@
+{
+  "libexec/*": {
+    "alternate": "tests/{}.bats"
+  },
+  "tests/*.bats": {
+    "runner": "bats",
+    "alternate": "libexec/{}"
+  }
+}
