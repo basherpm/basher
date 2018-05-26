@@ -13,12 +13,12 @@ if [ -z "$shell" ]; then
 fi
 
 print_fish_commands() {
-  echo "setenv BASHER_SHELL $shell"
-  echo "setenv BASHER_ROOT $BASHER_ROOT"
-  echo "setenv BASHER_PREFIX $BASHER_PREFIX"
+  echo "set -gx BASHER_SHELL $shell"
+  echo "set -gx BASHER_ROOT $BASHER_ROOT"
+  echo "set -gx BASHER_PREFIX $BASHER_PREFIX"
 
   echo 'if not contains $BASHER_ROOT/cellar/bin $PATH'
-  echo 'setenv PATH $BASHER_ROOT/cellar/bin $PATH'
+  echo 'set -gx PATH $BASHER_ROOT/cellar/bin $PATH'
   echo 'end'
 }
 
