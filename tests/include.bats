@@ -20,7 +20,7 @@ load test_helper
   eval "$(basher-init - sh)"
   run include user/repo file
   assert_failure
-  assert_output 'Package not installed: "user/repo"'
+  assert_output "Package not installed: user/repo"
 }
 
 @test "when file doesn't exist, prints an error" {
@@ -31,7 +31,7 @@ load test_helper
   eval "$(basher-init - sh)"
   run include username/repo non_existent
   assert_failure
-  assert_output "File not found: \"$BASHER_PREFIX/packages/username/repo/non_existent\""
+  assert_output "File not found: $BASHER_PREFIX/packages/username/repo/non_existent"
 }
 
 @test "sources a file into the current shell" {
@@ -55,7 +55,7 @@ load test_helper
   basher-_clone false site username/repo
 
   eval "$(basher-init - sh)"
-  include username/repo function.sh
+  include_once username/repo function.sh
 
   [[ "$BASHER_INCLUDED_ONCE" == ":username/repo/function.sh" ]]
 
@@ -70,7 +70,7 @@ load test_helper
   basher-_clone false site username/repo
 
   declare expected="$BASHER_INCLUDED_ONCE"
-  include username/repo function.sh
+  include_once username/repo function.sh
   [[ "$expected" == "$BASHER_INCLUDED_ONCE" ]]
 
   run func_name
