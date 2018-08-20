@@ -55,7 +55,7 @@ load test_helper
   basher-_clone false site username/repo
 
   eval "$(basher-init - sh)"
-  include_once username/repo function.sh
+  include username/repo function.sh
 
   [[ "$BASHER_INCLUDED_ONCE" == ":username/repo/function.sh" ]]
 
@@ -70,7 +70,7 @@ load test_helper
   basher-_clone false site username/repo
 
   declare expected="$BASHER_INCLUDED_ONCE"
-  include_once username/repo function.sh
+  include username/repo function.sh
   [[ "$expected" == "$BASHER_INCLUDED_ONCE" ]]
 
   run func_name
