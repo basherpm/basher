@@ -19,5 +19,10 @@ done
 
 for completion in "${zsh_completions[@]}"
 do
-  rm -f "$BASHER_PREFIX/completions/zsh/${completion##*/}"
+  target="$BASHER_PACKAGES_PATH/$package/$completion"
+  if grep -q "#compdef" "$target"; then
+    rm -f "$BASHER_PREFIX/completions/zsh/compsys/${completion##*/}"
+  else
+    rm -f "$BASHER_PREFIX/completions/zsh/compctl/${completion##*/}"
+  fi
 done
