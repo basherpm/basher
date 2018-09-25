@@ -5,38 +5,67 @@ load test_helper
 @test "without arguments prints usage" {
   run basher-link
   assert_failure
-  assert_line "Usage: basher link <directory>"
+  assert_line "Usage: basher link <directory> <package>"
+}
+
+@test "fails with only one argument" {
+  run basher-link invalid
+  assert_failure
+  assert_line "Usage: basher link <directory> <package>"
 }
 
 @test "fails with an invalid path" {
-  run basher-link invalid
+  run basher-link invalid namespace/name
   assert_failure
   assert_output "Directory 'invalid' not found."
 }
 
-@test "links the package to packages under link user" {
+@test "fails with a file path instead of a directory path" {
+  touch file1
+  run basher-link file1 namespace/name
+  assert_failure
+  assert_output "Directory 'file1' not found."
+}
+
+@test "fails with an invalid package name" {
+  mkdir package1
+
+  run basher-link package1 invalid
+  assert_failure
+  assert_line "Usage: basher link <directory> <package>"
+
+  run basher-link package1 namespace1/
+  assert_failure
+  assert_line "Usage: basher link <directory> <package>"
+
+  run basher-link package1 /package1
+  assert_failure
+  assert_line "Usage: basher link <directory> <package>"
+}
+
+@test "links the package to packages under the correct namespace" {
   mock_command basher-_link-bins
   mock_command basher-_link-completions
   mkdir package1
-  run basher-link package1
+  run basher-link package1 namespace1/package1
   assert_success
-  assert [ "$(readlink $BASHER_PACKAGES_PATH/link/package1)" = "$(pwd)/package1" ]
+  assert [ "$(readlink $BASHER_PACKAGES_PATH/namespace1/package1)" = "$(pwd)/package1" ]
 }
 
 @test "calls link-bins" {
   mock_command basher-_link-bins
   mock_command basher-_link-completions
   mkdir package2
-  run basher-link package2
+  run basher-link package2 namespace2/package2
   assert_success
-  assert_line "basher-_link-bins link/package2"
+  assert_line "basher-_link-bins namespace2/package2"
 }
 
 @test "calls link-completions" {
   mock_command basher-_link-bins
   mock_command basher-_link-completions
   mkdir package2
-  run basher-link package2
+  run basher-link package2 namespace2/package2
   assert_success
-  assert_line "basher-_link-completions link/package2"
+  assert_line "basher-_link-completions namespace2/package2"
 }
