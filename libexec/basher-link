@@ -1,23 +1,53 @@
 #!/usr/bin/env bash
 # Summary: Installs a local directory as a basher package
-# Usage: basher link <directory>
+# Usage: basher link <directory> <package>
 
 set -e
 
-if [ "$#" -ne 1 ]; then
+if [ "$#" -ne 2 ]; then
   basher-help link
   exit 1
 fi
 
 directory="$1"
+package="$2"
 
 if [ ! -d "$directory" ]; then
   echo "Directory '$directory' not found."
   exit 1
 fi
 
-mkdir -p "${BASHER_PACKAGES_PATH}/link"
-ln -s "$(pwd)/$directory" "${BASHER_PACKAGES_PATH}/link/$directory"
+if [ -z "$package" ]; then
+  basher-help link
+  exit 1
+fi
 
-basher-_link-bins "link/$directory"
-basher-_link-completions "link/$directory"
+IFS=/ read -r namespace name <<< "$package"
+
+if [ -z "$namespace" ]; then
+  basher-help link
+  exit 1
+fi
+
+if [ -z "$name" ]; then
+  basher-help link
+  exit 1
+fi
+
+if [ -d "${BASHER_PACKAGES_PATH}/$package" ]; then
+  echo "Package '$package' is already present"
+  exit 0
+fi
+
+# Make sure the namespace directory exists before linking
+if [ ! -d "${BASHER_PACKAGES_PATH}/$namespace" ]; then
+  mkdir -p "${BASHER_PACKAGES_PATH}/$namespace"
+fi
+
+# Resolve local package path
+directory="$(readlink -e "$directory")"
+
+ln -s "$directory" "${BASHER_PACKAGES_PATH}/$package"
+
+basher-_link-bins "$package"
+basher-_link-completions "$package"
