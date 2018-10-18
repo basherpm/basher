@@ -50,7 +50,7 @@ fi
 if [[ "$package" = */*@* ]]; then
   IFS=@ read -r package ref <<< "$package"
 else
-  ref=""
+  ref="master"
 fi
 
 if [ -z "$ref" ]; then
