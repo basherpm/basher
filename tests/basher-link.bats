@@ -46,26 +46,59 @@ load test_helper
 @test "links the package to packages under the correct namespace" {
   mock_command basher-_link-bins
   mock_command basher-_link-completions
+  mock_command basher-_link-man
+  mock_command basher-_deps
   mkdir package1
   run basher-link package1 namespace1/package1
   assert_success
   assert [ "$(readlink $BASHER_PACKAGES_PATH/namespace1/package1)" = "$(pwd)/package1" ]
 }
 
-@test "calls link-bins" {
+@test "calls link-bins, link-completions, link-man and deps" {
   mock_command basher-_link-bins
   mock_command basher-_link-completions
+  mock_command basher-_link-man
+  mock_command basher-_deps
   mkdir package2
   run basher-link package2 namespace2/package2
   assert_success
   assert_line "basher-_link-bins namespace2/package2"
+  assert_line "basher-_link-completions namespace2/package2"
+  assert_line "basher-_link-man namespace2/package2"
+  assert_line "basher-_deps namespace2/package2"
 }
 
-@test "calls link-completions" {
+@test "resolves current directory (dot) path" {
   mock_command basher-_link-bins
   mock_command basher-_link-completions
-  mkdir package2
-  run basher-link package2 namespace2/package2
+  mock_command basher-_link-man
+  mock_command basher-_deps
+  mkdir package3
+  cd package3
+  run basher-link . namespace3/package3
   assert_success
-  assert_line "basher-_link-completions namespace2/package2"
+  assert [ "$(readlink $BASHER_PACKAGES_PATH/namespace3/package3)" = "$(pwd)" ]
+}
+
+@test "resolves parent directory (dotdot) path" {
+  mock_command basher-_link-bins
+  mock_command basher-_link-completions
+  mock_command basher-_link-man
+  mock_command basher-_deps
+  mkdir package3
+  cd package3
+  run basher-link ../package3 namespace3/package3
+  assert_success
+  assert [ "$(readlink $BASHER_PACKAGES_PATH/namespace3/package3)" = "$(pwd)" ]
+}
+
+@test "resolves arbitrary complex relative path" {
+  mock_command basher-_link-bins
+  mock_command basher-_link-completions
+  mock_command basher-_link-man
+  mock_command basher-_deps
+  mkdir package3
+  run basher-link ./package3/.././package3 namespace3/package3
+  assert_success
+  assert [ "$(readlink $BASHER_PACKAGES_PATH/namespace3/package3)" = "$(pwd)/package3" ]
 }

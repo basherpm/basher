@@ -4,6 +4,10 @@
 
 set -e
 
+resolve_link() {
+  $(type -p greadlink readlink | head -n1) -e "$1"
+}
+
 if [ "$#" -ne 2 ]; then
   basher-help link
   exit 1
@@ -36,7 +40,7 @@ fi
 
 if [ -d "${BASHER_PACKAGES_PATH}/$package" ]; then
   echo "Package '$package' is already present"
-  exit 0
+  exit 1
 fi
 
 # Make sure the namespace directory exists before linking
@@ -45,9 +49,11 @@ if [ ! -d "${BASHER_PACKAGES_PATH}/$namespace" ]; then
 fi
 
 # Resolve local package path
-directory="$(readlink -e "$directory")"
+directory="$(resolve_link "$directory")"
 
 ln -s "$directory" "${BASHER_PACKAGES_PATH}/$package"
 
 basher-_link-bins "$package"
 basher-_link-completions "$package"
+basher-_link-man "$package"
+basher-_deps "$package"
