@@ -1,12 +1,23 @@
 #!/usr/bin/env bash
 # Summary: Installs a local directory as a basher package
-# Usage: basher link <directory> <package>
+# Usage: basher link [--no-deps] <directory> <package>
 
 set -e
 
 resolve_link() {
   $(type -p greadlink readlink | head -n1) -e "$1"
 }
+
+no_deps="false"
+
+for i in "$@"; do
+  case $i in
+    --no-deps)
+    no_deps="true"
+    shift
+    ;;
+  esac
+done
 
 if [ "$#" -ne 2 ]; then
   basher-help link
@@ -56,4 +67,7 @@ ln -s "$directory" "${BASHER_PACKAGES_PATH}/$package"
 basher-_link-bins "$package"
 basher-_link-completions "$package"
 basher-_link-man "$package"
-basher-_deps "$package"
+
+if [ "$no_deps" = "false" ]; then
+  basher-_deps "$package"
+fi
