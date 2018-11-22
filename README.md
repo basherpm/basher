@@ -83,6 +83,15 @@ access to the site, use `--ssh` to override the protocol:
 $ basher install --ssh juanibiapina/gg
 ~~~
 
+### Installing a local package
+
+If you develop a package locally and want to try it through basher,
+use the `link` command:
+
+~~~ sh
+$ basher link directory my_namespace/my_package
+~~~
+
 ### Sourcing files from a package into current shell
 
 Basher provides an `include` function that allows sourcing files into the
