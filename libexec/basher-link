@@ -5,7 +5,7 @@
 set -e
 
 resolve_link() {
-  $(type -p greadlink readlink | head -n1) -e "$1"
+  $(type -p realpath readlink | head -n1) -e "$1"
 }
 
 if [ "$#" -ne 2 ]; then
