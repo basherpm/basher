@@ -2,6 +2,10 @@
 
 load test_helper
 
+resolve_link() {
+  $(type -p realpath readlink | head -n1) -e "$1"
+}
+
 @test "without arguments prints usage" {
   run basher-link
   assert_failure
@@ -51,7 +55,7 @@ load test_helper
   mkdir package1
   run basher-link package1 namespace1/package1
   assert_success
-  assert [ "$(readlink $BASHER_PACKAGES_PATH/namespace1/package1)" = "$(pwd)/package1" ]
+  assert [ "$(resolve_link $BASHER_PACKAGES_PATH/namespace1/package1)" = "$(resolve_link "$(pwd)/package1")" ]
 }
 
 @test "calls link-bins, link-completions, link-man and deps" {
@@ -77,7 +81,7 @@ load test_helper
   cd package3
   run basher-link . namespace3/package3
   assert_success
-  assert [ "$(readlink $BASHER_PACKAGES_PATH/namespace3/package3)" = "$(pwd)" ]
+  assert [ "$(resolve_link $BASHER_PACKAGES_PATH/namespace3/package3)" = "$(resolve_link "$(pwd)")" ]
 }
 
 @test "resolves parent directory (dotdot) path" {
@@ -89,7 +93,7 @@ load test_helper
   cd package3
   run basher-link ../package3 namespace3/package3
   assert_success
-  assert [ "$(readlink $BASHER_PACKAGES_PATH/namespace3/package3)" = "$(pwd)" ]
+  assert [ "$(resolve_link $BASHER_PACKAGES_PATH/namespace3/package3)" = "$(resolve_link "$(pwd)")" ]
 }
 
 @test "resolves arbitrary complex relative path" {
@@ -100,5 +104,5 @@ load test_helper
   mkdir package3
   run basher-link ./package3/.././package3 namespace3/package3
   assert_success
-  assert [ "$(readlink $BASHER_PACKAGES_PATH/namespace3/package3)" = "$(pwd)/package3" ]
+  assert [ "$(resolve_link $BASHER_PACKAGES_PATH/namespace3/package3)" = "$(resolve_link "$(pwd)/package3")" ]
 }
