@@ -92,6 +92,13 @@ use the `link` command:
 $ basher link directory my_namespace/my_package
 ~~~
 
+The `link` command will install the dependencies of local package.
+You can prevent that with the `--no-deps` option:
+
+~~~ sh
+$ basher link --no-deps directory my_namespace/my_package
+~~~
+
 ### Sourcing files from a package into current shell
 
 Basher provides an `include` function that allows sourcing files into the
