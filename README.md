@@ -92,7 +92,7 @@ use the `link` command:
 $ basher link directory my_namespace/my_package
 ~~~
 
-The `link` command will install the dependencies of local package.
+The `link` command will install the dependencies of the local package.
 You can prevent that with the `--no-deps` option:
 
 ~~~ sh
