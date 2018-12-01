@@ -10,14 +10,12 @@ resolve_link() {
 
 no_deps="false"
 
-for i in "$@"; do
-  case $i in
-    --no-deps)
+case $1 in
+  --no-deps)
     no_deps="true"
     shift
-    ;;
-  esac
-done
+  ;;
+esac
 
 if [ "$#" -ne 2 ]; then
   basher-help link
