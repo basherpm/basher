@@ -8,14 +8,12 @@ set -e
 
 use_ssh="false"
 
-for i in "$@"; do
-  case $i in
-    --ssh)
+case $1 in
+  --ssh)
     use_ssh="true"
     shift
-    ;;
-  esac
-done
+  ;;
+esac
 
 if [ "$#" -ne 1 ]; then
   basher-help install
