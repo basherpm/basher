@@ -3,7 +3,11 @@
 load test_helper
 
 resolve_link() {
-  $(type -p realpath readlink | head -n1) -e "$1"
+  if type -p realpath >/dev/null; then
+    realpath "$1"
+  else
+    readlink -f "$1"
+  fi
 }
 
 @test "without arguments prints usage" {
