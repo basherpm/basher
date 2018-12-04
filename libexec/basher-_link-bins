@@ -15,7 +15,7 @@ if [ -z "$bins" ]; then
     bins=("${bins[@]##*/}")
     bins=("${bins[@]/#/bin/}")
   else
-    bins=($(find "$BASHER_PACKAGES_PATH/$package" -maxdepth 1 -perm -u+x -type f -or -type l))
+    bins=($(find "$BASHER_PACKAGES_PATH/$package" -maxdepth 1 -mindepth 1 -perm -u+x -type f -or -type l))
     bins=("${bins[@]##*/}")
   fi
 fi
