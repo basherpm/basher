@@ -10,13 +10,6 @@ create_package() {
   cd "${BASHER_CWD}"
 }
 
-create_link_package() {
-  local name="$1"
-  mkdir -p "${BASHER_PACKAGES_PATH}/link"
-  mkdir -p "${BASHER_ORIGIN_DIR}/$name"
-  ln -s "${BASHER_ORIGIN_DIR}/$name" "${BASHER_PACKAGES_PATH}/link/$name"
-}
-
 create_file() {
   local package="$1"
   local filename="$2"
