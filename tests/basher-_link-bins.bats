@@ -113,3 +113,11 @@ load test_helper
   assert [ "$(readlink $BASHER_INSTALL_BIN/exec1)" = "${BASHER_PACKAGES_PATH}/username/package/bin/exec1" ]
   assert [ "$(readlink $BASHER_INSTALL_BIN/exec2.sh)" = "${BASHER_PACKAGES_PATH}/username/package/bin/exec2.sh" ]
 }
+
+@test "does not symlink package itself as bin when linked with basher link" {
+  mkdir package
+  # implicit call to basher-_link-bins
+  run basher-link package username/package
+  assert_success
+  assert [ ! -e "${BASHER_PREFIX}/bin/package" ]
+}
