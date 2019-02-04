@@ -29,6 +29,9 @@ script:
     docker run -it bash:${BASHVER} --version
     time docker run -it basher/basher:bash-${BASHVER} --tap /opt/basher/tests
   else
+    if [[ "$TRAVIS_OS_NAME" == osx ]]; then
+      brew uninstall --force coreutils
+    fi
     git config --global user.email "user@example.com"
     git config --global user.name "User Name"
     time bats/bin/bats --tap tests
