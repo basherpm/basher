@@ -1,8 +1,39 @@
-install: git clone https://github.com/sstephenson/bats.git
-before_script:
-  - git config --global user.email "user@example.com"
-  - git config --global user.name "User Name"
-script: bats/bin/bats --tap tests
-# skips unnecessary Ruby-specific setup
-language: c
-sudo: false
+language: bash
+
+os:
+- linux
+
+env:
+  - BASHVER=
+  - BASHVER=3.2
+  - BASHVER=4.0
+  - BASHVER=4.1
+  - BASHVER=4.2
+  - BASHVER=4.3
+  - BASHVER=4.4
+
+matrix:
+  include:
+    - os: osx
+
+services:
+  - docker
+
+script:
+- |
+  wget --no-check-certificate -O bats.tar.gz https://github.com/bats-core/bats-core/archive/v1.1.0.tar.gz
+  mkdir bats
+  tar --strip-components=1 -xvzf bats.tar.gz -C bats
+  if [[ "$TRAVIS_OS_NAME" == 'linux' && -n "$BASHVER" ]]; then
+    docker build --build-arg bashver=${BASHVER} --tag basher/basher:bash-${BASHVER} .
+    docker run -it bash:${BASHVER} --version
+    time docker run -it basher/basher:bash-${BASHVER} --tap /opt/basher/tests
+  else
+    git config --global user.email "user@example.com"
+    git config --global user.name "User Name"
+    time bats/bin/bats --tap tests
+  fi
+
+notifications:
+  email:
+    on_success: never
