@@ -63,7 +63,7 @@ load test_helper
 }
 
 hasShell() {
-  which "$1" &>>/dev/null
+  which "$1" >>/dev/null 2>&1
 }
 
 @test "is sh-compatible" {
