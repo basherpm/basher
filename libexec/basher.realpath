@@ -3,8 +3,8 @@
 
 realpath.location(){ realpath.follow "$1"; realpath.absolute "$REPLY" ".."; }
 realpath.resolved(){ realpath.follow "$1"; realpath.absolute "$REPLY"; }
-realpath.dirname() { if [[ $1 =~ /+[^/]+/*$ ]]; then REPLY="${1%${BASH_REMATCH[0]}}"; REPLY=${REPLY:-/}; else REPLY=.; fi }
-realpath.basename(){ if [[ $1 =~ /*([^/]+)/*$ ]]; then REPLY="${BASH_REMATCH[1]}"; else REPLY=/; fi }
+realpath.dirname() { REPLY=.; ! [[ $1 =~ /+[^/]+/*$ ]] || REPLY="${1%${BASH_REMATCH[0]}}"; REPLY=${REPLY:-/}; }
+realpath.basename(){ REPLY=/; ! [[ $1 =~ /*([^/]+)/*$ ]] || REPLY="${BASH_REMATCH[1]}"; }
 
 realpath.follow() {
 	local target
@@ -23,6 +23,7 @@ realpath.follow() {
 realpath.absolute() {
 	REPLY=$PWD; local eg=extglob; ! shopt -q $eg || eg=; ${eg:+shopt -s $eg}
 	while (($#)); do case $1 in
+		//|//[^/]*) REPLY=//; set -- "${1:2}" "${@:2}" ;;
 		/*) REPLY=/; set -- "${1##+(/)}" "${@:2}" ;;
 		*/*) set -- "${1%%/*}" "${1##${1%%/*}+(/)}" "${@:2}" ;;
 		''|.) shift ;;
