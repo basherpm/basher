@@ -4,14 +4,6 @@
 
 set -e
 
-resolve_link() {
-  if type -p realpath >/dev/null; then
-    realpath "$1"
-  else
-    readlink -f "$1"
-  fi
-}
-
 no_deps="false"
 
 case $1 in
@@ -62,7 +54,9 @@ if [ ! -d "${BASHER_PACKAGES_PATH}/$namespace" ]; then
 fi
 
 # Resolve local package path
-directory="$(resolve_link "$directory")"
+source basher.realpath
+realpath.absolute "$directory"
+directory="$REPLY"
 
 ln -s "$directory" "${BASHER_PACKAGES_PATH}/$package"
 

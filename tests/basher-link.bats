@@ -1,14 +1,9 @@
 #!/usr/bin/env bats
 
 load test_helper
+source basher.realpath
 
-resolve_link() {
-  if type -p realpath >/dev/null; then
-    realpath "$1"
-  else
-    readlink -f "$1"
-  fi
-}
+resolve_link() { realpath.canonical "$1"; echo "$REPLY"; }
 
 @test "without arguments prints usage" {
   run basher-link

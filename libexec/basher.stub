@@ -1,0 +1,15 @@
+
+# Compute the physical file and directory of the main program
+
+realpath.resolved "$0"
+__FILE__=$REPLY
+
+realpath.dirname "$REPLY"
+__DIR__=$REPLY
+
+# If we're run as the main program and our name is basher.realpath,
+# run basher with our directory at the head of PATH:
+
+if [[ "$0" == "$BASH_SOURCE" && "$__FILE__" == *.realpath && -f "${__FILE__%.realpath}" ]]; then
+    PATH="$__DIR__:$PATH" exec "${__FILE__%.realpath}" "$@"
+fi

@@ -4,24 +4,6 @@
 #
 # Usage: basher <command> [<args>]
 
-resolve_link() {
-  $(type -p greadlink readlink | head -1) "$1"
-}
-
-abs_dirname() {
-  local cwd="$(pwd)"
-  local path="$1"
-
-  while [ -n "$path" ]; do
-    cd "${path%/*}"
-    local name="${path##*/}"
-    path="$(resolve_link "$name" || true)"
-  done
-
-  pwd
-  cd "$cwd"
-}
-
 if [ -z "$BASHER_ROOT" ]; then
   BASHER_ROOT="$HOME/.basher"
 fi
@@ -46,9 +28,6 @@ if [ -z "$BASHER_INSTALL_MAN" ]; then
   BASHER_INSTALL_MAN="$BASHER_PREFIX/man"
 fi
 export BASHER_INSTALL_MAN
-
-bin_path="$(abs_dirname "$0")"
-export PATH="${bin_path}:${PATH}"
 
 command="$1"
 case "$command" in
