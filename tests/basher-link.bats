@@ -3,7 +3,7 @@
 load test_helper
 source basher.realpath
 
-resolve_link() { realpath.canonical "$1"; echo "$REPLY"; }
+resolve_link() { realpath.resolved "$1"; echo "$REPLY"; }
 
 @test "without arguments prints usage" {
   run basher-link
