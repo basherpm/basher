@@ -156,6 +156,7 @@ above.
 
 - [bltavares/kickstart](https://github.com/bltavares/kickstart)
 - [bripkens/dock](https://github.com/bripkens/dock)
+- [Calinou/0x0](https://github.com/Calinou/0x0)
 - [juanibiapina/gg](https://github.com/juanibiapina/gg)
 - [juanibiapina/pg](https://github.com/juanibiapina/pg)
 - [juanibiapina/todo](https://github.com/juanibiapina/todo)
