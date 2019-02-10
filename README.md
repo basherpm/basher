@@ -152,22 +152,6 @@ ZSH_COMPLETIONS=completions/_package
 BINS specified in this fashion have higher precedence then the inference rules
 above.
 
-## Working packages
-
-- [bltavares/kickstart](https://github.com/bltavares/kickstart)
-- [bripkens/dock](https://github.com/bripkens/dock)
-- [juanibiapina/gg](https://github.com/juanibiapina/gg)
-- [juanibiapina/pg](https://github.com/juanibiapina/pg)
-- [juanibiapina/todo](https://github.com/juanibiapina/todo)
-- [pote/gpm](https://github.com/pote/gpm)
-- [pote/gvp](https://github.com/pote/gvp)
-- [sstephenson/bats](https://github.com/sstephenson/bats)
-- [tj/git-extras](https://github.com/tj/git-extras)
-- [jimeh/tmuxifier](https://github.com/jimeh/tmuxifier)
-- [treyhunner/tmuxstart](https://github.com/treyhunner/tmuxstart)
-
-And many others. If a repo doesn't work, create an issue or a pull request.
-
 ## Development
 
 To run the tests, install bats:
