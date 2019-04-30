@@ -61,7 +61,7 @@ else
 fi
 
 if [ "$use_ssh" = "true" ]; then
-  URI="git@$site:$package.git"
+  URI="ssh://git@$site/$package.git"
 else
   URI="https://${site}/$package.git"
 fi

@@ -21,8 +21,28 @@ if [ "$#" -ne 1 ]; then
 fi
 
 if [[ "$1" = */*/* ]]; then
-  IFS=/ read -r site user name <<< "$1"
-  package="${user}/${name}"
+  # Handle fully qualified urls which start with a protocol.
+  if [[ "$1" = *//* ]]; then
+    IFS=/ read -r -a parts <<< "$1"
+
+    # If the protocol is ssh, set the use_ssh flag
+    if [[ "${parts[0]}" == "ssh:" ]]; then
+      use_ssh="true"
+    fi
+
+    # The second part is the site, $user@$site:$port. we don't need $user, as
+    # it is git in 99% of the cases, but we must keep $port.
+    site="${parts[2]##git@}"
+    package="$(IFS=/ ; echo "${parts[*]:3}")"
+
+    # Remove the '.git' if its at the end of the package name or if its right
+    # before the branch/hash specifier.
+    package="${package%%.git}"
+    package="${package//.git@/@}"
+  else
+    IFS=/ read -r site user name <<< "$1"
+    package="${user}/${name}"
+  fi
 else
   package="$1"
   site="github.com"

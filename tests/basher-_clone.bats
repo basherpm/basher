@@ -77,5 +77,13 @@ load test_helper
 
   run basher-_clone true site username/package
   assert_success
-  assert_output "git clone --depth=1 --recursive git@site:username/package.git ${BASHER_PACKAGES_PATH}/username/package"
+  assert_output "git clone --depth=1 --recursive ssh://git@site/username/package.git ${BASHER_PACKAGES_PATH}/username/package"
+}
+
+@test "using full clone uri" {
+  mock_command git
+
+  run basher-_clone true site group/subgroup/subsubgroup/package
+  assert_success
+  assert_output "git clone --depth=1 --recursive ssh://git@site/group/subgroup/subsubgroup/package.git ${BASHER_PACKAGES_PATH}/group/subgroup/subsubgroup/package"
 }
