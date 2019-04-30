@@ -16,6 +16,7 @@ print_fish_commands() {
   echo "set -gx BASHER_SHELL $shell"
   echo "set -gx BASHER_ROOT $BASHER_ROOT"
   echo "set -gx BASHER_PREFIX $BASHER_PREFIX"
+  echo "set -gx BASHER_PACKAGES_PATH $BASHER_PACKAGES_PATH"
 
   echo 'if not contains $BASHER_ROOT/cellar/bin $PATH'
   echo 'set -gx PATH $BASHER_ROOT/cellar/bin $PATH'
@@ -26,6 +27,7 @@ print_sh_commands(){
   echo "export BASHER_SHELL=$shell"
   echo "export BASHER_ROOT=$BASHER_ROOT"
   echo "export BASHER_PREFIX=$BASHER_PREFIX"
+  echo "export BASHER_PACKAGES_PATH=$BASHER_PACKAGES_PATH"
 
   echo 'export PATH="$BASHER_ROOT/cellar/bin:$PATH"'
 }
