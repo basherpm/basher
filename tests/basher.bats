@@ -27,6 +27,16 @@ load test_helper
   assert_output "/tmp/basher/cellar"
 }
 
+@test "inherited BASHER_PACKAGES_PATH" {
+  BASHER_PACKAGES_PATH=/usr/local/packages run basher echo BASHER_PACKAGES_PATH
+  assert_output "/usr/local/packages"
+}
+
+@test "BASHER_PACKAGES_PATH based on BASHER_PREFIX" {
+  BASHER_PREFIX=/tmp/basher BASHER_PACKAGES_PATH= run basher echo BASHER_PACKAGES_PATH
+  assert_output "/tmp/basher/packages"
+}
+
 @test "default BASHER_INSTALL_BIN" {
   BASHER_ROOT= BASHER_PREFIX= BASHER_INSTALL_BIN= run basher echo BASHER_INSTALL_BIN
   assert_output "$HOME/.basher/cellar/bin"
