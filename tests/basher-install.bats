@@ -102,3 +102,28 @@ basher-_link-completions username/package"
   run basher-install username/package
   assert_success
 }
+
+@test "with fully qualified https url and multi-level package" {
+  mock_command basher-_clone
+  mock_command basher-_deps
+  mock_command basher-_link-bins
+  mock_command basher-_link-man
+  mock_command basher-_link-completions
+
+  run basher-install https://foo.com/foo/bar/baz.git@v1.2.3
+
+  assert_line "basher-_clone false foo.com foo/bar/baz v1.2.3"
+}
+
+@test "with fully qualified ssh+git url and multi-level package" {
+  mock_command basher-_clone
+  mock_command basher-_deps
+  mock_command basher-_link-bins
+  mock_command basher-_link-man
+  mock_command basher-_link-completions
+
+  run basher-install ssh://git@foo.com/foo/bar/baz.git@v1.2.3
+
+  assert_line "basher-_clone true foo.com foo/bar/baz v1.2.3"
+}
+
