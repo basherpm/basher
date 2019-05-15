@@ -83,6 +83,18 @@ access to the site, use `--ssh` to override the protocol:
 $ basher install --ssh juanibiapina/gg
 ~~~
 
+### Using a fully qualified  clone url
+
+If the package is found on a site that supports multi-level namespaces or if you have it
+hosted on a server at a non-standard port, you can use a fully qualified clone url
+to install the package. You can use `ssh` urls and `https` urls.
+
+~~~ sh
+$ basher install https://gitlab.com/company/group/repo_name.git
+$ basher install git@gitlab.com:company/group/repo_name.git
+$ basher install ssh://git@gitlab.mycompany.com:10022/devision/team/repo_name.git
+~~~
+
 ### Installing a local package
 
 If you develop a package locally and want to try it through basher,
