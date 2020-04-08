@@ -6,7 +6,7 @@ set -e
 
 shell="$2"
 if [ -z "$shell" ]; then
-  shell="$(ps -o comm= -o pid= | grep "$PPID" 2>/dev/null || true)"
+  shell="$(ps -o comm= -o pid= 2>/dev/null | grep "$PPID" 2>/dev/null || true)"
   shell="${shell##-}"
   shell="${shell%% *}"
   shell="$(basename "${shell:-$SHELL}")"
