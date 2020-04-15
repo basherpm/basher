@@ -155,23 +155,3 @@ ZSH_COMPLETIONS=completions/_package
 
 BINS specified in this fashion have higher precedence then the inference rules
 above.
-
-## Development
-
-To run the tests, install bats:
-
-~~~ sh
-$ basher install sstephenson/bats
-~~~
-
-update submodules:
-
-~~~ sh
-$ git submodule update --init
-~~~
-
-and then run:
-
-~~~ sh
-$ make
-~~~
