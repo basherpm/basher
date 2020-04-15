@@ -54,7 +54,12 @@ Even though it is called basher, it also works with zsh and fish.
 
 ## Updating
 
-Run `basher update` to update basher.
+Go to the directory where you cloned basher and pull the latest changes:
+
+~~~ sh
+$ cd ~/.basher
+$ git pull
+~~~
 
 ## Usage
 
@@ -115,7 +120,6 @@ This will source a file `lib/file.sh` under the package `username/repo`.
 - `basher commands` - List commands
 - `basher help <command>` - Display help for a command
 - `basher uninstall <package>` - Uninstall a package
-- `basher update` - Update basher to latest version from master
 - `basher list` - List installed packages
 - `basher outdated` - List packages which are not in the latest version
 - `basher upgrade <package>` - Upgrade a package to the latest version
