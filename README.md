@@ -19,36 +19,20 @@ Even though it is called basher, it also works with zsh and fish.
     $ git clone https://github.com/basherpm/basher.git ~/.basher
     ~~~
 
-2. Add `~/.basher/bin` to `$PATH` for easy access to the basher command-line utility.
+2. Initialize basher in your shell initialization
 
     ~~~ sh
-    $ echo 'export PATH="$HOME/.basher/bin:$PATH"' >> ~/.bash_profile
+    export PATH="$HOME/.basher/bin:$PATH"'
+    eval "$(basher init -)"
     ~~~
 
-    **Ubuntu Desktop note**: Modify your `~/.bashrc` instead of `~/.bash_profile`.
-
-    **Zsh note**: Modify your `~/.zshrc` file instead of `~/.bash_profile`.
-
-    **For Fish**: Add the following to you `~/.config/fish/config.fish`
+    **Fish**: Use the following commands instead:
 
     ~~~ sh
     if test -d ~/.basher
       set basher ~/.basher/bin
     end
     set -gx PATH $basher $PATH
-    ~~~
-
-3. Add `basher init` to your shell to enable basher runtime functions
-
-    ~~~ sh
-    $ echo 'eval "$(basher init -)"' >> ~/.bash_profile
-    ~~~
-
-    _Same as in previous step, use `~/.bashrc` on Ubuntu, `~/.zshrc` for Zsh._
-
-    _For **Fish**, use the following line on your `~/.config/fish/config.fish`._
-
-    ~~~ sh
     status --is-interactive; and . (basher init -|psub)
     ~~~
 
@@ -63,7 +47,7 @@ $ git pull
 
 ## Usage
 
-### Installing packages from github.com
+### Installing packages from Github
 
 ~~~ sh
 $ basher install sstephenson/bats

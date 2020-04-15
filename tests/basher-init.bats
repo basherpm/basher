@@ -2,10 +2,15 @@
 
 load test_helper
 
-@test "detects the shell" {
-  SHELL=/bin/false run basher-init -
-  assert_success
-  assert_line -n 0 'export BASHER_SHELL=bash'
+@test "without enough arguments, prints a useful message" {
+  run basher-init -
+  assert_failure
+  assert_output "echo 'basher init usage has changed, please specify the name of your shell as an argument:
+
+eval \"\$(basher init - bash)\" # or zsh, fish, sh etc
+
+For more information, check this PR: https://github.com/basherpm/basher/pull/77
+'"
 }
 
 @test "exports BASHER_ROOT" {

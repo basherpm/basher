@@ -6,10 +6,13 @@ set -e
 
 shell="$2"
 if [ -z "$shell" ]; then
-  shell="$(ps -o comm= -o pid= | grep "$PPID" 2>/dev/null || true)"
-  shell="${shell##-}"
-  shell="${shell%% *}"
-  shell="$(basename "${shell:-$SHELL}")"
+  echo "echo 'basher init usage has changed, please specify the name of your shell as an argument:
+
+eval \"\$(basher init - bash)\" # or zsh, fish, sh etc
+
+For more information, check this PR: https://github.com/basherpm/basher/pull/77
+'"
+  exit 1
 fi
 
 print_fish_commands() {
