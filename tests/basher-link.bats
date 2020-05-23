@@ -6,7 +6,28 @@ resolve_link() {
   if type -p realpath >/dev/null; then
     realpath "$1"
   else
-    readlink -f "$1"
+    local path="$1"
+
+    if [[ "${path%/*}" = "$path" ]]; then
+      if [[ -d "$path" ]];then
+        echo "$(cd "$path"; pwd)"
+      else
+        echo "$(pwd)/$path"
+      fi
+      return
+    fi
+
+    local cwd="$(pwd)"
+    while [[ -L "$path" ]]; do
+      cd "${path%/*}"
+      local name="${path##*/}"
+      path="$(readlink "$name" || true)"
+    done
+
+    local parent="$(cd "${path%/*}"; pwd)"
+    echo "$parent/${path##*/}"
+
+    cd "$cwd"
   fi
 }
 
