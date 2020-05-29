@@ -34,4 +34,28 @@ if [ -z "$name" ]; then
 fi
 
 cd "${BASHER_PACKAGES_PATH}/$package"
+git remote update > /dev/null 2>&1
+if git symbolic-ref --short -q HEAD > /dev/null; then
+    if [ "$(git rev-list --count HEAD...HEAD@{upstream})" -eq 0 ]; then
+      # Exit when no need to upgrades. This also helps to avoid inf recursion even if
+      # some package happened to set itself to be its own dependencies.
+      exit
+    fi
+fi
+
+# unlink everything first
+basher-_unlink-man "$package"
+basher-_unlink-bins "$package"
+basher-_unlink-completions "$package"
+# upgrade the package
+cd "${BASHER_PACKAGES_PATH}/$package"
 git pull
+# relink the package components
+basher-_link-bins "$package"
+basher-_link-man "$package"
+basher-_link-completions "$package"
+# upgrade any dependencies it needs
+for dep in $(basher-_deps --get "$package")
+do
+  basher-upgrade "$dep"
+done

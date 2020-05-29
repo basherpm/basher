@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Usage: basher _deps <package>
+# Usage: basher _deps <package> [--get]
 # Summary: Globally installs package runtime dependencies
 #
 # Installs the package dependencies, specified with the
@@ -9,6 +9,13 @@
 # Example: DEPS=username/repo1:otheruser/repo2
 
 set -e
+
+case $1 in
+  --get)
+    get_deps="true"
+    shift
+  ;;
+esac
 
 if [ "$#" -ne 1 ]; then
   basher-help _deps
@@ -28,5 +35,9 @@ IFS=: read -a deps <<< "$DEPS"
 
 for dep in "${deps[@]}"
 do
-  basher-install "$dep"
+  if [ -z "$get_deps" ]
+    basher-install "$dep"
+  else
+    echo "$dep"
+  fi
 done
