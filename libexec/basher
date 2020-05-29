@@ -23,7 +23,11 @@ abs_dirname() {
 }
 
 if [ -z "$BASHER_ROOT" ]; then
-  BASHER_ROOT="$HOME/.basher"
+  if [ -z "$XDG_DATA_HOME" ]; then
+    BASHER_ROOT="$HOME/.basher"
+  else
+    BASHER_ROOT="$XDG_DATA_HOME/basher"
+  fi
 fi
 export BASHER_ROOT
 

@@ -12,6 +12,11 @@ load test_helper
   assert_output "/tmp/basher"
 }
 
+@test "inherited BASHER_ROOT" {
+  XDG_DATA_HOME=/local/share run basher echo BASHER_ROOT
+  assert_output "$XDG_DATA_HOME/basher"
+}
+
 @test "default BASHER_PREFIX" {
   BASHER_ROOT= BASHER_PREFIX= run basher echo BASHER_PREFIX
   assert_output "$HOME/.basher/cellar"
