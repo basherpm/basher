@@ -12,15 +12,11 @@ case $1 in
 esac
 
 if [ -n "$upgrade_all" ]; then
-  for package_path in ${BASHER_PACKAGES_PATH}/*/*
+  echo "Checking packages status..."
+  for package in $(basher-outdated)
   do
-    username="$(dirname "$package_path")"
-    username="${username##*/}"
-    package="${package_path##*/}"
-
-    echo "Upgrading $username/$package..."
-    cd "$package_path"
-    git pull
+    echo "Upgrading $package"
+    basher-upgrade "$package"
   done
   exit
 fi
