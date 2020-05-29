@@ -2,7 +2,7 @@
 #
 # Summary: Installs a package from github (or a custom site)
 #
-# Usage: basher install [--ssh] [site]/<package>[@ref]
+# Usage: basher install [--ssh] [site]/<package>[@ref] [folder]
 
 set -e
 
@@ -15,7 +15,7 @@ case $1 in
   ;;
 esac
 
-if [ "$#" -ne 1 ]; then
+if [ "$#" -lt 1 -o "$#" -gt 2 ]; then
   basher-help install
   exit 1
 fi
@@ -26,6 +26,17 @@ if [[ "$1" = */*/* ]]; then
 else
   package="$1"
   site="github.com"
+fi
+
+# defaults to package's name, but allows custom folder name
+folder="$package"
+if [ -n "$2" ]; then
+  if [[ "$2" = */* ]]; then
+    basher-help install
+    echo "Optional argunment [folder] cannot be nested."
+    exit 1
+  fi
+  folder="${user}/$2"
 fi
 
 if [ -z "$package" ]; then
@@ -51,12 +62,8 @@ else
   ref=""
 fi
 
-if [ -z "$ref" ]; then
-  basher-_clone "$use_ssh" "$site" "$package"
-else
-  basher-_clone "$use_ssh" "$site" "$package" "$ref"
-fi
-basher-_deps "$package"
-basher-_link-bins "$package"
-basher-_link-man "$package"
-basher-_link-completions "$package"
+basher-_clone "$use_ssh" "$site" "$package" "$ref" "$folder"
+basher-_deps "$folder"
+basher-_link-bins "$folder"
+basher-_link-man "$folder"
+basher-_link-completions "$folder"

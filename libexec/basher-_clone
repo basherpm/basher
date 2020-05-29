@@ -2,11 +2,11 @@
 #
 # Summary: Clones a package from a site, but doesn't install it
 #
-# Usage: basher _clone <use_ssh> <site> <package> [<ref>]
+# Usage: basher _clone <use_ssh> <site> <package> [<ref>] [folder]
 
 set -e
 
-if [ "$#" -ne 3 -a "$#" -ne 4 ]; then
+if [ "$#" -lt 3 -a "$#" -gt 5 ]; then
   basher-help _clone
   exit 1
 fi
@@ -15,6 +15,7 @@ use_ssh="$1"
 site="$2"
 package="$3"
 ref="$4"
+folder="$5"
 
 if [ -z "$use_ssh" ]; then
   basher-help _clone
@@ -49,7 +50,11 @@ if [ -z "$name" ]; then
   exit 1
 fi
 
-if [ -e "$BASHER_PACKAGES_PATH/$package" ]; then
+if [ -z "$folder" ]; then
+  folder="$package"
+fi
+
+if [ -e "$BASHER_PACKAGES_PATH/$folder" ]; then
   echo "Package '$package' is already present"
   exit 0
 fi
@@ -66,4 +71,4 @@ else
   URI="https://${site}/$package.git"
 fi
 
-git clone ${DEPTH_OPTION} ${BRANCH_OPTION} --recursive "$URI" "${BASHER_PACKAGES_PATH}/$package"
+git clone ${DEPTH_OPTION} ${BRANCH_OPTION} --recursive "$URI" "${BASHER_PACKAGES_PATH}/$folder"
