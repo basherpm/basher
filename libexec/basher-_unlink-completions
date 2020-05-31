@@ -1,5 +1,19 @@
 #!/usr/bin/env bash
 
+resolve_link() {
+  if type -p realpath >/dev/null; then
+    realpath "$1"
+  else
+    readlink -f "$1"
+  fi
+}
+
+remove_linked() {
+  if [[ "$(resolve_link $1)" = "$2/"* ]]; then
+    rm -f "$1"
+  fi
+}
+
 package="$1"
 
 if [ ! -e "$BASHER_PACKAGES_PATH/$package/package.sh" ]; then
@@ -21,8 +35,8 @@ for completion in "${zsh_completions[@]}"
 do
   target="$BASHER_PACKAGES_PATH/$package/$completion"
   if grep -q "#compdef" "$target"; then
-    rm -f "$BASHER_PREFIX/completions/zsh/compsys/${completion##*/}"
+    remove_linked "$BASHER_PREFIX/completions/zsh/compsys/${completion##*/}" "$BASHER_PACKAGES_PATH/$package"
   else
-    rm -f "$BASHER_PREFIX/completions/zsh/compctl/${completion##*/}"
+    remove_linked "$BASHER_PREFIX/completions/zsh/compctl/${completion##*/}" "$BASHER_PACKAGES_PATH/$package"
   fi
 done

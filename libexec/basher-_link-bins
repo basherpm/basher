@@ -27,6 +27,6 @@ do
     name="${name%%.*}"
   fi
   mkdir -p "$BASHER_INSTALL_BIN"
-  ln -sf "$BASHER_PACKAGES_PATH/$package/$bin" "$BASHER_INSTALL_BIN/${name}"
+  ln -s "$BASHER_PACKAGES_PATH/$package/$bin" "$BASHER_INSTALL_BIN/${name}"
   chmod +x "$BASHER_INSTALL_BIN/${name}"
 done

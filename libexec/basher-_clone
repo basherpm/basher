@@ -51,7 +51,7 @@ fi
 
 if [ -e "$BASHER_PACKAGES_PATH/$package" ]; then
   echo "Package '$package' is already present"
-  exit 0
+  exit 1
 fi
 
 if [ "$BASHER_FULL_CLONE" = "true" ]; then
