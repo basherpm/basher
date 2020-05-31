@@ -24,7 +24,8 @@ if [[ "$1" = */*/* ]]; then
   IFS=/ read -r site user name <<< "$1"
   package="${user}/${name}"
 else
-  package="$1"
+  IFS=/ read -r user name <<< "$1"
+  package="${user}/${name}"
   site="github.com"
 fi
 
