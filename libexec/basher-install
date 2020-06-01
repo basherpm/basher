@@ -32,12 +32,12 @@ fi
 # defaults to package's name, but allows custom folder name
 folder="$package"
 if [ -n "$2" ]; then
-  if [[ "$2" = */* ]]; then
+  if [[ "$2" != *([^/])/*([^/]) ]]; then
     basher-help install
-    echo "Optional argunment [folder] cannot be nested."
+    echo "Optional argunment [folder] must be in the format <...>/<...>"
     exit 1
   fi
-  folder="${user}/$2"
+  folder="$2"
 fi
 
 if [ -z "$package" ]; then
