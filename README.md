@@ -22,8 +22,8 @@ Even though it is called basher, it also works with zsh and fish.
 2. Initialize basher in your shell initialization
 
     ~~~ sh
-    export PATH="$HOME/.basher/bin:$PATH"'
-    eval "$(basher init -)"
+    export PATH="$HOME/.basher/bin:$PATH"
+    eval "$(basher init - bash)" # replace `bash` with `zsh` if you use zsh
     ~~~
 
     **Fish**: Use the following commands instead:
@@ -33,7 +33,7 @@ Even though it is called basher, it also works with zsh and fish.
       set basher ~/.basher/bin
     end
     set -gx PATH $basher $PATH
-    status --is-interactive; and . (basher init -|psub)
+    status --is-interactive; and . (basher init - fish|psub)
     ~~~
 
 ## Updating
