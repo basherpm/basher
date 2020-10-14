@@ -139,3 +139,10 @@ ZSH_COMPLETIONS=completions/_package
 
 BINS specified in this fashion have higher precedence then the inference rules
 above.
+
+### Package Directory
+
+A list of working packages can be found on https://basher.gitparade.com/. There
+you can also find a badge if you want to include it in your readme:
+
+[![basher install](https://img.shields.io/badge/basher-install-white?logo=gnu-bash&style=flat)](https://basher.gitparade.com/package/)
