@@ -36,6 +36,10 @@ Even though it is called basher, it also works with zsh and fish.
     status --is-interactive; and . (basher init - fish|psub)
     ~~~
 
+or in 1 line, automatically
+
+	curl -s https://raw.githubusercontent.com/basherpm/basher/master/install.sh | bash
+
 ## Updating
 
 Go to the directory where you cloned basher and pull the latest changes:
