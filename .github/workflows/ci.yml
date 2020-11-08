@@ -10,7 +10,7 @@ jobs:
   build-linux:
     strategy:
       matrix:
-        bashver: ["3.2", "4.0", "4.1", "4.2", "4.3", "4.4", "latest"]
+        bashver: ["4.0", "4.1", "4.2", "4.3", "4.4", "5.0", "latest"]
 
     runs-on: ubuntu-latest
 
