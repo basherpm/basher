@@ -23,7 +23,7 @@ $ brew install bash coreutils
 1. Checkout basher on `~/.basher`
 
     ~~~ sh
-    $ git clone https://github.com/basherpm/basher.git ~/.basher
+    $ git clone --depth=1 https://github.com/basherpm/basher.git ~/.basher
     ~~~
 
 2. Initialize basher in your shell initialization
