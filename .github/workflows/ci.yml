@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build-linux:
+    strategy:
+      matrix:
+        bashver: ["3.2", "4.0", "4.1", "4.2", "4.3", "4.4", "latest"]
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Install dependencies
+        run: |
+          wget --no-check-certificate -O bats.tar.gz https://github.com/bats-core/bats-core/archive/v1.1.0.tar.gz
+          mkdir bats
+          tar --strip-components=1 -xvzf bats.tar.gz -C bats
+
+      - name: Build image
+        run: |
+          docker build --build-arg bashver=${{ matrix.bashver }} --tag basher/basher:bash-${{ matrix.bashver }} .
+          docker run bash:${{ matrix.bashver }} --version
+
+      - name: Run tests
+        run: |
+          time docker run basher/basher:bash-${{ matrix.bashver }} --tap /opt/basher/tests
