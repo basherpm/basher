@@ -36,7 +36,7 @@ Even though it is called basher, it also works with zsh and fish.
     status --is-interactive; and . (basher init - fish|psub)
     ~~~
 
-or in 1 line, automatically
+or in 1 line, automatically (this will install basher and add it to your .bashrc/.zshrc file - in a way that can automatically be uninstalled later)):
 
 	curl -s https://raw.githubusercontent.com/basherpm/basher/master/install.sh | bash
 
