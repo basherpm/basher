@@ -57,10 +57,10 @@ $ git pull
 ### Installing packages from Github
 
 ~~~ sh
-$ basher install sstephenson/bats
+$ basher install bats-core/bats-core
 ~~~
 
-This will install bats from https://github.com/sstephenson/bats and add `bin/bats` to the PATH.
+This will install bats from https://github.com/bats-core/bats-core and add `bin/bats` to the PATH.
 
 ### Installing packages from other sites
 
