@@ -43,6 +43,10 @@ $ brew install bash coreutils
     status --is-interactive; and . (basher init - fish|psub)
     ~~~
 
+or in 1 line, automatically (this will install basher and add it to your .bashrc/.zshrc file - in a way that can automatically be uninstalled later)):
+
+	curl -s https://raw.githubusercontent.com/basherpm/basher/master/install.sh | bash
+
 ## Updating
 
 Go to the directory where you cloned basher and pull the latest changes:
