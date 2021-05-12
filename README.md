@@ -153,7 +153,7 @@ above.
 
 ### Package Directory
 
-A list of working packages can be found on https://basher.gitparade.com/. There
+A list of working packages can be found on https://www.basher.it/. There
 you can also find a badge if you want to include it in your readme:
 
-[![basher install](https://img.shields.io/badge/basher-install-white?logo=gnu-bash&style=flat)](https://basher.gitparade.com/package/)
+[![basher install](https://img.shields.io/badge/basher-install-white?logo=gnu-bash&style=flat)](https://www.basher.it/package/)
