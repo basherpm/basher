@@ -6,8 +6,11 @@ die() {
   exit 1
 }
 
+xdgBasherDir="${XDG_DATA_HOME:-$HOME/.local/share}/basher"
+
 ## stop if basher is already installed
 [[ -d "$HOME/.basher" ]] && die "basher is already installed on [$HOME/.basher]"
+[[ -d "$xdgBasherDir" ]] && die "basher is already installed on [$xdgBasherDir]"
 
 ## stop if git is not installed
 git version >/dev/null 2>&1 || die "git is not installed on this machine"

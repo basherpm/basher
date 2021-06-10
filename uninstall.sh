@@ -6,12 +6,15 @@ die() {
   exit 1
 }
 
+xdgBasherDir="${XDG_DATA_HOME:-$HOME/.local/share}/basher"
+
 ## stop if basher is not installed
-[[ ! -d "$HOME/.basher" ]] && die "basher doesn't seem to be installed on [$HOME/.basher]"
+[[ -d "$HOME/.basher" || -d "$xdgBasherDir" ]] || die "basher doesn't seem to be installed on [$HOME/.basher] or [$xdgBasherDir]"
 echo ". remove basher code and installed packages"
 basher list
 sleep 2
-rm -fr "$HOME/.basher"
+[ -d "$HOME/.basher" ] && rm -fr "$HOME/.basher"
+[ -d "$xdgBasherDir" ] && rm -fr "$xdgBasherDir"
 
 ## now check what shell is running
 shell_type=$(basename "$SHELL")
