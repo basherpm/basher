@@ -14,12 +14,6 @@ load test_helper
   assert_line "Usage: basher install [--ssh] [site]/<package>[@ref]"
 }
 
-@test "too many arguments prints usage" {
-  run basher-install a/b wrong
-  assert_failure
-  assert_line "Usage: basher install [--ssh] [site]/<package>[@ref]"
-}
-
 @test "executes install steps in right order" {
   mock_command basher-_clone
   mock_command basher-_deps

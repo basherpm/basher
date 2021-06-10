@@ -14,12 +14,6 @@ load test_helper
   assert_line "Usage: basher uninstall <package>"
 }
 
-@test "with too many arguments, prints usage" {
-  run basher-uninstall a/b lol
-  assert_failure
-  assert_line "Usage: basher uninstall <package>"
-}
-
 @test "fails if package is not installed" {
   run basher-uninstall user/lol
   assert_failure
