@@ -34,12 +34,14 @@ For more information, check this PR: https://github.com/basherpm/basher/pull/77
 @test "adds cellar/bin to path" {
   run basher-init - bash
   assert_success
-  assert_line -n 4 'export PATH="$BASHER_ROOT/cellar/bin:$PATH"'
+  assert_line -n 4 'if [ "${PATH#*$BASHER_ROOT/cellar/bin}" = "${PATH}" ]; then'
+  assert_line -n 5 '  export PATH="$BASHER_ROOT/cellar/bin:$PATH"'
+  assert_line -n 6 'fi'
 }
 
 @test "setup include function if it exists" {
   run basher-init - bash
-  assert_line -n 5 '. "$BASHER_ROOT/lib/include.bash"'
+  assert_line -n 7 '. "$BASHER_ROOT/lib/include.bash"'
 }
 
 @test "doesn't setup include function if it doesn't exist" {
@@ -50,7 +52,7 @@ For more information, check this PR: https://github.com/basherpm/basher/pull/77
 @test "setup basher completions if available" {
   run basher-init - bash
   assert_success
-  assert_line -n 6 '. "$BASHER_ROOT/completions/basher.bash"'
+  assert_line -n 8 '. "$BASHER_ROOT/completions/basher.bash"'
 }
 
 @test "does not setup basher completions if not available" {
@@ -63,14 +65,14 @@ For more information, check this PR: https://github.com/basherpm/basher/pull/77
 @test "setup package completions (bash)" {
   run basher-init - bash
   assert_success
-  assert_line -n 7 'for f in $(command ls "$BASHER_ROOT/cellar/completions/bash"); do source "$BASHER_ROOT/cellar/completions/bash/$f"; done'
+  assert_line -n 9 'for f in $(command ls "$BASHER_ROOT/cellar/completions/bash"); do source "$BASHER_ROOT/cellar/completions/bash/$f"; done'
 }
 
 @test "setup package completions (zsh)" {
   run basher-init - zsh
   assert_success
-  assert_line -n 7 'fpath=("$BASHER_ROOT/cellar/completions/zsh/compsys" $fpath)'
-  assert_line -n 8 'for f in $(command ls "$BASHER_ROOT/cellar/completions/zsh/compctl"); do source "$BASHER_ROOT/cellar/completions/zsh/compctl/$f"; done'
+  assert_line -n 9 'fpath=("$BASHER_ROOT/cellar/completions/zsh/compsys" $fpath)'
+  assert_line -n 10 'for f in $(command ls "$BASHER_ROOT/cellar/completions/zsh/compctl"); do source "$BASHER_ROOT/cellar/completions/zsh/compctl/$f"; done'
 }
 
 hasShell() {
