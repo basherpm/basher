@@ -124,7 +124,7 @@ This will source a file `lib/file.sh` under the package `username/repo`.
 To change the behavior of basher, you can set the following variables either
 globally or before each command:
 
-- If `$XDG_DATA_HOME` is set, and `$XDG_DATA_HOME/basher` is a directory, then `$BASHER_ROOT` will be set to `$XDG_DATA_HOME/basher` instead of the usual `$HOME/.basher`. If `$XDG_DATA_HOME` is not explicitly set, then it defaults to `~/.local/share`.
+- If `$XDG_DATA_HOME/basher` is a directory, then `$BASHER_ROOT` will be set to `$XDG_DATA_HOME/basher` instead of the usual `$HOME/.basher`. If `$XDG_DATA_HOME` is not set or is empty, then it defaults to `~/.local/share`.
 - `BASHER_FULL_CLONE=true` - Clones the full repo history instead of only the last commit (useful for package development)
 - `BASHER_PREFIX` - set the installation and package checkout prefix (default is `$BASHER_ROOT/cellar`).  Setting this to `/usr/local`, for example, will install binaries to `/usr/local/bin`, manpages to `/usr/local/man`, completions to `/usr/local/completions`, and clone packages to `/usr/local/packages`.  This allows you to manage "global packages", distinct from individual user packages.
 
