@@ -12,6 +12,18 @@ load test_helper
   assert_output "/tmp/basher"
 }
 
+@test "inherited XDG_DATA_HOME" {
+  mkdir -p "/tmp/local/share/basher"
+  BASHER_ROOT= XDG_DATA_HOME=/tmp/local/share run basher echo BASHER_ROOT
+  assert_output "/tmp/local/share/basher"
+}
+
+@test "inherited XDG_DATA_PREFIX overriden by inherited BASHER_ROOT" {
+  mkdir -p "/tmp/local/share/basher"
+  BASHER_ROOT=/tmp/basher XDG_DATA_HOME=/tmp/local/share run basher echo BASHER_ROOT
+  assert_output "/tmp/basher"
+}
+
 @test "default BASHER_PREFIX" {
   BASHER_ROOT= BASHER_PREFIX= run basher echo BASHER_PREFIX
   assert_output "$HOME/.basher/cellar"
