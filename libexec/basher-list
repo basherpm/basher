@@ -1,9 +1,16 @@
 #!/usr/bin/env bash
 #
 # Summary: List installed packages
-# Usage: basher list
+# Usage: basher list [-v]
 
 set -e
+
+case $1 in
+  -v)
+    verbose="true"
+    shift
+  ;;
+esac
 
 if [ "$#" -gt 0 ]; then
   basher-help list
@@ -17,5 +24,9 @@ do
   username="$(dirname "$package_path")"
   username="${username##*/}"
   package="${package_path##*/}"
-  echo "$username/$package"
+  if [ -z "$verbose" ]; then
+    echo "$username/$package"
+  else
+    printf "%-30s %-30s\n" "$username/$package" "($(git --git-dir=${BASHER_PACKAGES_PATH}/$username/$package/.git config --get remote.origin.url))"
+  fi
 done
