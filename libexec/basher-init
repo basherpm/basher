@@ -22,7 +22,7 @@ print_fish_commands() {
   echo "set -gx BASHER_PACKAGES_PATH $BASHER_PACKAGES_PATH"
 
   echo 'if not contains $BASHER_ROOT/cellar/bin $PATH'
-  echo 'set -gx PATH $BASHER_ROOT/cellar/bin $PATH'
+  echo '  set -gx PATH $BASHER_ROOT/cellar/bin $PATH'
   echo 'end'
 }
 
@@ -32,7 +32,9 @@ print_sh_commands(){
   echo "export BASHER_PREFIX=$BASHER_PREFIX"
   echo "export BASHER_PACKAGES_PATH=$BASHER_PACKAGES_PATH"
 
-  echo 'export PATH="$BASHER_ROOT/cellar/bin:$PATH"'
+  echo 'if [ "${PATH#*$BASHER_ROOT/cellar/bin}" = "${PATH}" ]; then'
+  echo '  export PATH="$BASHER_ROOT/cellar/bin:$PATH"'
+  echo 'fi'
 }
 
 load_bash_package_completions() {

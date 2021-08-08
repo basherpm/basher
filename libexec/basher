@@ -24,6 +24,10 @@ abs_dirname() {
 
 if [ -z "$BASHER_ROOT" ]; then
   BASHER_ROOT="$HOME/.basher"
+
+  if [ -d "${XDG_DATA_HOME:-$HOME/.local/share}/basher" ]; then
+    BASHER_ROOT="${XDG_DATA_HOME:-$HOME/.local/share}/basher"
+  fi
 fi
 export BASHER_ROOT
 
