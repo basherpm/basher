@@ -6,7 +6,7 @@ package="$1"
 
 shopt -s nullglob
 
-files=($BASHER_PACKAGES_PATH/$package/man/*)
+files=("$BASHER_PACKAGES_PATH/$package"/man/*)
 files=("${files[@]##*/}")
 
 pattern="\.([1-9])\$"

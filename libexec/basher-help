@@ -77,7 +77,8 @@ collect_documentation() {
 }
 
 documentation_for() {
-  local filename="$(command_path "$1")"
+  local filename=
+  filename="$(command_path "$1")"
   if [ -n "$filename" ]; then
     extract_initial_comment_block < "$filename" | collect_documentation
   fi
