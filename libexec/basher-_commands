@@ -23,7 +23,7 @@ shopt -s nullglob
     for command in "${path}/$package-"*; do
       command="${command##*$package-}"
       if [[ ! "$command" == _* ]]; then
-        echo ${command}
+        echo "${command}"
       fi
     done
   done
