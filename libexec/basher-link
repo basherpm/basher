@@ -42,11 +42,15 @@ fi
 IFS=/ read -r namespace name <<< "$package"
 
 if [ -z "$namespace" ]; then
+  echo "Missing <namespace> from package '$package', <namespace>/<name>"
+  echo
   basher-help link
   exit 1
 fi
 
 if [ -z "$name" ]; then
+  echo "Missing <name> from package '$package', <namespace>/<name>"
+  echo
   basher-help link
   exit 1
 fi
