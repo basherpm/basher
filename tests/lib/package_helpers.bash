@@ -62,9 +62,19 @@ create_exec() {
   cd "${BASHER_ORIGIN_DIR}/$package"
   mkdir -p bin
   touch bin/$exec
+  chmod +x bin/$exec
 
   git add .
   git commit -m "Add $exec"
+  cd ${BASHER_CWD}
+}
+
+remove_exec() {
+  local package="$1"
+  local exec="$2"
+  cd "${BASHER_ORIGIN_DIR}/$package"
+  git rm bin/$exec
+  git commit -a -m "Remove $exec"
   cd ${BASHER_CWD}
 }
 

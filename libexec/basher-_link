@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+package="$1"
+
+basher-_link-bins "$package"
+basher-_link-completions "$package"
+basher-_link-man "$package"

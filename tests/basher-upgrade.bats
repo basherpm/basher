@@ -31,3 +31,41 @@ load test_helper
   run basher-outdated
   assert_output ""
 }
+
+@test "upgrade includes man page changes" {
+  mock_clone
+  create_package username/package
+  basher-install username/package
+  create_man username/package exec.1
+
+  assert [ ! -d "$BASHER_INSTALL_MAN" ]
+  basher-upgrade username/package
+
+
+  run basher-outdated
+  assert_output ""
+
+  assert [ -d "$BASHER_INSTALL_MAN" ]
+  assert [ -e "$BASHER_INSTALL_MAN/man1/exec.1" ]
+}
+
+@test "upgrade removes old binaries" {
+  mock_clone
+  create_package username/package
+  basher-install username/package
+  create_exec username/package "second"
+
+  basher-upgrade username/package
+
+  run basher-outdated
+  assert_output ""
+
+  assert [ -e "${BASHER_INSTALL_BIN}/second" ]
+
+  remove_exec username/package "second"
+  run basher-outdated
+  assert_output "username/package"
+  basher-upgrade username/package
+
+  assert [ ! -e "${BASHER_INSTALL_BIN}/second" ]
+}
