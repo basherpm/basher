@@ -34,4 +34,7 @@ if [ -z "$name" ]; then
 fi
 
 cd "${BASHER_PACKAGES_PATH}/$package"
+
+basher-_unlink "$package"
 git pull
+basher-_link "$package"
