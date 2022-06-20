@@ -44,10 +44,12 @@ resolve_link() {
 
   run basher-link package1 namespace1/
   assert_failure
+  assert_line "Missing <name> from package 'namespace1/', <namespace>/<name>"
   assert_line "Usage: basher link [--no-deps] <directory> <package>"
 
   run basher-link package1 /package1
   assert_failure
+  assert_line "Missing <namespace> from package '/package1', <namespace>/<name>"
   assert_line "Usage: basher link [--no-deps] <directory> <package>"
 }
 

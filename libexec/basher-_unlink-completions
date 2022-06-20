@@ -9,8 +9,8 @@ fi
 shopt -s nullglob
 
 source "$BASHER_PACKAGES_PATH/$package/package.sh" # TODO: make this secure?
-IFS=: read -a bash_completions <<< "$BASH_COMPLETIONS"
-IFS=: read -a zsh_completions <<< "$ZSH_COMPLETIONS"
+IFS=: read -ra bash_completions <<< "$BASH_COMPLETIONS"
+IFS=: read -ra zsh_completions <<< "$ZSH_COMPLETIONS"
 
 for completion in "${bash_completions[@]}"
 do

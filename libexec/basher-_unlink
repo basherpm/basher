@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+package="$1"
+
+basher-_unlink-man "$package"
+basher-_unlink-bins "$package"
+basher-_unlink-completions "$package"

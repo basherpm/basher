@@ -57,6 +57,4 @@ else
   basher-_clone "$use_ssh" "$site" "$package" "$ref"
 fi
 basher-_deps "$package"
-basher-_link-bins "$package"
-basher-_link-man "$package"
-basher-_link-completions "$package"
+basher-_link "$package"

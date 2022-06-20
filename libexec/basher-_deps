@@ -24,7 +24,7 @@ fi
 shopt -s nullglob
 
 source "$BASHER_PACKAGES_PATH/$package/package.sh"
-IFS=: read -a deps <<< "$DEPS"
+IFS=: read -ra deps <<< "$DEPS"
 
 for dep in "${deps[@]}"
 do

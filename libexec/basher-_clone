@@ -6,7 +6,7 @@
 
 set -e
 
-if [ "$#" -ne 3 -a "$#" -ne 4 ]; then
+if [ "$#" -ne 3 ] && [ "$#" -ne 4 ]; then
   basher-help _clone
   exit 1
 fi
@@ -66,4 +66,5 @@ else
   URI="https://${site}/$package.git"
 fi
 
+# shellcheck disable=SC2086
 git clone ${DEPTH_OPTION} ${BRANCH_OPTION} --recursive "$URI" "${BASHER_PACKAGES_PATH}/$package"

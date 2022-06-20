@@ -40,8 +40,6 @@ if [ ! -d "$BASHER_PACKAGES_PATH/$package" ]; then
   exit 1
 fi
 
-basher-_unlink-man "$package"
-basher-_unlink-bins "$package"
-basher-_unlink-completions "$package"
+basher-_unlink "$package"
 
 rm -rf "${BASHER_PACKAGES_PATH}/$package"

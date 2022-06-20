@@ -12,7 +12,7 @@ fi
 
 shopt -s nullglob
 
-for package_path in ${BASHER_PACKAGES_PATH}/*/*
+for package_path in "${BASHER_PACKAGES_PATH}"/*/*
 do
   username="$(dirname "$package_path")"
   username="${username##*/}"
