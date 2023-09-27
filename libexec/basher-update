@@ -18,7 +18,7 @@ do
     git remote update > /dev/null 2>&1
     if git symbolic-ref --short -q HEAD > /dev/null; then
         if [ "$(git rev-list --count HEAD...HEAD@{upstream})" -gt 0 ]; then
-		echo "update $package ...            \r"
+		printf "update $package ...            \r"
 		basher-_unlink "$package"
 		git pull &> /dev/null
 		basher-_link "$package"
