@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+#
+# Summary: Checks all packages for updates
+# Usage: basher update
+
+set -e
+
+shopt -s nullglob
+
+IFS=$'\r\n' packages=($(basher list))
+
+for package in "${packages[@]}"
+do
+  package_path="$BASHER_PACKAGES_PATH/$package"
+  if [ ! -L "$package_path" ]; then
+    printf "check $package ...            \r"
+    cd "$package_path"
+    git remote update > /dev/null 2>&1
+    if git symbolic-ref --short -q HEAD > /dev/null; then
+        if [ "$(git rev-list --count HEAD...HEAD@{upstream})" -gt 0 ]; then
+		echo "update $package ...            \r"
+		basher-_unlink "$package"
+		git pull &> /dev/null
+		basher-_link "$package"
+        fi
+    fi
+  fi
+done
+echo "                                                                 "
