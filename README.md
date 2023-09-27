@@ -116,7 +116,8 @@ This will source a file `lib/file.sh` under the package `username/repo`.
 - `basher help <command>` - Display help for a command
 - `basher uninstall <package>` - Uninstall a package
 - `basher list` - List installed packages
-- `basher outdated` - List packages which are not in the latest version
+- `basher outdated` - List packages that are not in the latest version
+- `basher update` - Upgrade all packages that are not in the latest version
 - `basher upgrade <package>` - Upgrade a package to the latest version
 
 ### Configuration options
