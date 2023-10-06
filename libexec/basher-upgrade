@@ -16,7 +16,7 @@ fi
 
 if [ "$1" == "--all" ]; then
   basher-list | xargs -n1 basher upgrade
-  exit 0
+  exit
 fi
 
 package="$1"
