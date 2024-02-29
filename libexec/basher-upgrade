@@ -14,6 +14,11 @@ if [ "$1" == "--complete" ]; then
   exec basher-list
 fi
 
+if [ "$1" == "--all" ]; then
+  basher-list | xargs -n1 basher upgrade
+  exit 0
+fi
+
 package="$1"
 
 if [ -z "$package" ]; then
