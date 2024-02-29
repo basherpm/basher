@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+#
+# Summary: Updates all outdated packages
+# Usage: basher update
+
+set -e
+
+find "${BASHER_PACKAGES_PATH}" -maxdepth 2 -mindepth 2 -type d |
+  sort |
+  while read -r package_path; do
+    package_name="$(basename "$package_path")"
+    package_author="$(basename "$(dirname "$package_path")")"
+    author_package="$package_author/$package_name"
+    cd "$package_path"
+    git remote update >/dev/null 2>&1
+    if git symbolic-ref --short -q HEAD >/dev/null; then
+      if [ "$(git rev-list --count "HEAD...HEAD@{upstream}")" -gt 0 ]; then
+        printf "UPDATING: %s...\r" "$author_package"
+        basher-_unlink "$author_package"
+        if git pull >/dev/null 2>&1; then
+          echo "UPDATED : $author_package   "
+        else
+          echo "FAILED  : $author_package   "
+        fi
+        basher-_link "$author_package"
+      fi
+    fi
+  done
