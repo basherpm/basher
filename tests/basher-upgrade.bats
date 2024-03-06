@@ -69,3 +69,27 @@ load test_helper
 
   assert [ ! -e "${BASHER_INSTALL_BIN}/second" ]
 }
+
+@test "upgrade -all upgrades all packages" {
+  mock_clone
+  create_package username/package1
+  basher-install username/package1
+  create_package username/package2
+  basher-install username/package2
+  create_exec username/package1 "second"
+  create_exec username/package2 "second"
+
+  basher-upgrade --all
+
+  run basher-outdated
+  assert_output ""
+
+  assert [ -e "${BASHER_INSTALL_BIN}/second" ]
+
+  remove_exec username/package1 "second"
+  run basher-outdated
+  assert_output "username/package1"
+  basher-upgrade username/package1
+
+  assert [ ! -e "${BASHER_INSTALL_BIN}/second" ]
+}
