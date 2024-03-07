@@ -14,6 +14,15 @@ if [ "$1" == "--complete" ]; then
   exec basher-list
 fi
 
+if [ "$1" == "--all" ]; then
+  basher-outdated |
+    while read -r package; do
+      echo "# $package"
+      basher-upgrade "$package"
+    done
+    exit 0
+fi
+
 package="$1"
 
 if [ -z "$package" ]; then
