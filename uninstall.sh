@@ -18,6 +18,7 @@ sleep 2
 
 ## now check what shell is running
 shell_type=$(basename "$SHELL")
+# shellcheck disable=SC2034
 case "$shell_type" in
 bash)  startup_type="simple" ; startup_script="$HOME/.bashrc" ;;
 zsh)   startup_type="simple" ; startup_script="$HOME/.zshrc"  ;;
@@ -33,7 +34,7 @@ esac
 basher_keyword="basher5ea843"
 
 echo ". following basher folders are in your path:"
-echo $PATH | tr ':' "\n" | grep basher
+echo "$PATH" | tr ':' "\n" | grep basher
 
 if grep -q "$basher_keyword" "$startup_script" ; then
   echo ". remove basher from startup script [$startup_script]"
@@ -44,7 +45,7 @@ if grep -q "$basher_keyword" "$startup_script" ; then
   rm "$temp_file"
 elif grep -q basher "$startup_script" ; then
     grep basher "$startup_script"
-    die "Can't auto-remove the lines from $(basename $startup_script) - please do so manually "
+    die "Can't auto-remove the lines from $(basename "$startup_script") - please do so manually "
 else
     die "Can't find initialisation commands for basher"
 fi
