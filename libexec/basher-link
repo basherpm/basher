@@ -5,7 +5,7 @@
 set -e
 
 resolve_link() {
-  if type -p realpath >/dev/null; then
+  if which realpath >/dev/null; then
     realpath "$1"
   else
     readlink -f "$1"
