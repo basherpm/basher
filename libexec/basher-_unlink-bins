@@ -1,5 +1,19 @@
 #!/usr/bin/env bash
 
+resolve_link() {
+  if type -p realpath >/dev/null; then
+    realpath "$1"
+  else
+    readlink -f "$1"
+  fi
+}
+
+remove_linked() {
+  if [[ "$(resolve_link $1)" = "$2/"* ]]; then
+    rm -f "$1"
+  fi
+}
+
 package="$1"
 
 if [ -e "$BASHER_PACKAGES_PATH/$package/package.sh" ]; then
@@ -24,5 +38,6 @@ do
   if ${REMOVE_EXTENSION:-false}; then
     name="${name%%.*}"
   fi
-  rm -f "$BASHER_INSTALL_BIN/${name}"
+  # only deletes if it actually owned (linked) by this package
+  remove_linked "$BASHER_INSTALL_BIN/${name}" "$BASHER_PACKAGES_PATH/$package"
 done
