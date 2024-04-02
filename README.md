@@ -13,12 +13,20 @@ Even though it is called basher, it also works with zsh and fish.
 
 ## Installation
 
+You can install basher in 1 line. This will install basher, and add it to your .bashrc/.zshrc file - in a way that can automatically be uninstalled later:
+
+	curl -s https://raw.githubusercontent.com/basherpm/basher/master/install.sh | bash
+
+#### Install on Mac OSX
+ 
 Basher requires `bash >= 4`, and the `realpath` utility from `coreutils`. On
 osx you can install both with brew:
 
 ```
 $ brew install bash coreutils
 ```
+
+#### Manual method to Install
 
 1. Checkout basher on `~/.basher`
 
@@ -43,9 +51,6 @@ $ brew install bash coreutils
     status --is-interactive; and . (basher init - fish|psub)
     ~~~
 
-or in 1 line, automatically (this will install basher and add it to your .bashrc/.zshrc file - in a way that can automatically be uninstalled later)):
-
-	curl -s https://raw.githubusercontent.com/basherpm/basher/master/install.sh | bash
 
 ## Updating
 
