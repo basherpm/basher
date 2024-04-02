@@ -13,7 +13,7 @@ Even though it is called basher, it also works with zsh and fish.
 
 ## Installation
 
-You can install basher in 1 line. This will install basher, and add it to your .bashrc/.zshrc file - in a way that can automatically be uninstalled later:
+You can install Basher in 1 line. This will install Basher, and add it to your .bashrc/.zshrc file - in a way that can automatically be uninstalled later:
 
 	curl -s https://raw.githubusercontent.com/basherpm/basher/master/install.sh | bash
 
