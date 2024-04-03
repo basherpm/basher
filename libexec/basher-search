@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+#
+# Summary: Search for available packages matching a keyword
+# Usage: basher search <keyword>
+#
+# Searches for packages installed in the PATH containing the keyword
+# in their names and displays them.
+
+set -e
+
+if [ "$#" -ne 1 ]; then
+  basher-help search
+  exit 1
+fi
+
+keyword="$1"
+IFS=: paths=($BASHER_PACKAGES_PATH)
+
+shopt -s nullglob
+
+for package_path in "${paths[@]}"/*/*; do
+    username="$(dirname "$package_path")"
+    username="${username##*/}"
+    package="${package_path##*/}"
+    if [[ "$package" == *"$keyword"* ]]; then
+        echo "$username/$package"
+    fi
+done
