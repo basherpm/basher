@@ -15,7 +15,7 @@ IFS=: read -ra zsh_completions <<< "$ZSH_COMPLETIONS"
 for completion in "${bash_completions[@]}"
 do
   mkdir -p "$BASHER_PREFIX/completions/bash"
-  ln -sf $(relpath "$BASHER_PREFIX/completions/bash" "$BASHER_PACKAGES_PATH/$package/$completion") "$BASHER_PREFIX/completions/bash/${completion##*/}"
+  ln -sf $(realpath -s --relative-to="$BASHER_PREFIX/completions/bash" "$BASHER_PACKAGES_PATH/$package/$completion") "$BASHER_PREFIX/completions/bash/${completion##*/}"
 done
 
 for completion in "${zsh_completions[@]}"
@@ -23,9 +23,9 @@ do
   target="$BASHER_PACKAGES_PATH/$package/$completion"
   if grep -q "#compdef" "$target"; then
     mkdir -p "$BASHER_PREFIX/completions/zsh/compsys"
-    ln -sf $(relpath "$BASHER_PREFIX/completions/zsh/compsys" "$target") "$BASHER_PREFIX/completions/zsh/compsys/${completion##*/}"
+    ln -sf $(realpath -s --relative-to="$BASHER_PREFIX/completions/zsh/compsys" "$target") "$BASHER_PREFIX/completions/zsh/compsys/${completion##*/}"
   else
     mkdir -p "$BASHER_PREFIX/completions/zsh/compctl"
-    ln -sf $(relpath "$BASHER_PREFIX/completions/zsh/compctl" "$target") "$BASHER_PREFIX/completions/zsh/compctl/${completion##*/}"
+    ln -sf $(realpath -s --relative-to="$BASHER_PREFIX/completions/zsh/compctl" "$target") "$BASHER_PREFIX/completions/zsh/compctl/${completion##*/}"
   fi
 done

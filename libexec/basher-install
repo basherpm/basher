@@ -6,11 +6,6 @@
 
 set -e
 
-relpath() {
-    perl -e 'use File::Spec; print File::Spec->abs2rel($ARGV[0], $ARGV[1])' "$2" "$1"
-}
-export -f relpath
-
 use_ssh="false"
 
 case $1 in
