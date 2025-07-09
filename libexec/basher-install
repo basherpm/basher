@@ -63,7 +63,16 @@ else
   ref=""
 fi
 
-basher-_clone "$use_ssh" "$site" "$package" "$ref" "$folder"
+# Call basher-_clone with appropriate number of parameters
+if [ -z "$ref" ] && [ "$folder" = "$package" ]; then
+  basher-_clone "$use_ssh" "$site" "$package"
+elif [ -n "$ref" ] && [ "$folder" = "$package" ]; then
+  basher-_clone "$use_ssh" "$site" "$package" "$ref"
+else
+  basher-_clone "$use_ssh" "$site" "$package" "$ref" "$folder"
+fi
+
+# Use folder for subsequent operations
 basher-_deps "$folder"
 basher-_link-bins "$folder"
 basher-_link-man "$folder"
