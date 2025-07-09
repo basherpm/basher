@@ -31,6 +31,7 @@ fi
 
 # defaults to package's name, but allows custom folder name
 folder="$package"
+custom_folder=false
 if [ -n "$2" ]; then
   if [[ "$2" != *([^/])/*([^/]) ]]; then
     basher-help install
@@ -38,6 +39,7 @@ if [ -n "$2" ]; then
     exit 1
   fi
   folder="$2"
+  custom_folder=true
 fi
 
 if [ -z "$package" ]; then
@@ -64,11 +66,15 @@ else
 fi
 
 # Call basher-_clone with appropriate number of parameters
-if [ -z "$ref" ] && [ "$folder" = "$package" ]; then
-  basher-_clone "$use_ssh" "$site" "$package"
-elif [ -n "$ref" ] && [ "$folder" = "$package" ]; then
-  basher-_clone "$use_ssh" "$site" "$package" "$ref"
+if [ "$custom_folder" = "false" ]; then
+  # No custom folder - use original behavior
+  if [ -z "$ref" ]; then
+    basher-_clone "$use_ssh" "$site" "$package"
+  else
+    basher-_clone "$use_ssh" "$site" "$package" "$ref"
+  fi
 else
+  # Custom folder specified - pass all parameters
   basher-_clone "$use_ssh" "$site" "$package" "$ref" "$folder"
 fi
 
