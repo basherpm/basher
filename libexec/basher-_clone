@@ -6,7 +6,7 @@
 
 set -e
 
-if [ "$#" -lt 3 -a "$#" -gt 5 ]; then
+if [ "$#" -lt 3 -o "$#" -gt 5 ]; then
   basher-help _clone
   exit 1
 fi

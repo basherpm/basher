@@ -5,19 +5,19 @@ load test_helper
 @test "without arguments prints usage" {
   run basher-_clone
   assert_failure
-  assert_line "Usage: basher _clone <use_ssh> <site> <package> [<ref>]"
+  assert_line "Usage: basher _clone <use_ssh> <site> <package> [<ref>] [folder]"
 }
 
 @test "invalid package prints usage" {
   run basher-_clone false github.com invalid_package
   assert_failure
-  assert_line "Usage: basher _clone <use_ssh> <site> <package> [<ref>]"
+  assert_line "Usage: basher _clone <use_ssh> <site> <package> [<ref>] [folder]"
 }
 
 @test "too many arguments prints usage" {
-  run basher-_clone false site a/b ref fourth_arg
+  run basher-_clone false site a/b ref folder fifth_arg
   assert_failure
-  assert_line "Usage: basher _clone <use_ssh> <site> <package> [<ref>]"
+  assert_line "Usage: basher _clone <use_ssh> <site> <package> [<ref>] [folder]"
 }
 
 @test "install a specific version" {
