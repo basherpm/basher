@@ -5,19 +5,19 @@ load test_helper
 @test "without arguments prints usage" {
   run basher-install
   assert_failure
-  assert_line "Usage: basher install [--ssh] [site]/<package>[@ref]"
+  assert_line "Usage: basher install [--ssh] [site]/<package>[@ref] [folder]"
 }
 
 @test "incorrect argument prints usage" {
   run basher-install first_arg
   assert_failure
-  assert_line "Usage: basher install [--ssh] [site]/<package>[@ref]"
+  assert_line "Usage: basher install [--ssh] [site]/<package>[@ref] [folder]"
 }
 
 @test "too many arguments prints usage" {
-  run basher-install a/b wrong
+  run basher-install a/b folder wrong
   assert_failure
-  assert_line "Usage: basher install [--ssh] [site]/<package>[@ref]"
+  assert_line "Usage: basher install [--ssh] [site]/<package>[@ref] [folder]"
 }
 
 @test "executes install steps in right order" {
