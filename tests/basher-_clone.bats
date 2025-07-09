@@ -34,7 +34,7 @@ load test_helper
   run basher-_clone false github.com username/package
 
   assert_success
-  assert_output "Package 'username/package' is already present"
+  assert_output "Folder 'username/package' already exists"
 }
 
 @test "using a different site" {
@@ -78,4 +78,37 @@ load test_helper
   run basher-_clone true site username/package
   assert_success
   assert_output "git clone --depth=1 --recursive git@site:username/package.git ${BASHER_PACKAGES_PATH}/username/package"
+}
+
+@test "clones to custom folder" {
+  mock_command git
+
+  run basher-_clone false github.com username/package "" custom/folder
+  assert_success
+  assert_output "git clone --depth=1 --recursive https://github.com/username/package.git ${BASHER_PACKAGES_PATH}/custom/folder"
+}
+
+@test "clones to custom folder with version" {
+  mock_command git
+
+  run basher-_clone false github.com username/package v1.2.3 custom/folder
+  assert_success
+  assert_output "git clone --depth=1 -b v1.2.3 --recursive https://github.com/username/package.git ${BASHER_PACKAGES_PATH}/custom/folder"
+}
+
+@test "custom folder defaults to package name when not specified" {
+  mock_command git
+
+  run basher-_clone false github.com username/package "" ""
+  assert_success
+  assert_output "git clone --depth=1 --recursive https://github.com/username/package.git ${BASHER_PACKAGES_PATH}/username/package"
+}
+
+@test "does nothing if custom folder already exists" {
+  mkdir -p "$BASHER_PACKAGES_PATH/custom/folder"
+
+  run basher-_clone false github.com username/package "" custom/folder
+
+  assert_success
+  assert_output "Folder 'custom/folder' already exists"
 }

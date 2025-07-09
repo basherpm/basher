@@ -55,7 +55,7 @@ if [ -z "$folder" ]; then
 fi
 
 if [ -e "$BASHER_PACKAGES_PATH/$folder" ]; then
-  echo "Package '$package' is already present"
+  echo "Folder '$folder' already exists"
   exit 0
 fi
 
