@@ -102,3 +102,42 @@ basher-_link-completions username/package"
   run basher-install username/package
   assert_success
 }
+
+@test "installs package with custom folder name" {
+  mock_command basher-_clone
+  mock_command basher-_deps
+  mock_command basher-_link-bins
+  mock_command basher-_link-man
+  mock_command basher-_link-completions
+
+  run basher-install username/package my/folder
+
+  assert_line "basher-_clone false github.com username/package  my/folder"
+  assert_line "basher-_deps my/folder"
+  assert_line "basher-_link-bins my/folder"
+  assert_line "basher-_link-man my/folder"
+  assert_line "basher-_link-completions my/folder"
+}
+
+@test "installs package with custom folder name and version" {
+  mock_command basher-_clone
+  mock_command basher-_deps
+  mock_command basher-_link-bins
+  mock_command basher-_link-man
+  mock_command basher-_link-completions
+
+  run basher-install username/package@v1.2.3 my/folder
+
+  assert_line "basher-_clone false github.com username/package v1.2.3 my/folder"
+  assert_line "basher-_deps my/folder"
+  assert_line "basher-_link-bins my/folder"
+  assert_line "basher-_link-man my/folder"
+  assert_line "basher-_link-completions my/folder"
+}
+
+
+@test "rejects invalid custom folder name format" {
+  run basher-install username/package invalid-folder
+  assert_failure
+  assert_line "Optional argunment [folder] must be in the format <...>/<...>"
+}
