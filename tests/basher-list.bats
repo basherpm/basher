@@ -5,7 +5,7 @@ load test_helper
 @test "with arguments shows usage" {
   run basher-list a_arg
   assert_failure
-  assert_line "Usage: basher list"
+  assert_line "Usage: basher list [-v]"
 }
 
 @test "list installed packages" {
