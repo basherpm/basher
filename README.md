@@ -88,6 +88,16 @@ access to the site, use `--ssh` to override the protocol:
 $ basher install --ssh juanibiapina/gg
 ~~~
 
+### Installing with a custom folder name
+
+You can install a package with a custom folder name by providing a second argument:
+
+~~~ sh
+$ basher install sstephenson/bats bats-core/bats
+~~~
+
+This will install the package into `~/.basher/packages/bats-core/bats` instead of the default location. And it will appear in `basher list` as `bats-core/bats`.
+
 ### Installing a local package
 
 If you develop a package locally and want to try it through basher,
@@ -119,8 +129,9 @@ This will source a file `lib/file.sh` under the package `username/repo`.
 
 - `basher commands` - List commands
 - `basher help <command>` - Display help for a command
+- `basher install [--ssh] [site]/<package>[@ref] [folder]` - Install a package
 - `basher uninstall <package>` - Uninstall a package
-- `basher list` - List installed packages
+- `basher list [-v]` - List installed packages
 - `basher outdated` - List packages which are not in the latest version
 - `basher upgrade <package>` - Upgrade a package to the latest version
 
