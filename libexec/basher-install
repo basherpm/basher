@@ -33,7 +33,7 @@ fi
 folder="$package"
 custom_folder=false
 if [ -n "$2" ]; then
-  if [[ "$2" != *([^/])/*([^/]) ]]; then
+  if ! [[ "$2" =~ ^[^/]+/[^/]+$ ]]; then
     basher-help install
     echo "Optional argunment [folder] must be in the format <...>/<...>"
     exit 1

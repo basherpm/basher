@@ -34,8 +34,8 @@ load test_helper
   assert_success
   # Check that output contains package names in the verbose format
   # The format is: package-name (remote-url)
-  assert_output --regexp "username/p1 +\(/tmp/basher/origin/username/p1\)"
-  assert_output --regexp "username2/p2 +\(/tmp/basher/origin/username2/p2\)"
+  assert_output --regexp "username/p1 +\(${BASHER_ORIGIN_DIR}/username/p1\)"
+  assert_output --regexp "username2/p2 +\(${BASHER_ORIGIN_DIR}/username2/p2\)"
 }
 
 @test "verbose flag with arguments shows usage" {
