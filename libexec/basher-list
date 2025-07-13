@@ -28,5 +28,40 @@ do
     echo "$username/$package"
   else
     printf "%-30s %-30s\n" "$username/$package" "($(git --git-dir=${BASHER_PACKAGES_PATH}/$username/$package/.git config --get remote.origin.url))"
+    
+    # Find and display executables for this package
+    package_full="$username/$package"
+    bins=()
+    
+    # Check for package.sh file with custom BINS
+    if [ -e "$BASHER_PACKAGES_PATH/$package_full/package.sh" ]; then
+      source "$BASHER_PACKAGES_PATH/$package_full/package.sh"
+      IFS=: read -ra bins <<< "$BINS"
+    fi
+    
+    # If no custom bins, look for executables
+    if [ -z "$bins" ]; then
+      if [ -e "$BASHER_PACKAGES_PATH/$package_full/bin" ]; then
+        bins=("$BASHER_PACKAGES_PATH/$package_full"/bin/*)
+        bins=("${bins[@]##*/}")
+        bins=("${bins[@]/#/bin/}")
+      else
+        bins=($(find "$BASHER_PACKAGES_PATH/$package_full" -maxdepth 1 -mindepth 1 -perm -u+x -type f -or -type l 2>/dev/null))
+        bins=("${bins[@]##*/}")
+      fi
+    fi
+    
+    # Display executables if any exist
+    if [ ${#bins[@]} -gt 0 ] && [ -n "${bins[0]}" ]; then
+      for bin in "${bins[@]}"; do
+        name="${bin##*/}"
+        if ${REMOVE_EXTENSION:-false}; then
+          name="${name%%.*}"
+        fi
+        if [ -n "$name" ]; then
+          echo "- $name"
+        fi
+      done
+    fi
   fi
 done
