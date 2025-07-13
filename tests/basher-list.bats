@@ -53,10 +53,8 @@ load test_helper
   
   # Check exact output format
   assert_line --index 0 --regexp "username/package +\(${BASHER_ORIGIN_DIR}/username/package\)"
-  assert_line --index 1 "  Executables:"
-  assert_line --index 2 "    - tool1"
-  assert_line --index 3 "    - tool2.sh"
-  assert_line --index 4 ""  # blank line
+  assert_line --index 1 "- tool1"
+  assert_line --index 2 "- tool2.sh"
 }
 
 @test "verbose flag with multiple packages shows each with executables" {
@@ -87,13 +85,9 @@ load test_helper
   assert_output --partial "user3/pkg3"
   
   # Verify executables are shown
-  assert_output --partial "    - cmd1"
-  assert_output --partial "    - cmd2"
-  assert_output --partial "    - cmd3"
-  
-  # Verify each package with executables has the header
-  local exec_headers=$(echo "$output" | grep -c "  Executables:")
-  assert_equal "$exec_headers" "2"  # Only 2 packages have executables
+  assert_output --partial "- cmd1"
+  assert_output --partial "- cmd2"
+  assert_output --partial "- cmd3"
 }
 
 @test "verbose flag respects REMOVE_EXTENSION config" {
@@ -108,8 +102,8 @@ load test_helper
   assert_success
   
   # Should show names without extensions
-  assert_output --partial "    - script"
-  assert_output --partial "    - tool"
+  assert_output --partial "- script"
+  assert_output --partial "- tool"
   
   # Should NOT show the extensions
   refute_output --partial "script.sh"

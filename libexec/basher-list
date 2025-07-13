@@ -53,17 +53,15 @@ do
     
     # Display executables if any exist
     if [ ${#bins[@]} -gt 0 ] && [ -n "${bins[0]}" ]; then
-      echo "  Executables:"
       for bin in "${bins[@]}"; do
         name="${bin##*/}"
         if ${REMOVE_EXTENSION:-false}; then
           name="${name%%.*}"
         fi
         if [ -n "$name" ]; then
-          echo "    - $name"
+          echo "- $name"
         fi
       done
     fi
-    echo  # Add blank line between packages
   fi
 done
