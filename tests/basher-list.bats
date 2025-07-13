@@ -95,3 +95,23 @@ load test_helper
   local exec_headers=$(echo "$output" | grep -c "  Executables:")
   assert_equal "$exec_headers" "2"  # Only 2 packages have executables
 }
+
+@test "verbose flag respects REMOVE_EXTENSION config" {
+  mock_clone
+  create_package username/package
+  create_exec username/package script.sh
+  create_exec username/package tool.py
+  set_remove_extension username/package true
+  basher-install username/package
+  
+  run basher-list -v
+  assert_success
+  
+  # Should show names without extensions
+  assert_output --partial "    - script"
+  assert_output --partial "    - tool"
+  
+  # Should NOT show the extensions
+  refute_output --partial "script.sh"
+  refute_output --partial "tool.py"
+}
