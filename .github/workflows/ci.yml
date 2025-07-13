@@ -52,6 +52,7 @@ jobs:
 
       - name: Run tests
         run: |
+          PATH=$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH
           bash --version
           git config --global user.email "user@example.com"
           git config --global user.name "User Name"
