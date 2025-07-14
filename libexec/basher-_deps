@@ -30,3 +30,9 @@ for dep in "${deps[@]}"
 do
   basher-install "$dep"
 done
+
+IFS=: read -ra deps <<< "$DPKG_DEPS"
+for dep in "${deps[@]}"
+do
+  sudo apt install -y "$dep"
+done
