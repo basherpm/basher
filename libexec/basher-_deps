@@ -32,7 +32,13 @@ do
 done
 
 IFS=: read -ra deps <<< "$DPKG_DEPS"
-for dep in "${deps[@]}"
-do
-  sudo apt install -y "$dep"
-done
+if [ -n "$deps" ]; then
+  case "$(uname -s)" in
+    Linux*)  install_cmd="sudo apt install -y" ;;
+    Darwin*) install_cmd="brew install" ;;
+  esac
+  for dep in "${deps[@]}"
+  do
+    eval "${install_cmd} $dep"
+  done
+fi
