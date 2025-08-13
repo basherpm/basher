@@ -40,7 +40,7 @@ basher_keyword="basher5ea843"
 echo ". add basher initialisation to [$startup_script]"
 if [[ "$startup_type" == "simple" ]]; then
   (
-    echo "export PATH=\"\$HOME/.basher/bin:\$PATH\"   ##$basher_keyword"
+    echo "(echo "\$PATH" | grep -q "\$HOME/.basher/bin:") || export PATH=\"\$HOME/.basher/bin:\$PATH\"   ##$basher_keyword"
     # shellcheck disable=SC2086
     echo "eval \"\$(basher init - $shell_type)\"             ##$basher_keyword"
   ) >>"$startup_script"
