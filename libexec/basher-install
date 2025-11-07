@@ -61,6 +61,9 @@ fi
 
 if [[ "$package" = */*@* ]]; then
   IFS=@ read -r package ref <<< "$package"
+  if [ "$custom_folder" = "false" ]; then
+    folder="$package"
+  fi
 else
   ref=""
 fi
