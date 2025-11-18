@@ -81,6 +81,10 @@ basher-_link-completions username/package"
   run basher-install username/package@v1.2.3
 
   assert_line "basher-_clone false github.com username/package v1.2.3"
+  assert_line "basher-_deps username/package"
+  assert_line "basher-_link-bins username/package"
+  assert_line "basher-_link-man username/package"
+  assert_line "basher-_link-completions username/package"
 }
 
 @test "empty version is ignored" {
